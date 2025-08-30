@@ -1,0 +1,95 @@
+[
+  {
+    "type": "PICK_MADE",
+    "playerId": 4241457,
+    "teamId": 1,
+    "pickNumber": 12,
+    "round": 1,
+    "timestamp": "2025-08-30T17:59:57.352743"
+  },
+  {
+    "event": "draft_pick",
+    "player": {
+      "id": 3916387,
+      "name": "Josh Allen",
+      "pos": "QB",
+      "team": "BUF",
+      "fullName": "Josh Allen"
+    },
+    "draftInfo": {
+      "pickNumber": 1,
+      "round": 1,
+      "teamId": 2
+    }
+  },
+  {
+    "data": {
+      "selectedPlayer": {
+        "playerId": "4362628",
+        "fullName": "Justin Jefferson",
+        "position": "WR",
+        "nflTeam": "MIN",
+        "injuryStatus": "ACTIVE"
+      },
+      "pickInfo": {
+        "overall": 3,
+        "round": 1,
+        "teamIndex": 2
+      }
+    }
+  },
+  {
+    "messageType": "ON_THE_CLOCK",
+    "teamId": 4,
+    "timeRemaining": 90,
+    "pickNumber": 13,
+    "round": 2
+  },
+  {
+    "type": "ROSTER_UPDATE",
+    "teamId": 1,
+    "roster": {
+      "QB": [
+        {
+          "playerId": 3916387,
+          "name": "Josh Allen"
+        }
+      ],
+      "RB": [
+        {
+          "playerId": 4241457,
+          "name": "Najee Harris"
+        }
+      ],
+      "WR": [
+        {
+          "playerId": 4362628,
+          "name": "Justin Jefferson"
+        }
+      ],
+      "TE": [],
+      "K": [],
+      "DST": []
+    }
+  },
+  {
+    "event": "draft_pick",
+    "player": {
+      "id": 4567890,
+      "name": "Rookie Player",
+      "pos": "RB",
+      "team": "NYG",
+      "fullName": "Mock Rookie Player",
+      "rookieYear": 2025
+    }
+  },
+  {
+    "type": "PICK_MADE",
+    "playerId": 123456,
+    "teamId": 3,
+    "pickNumber": 120,
+    "round": 9,
+    "playerType": "DST",
+    "nflTeam": "SF"
+  }
+]
