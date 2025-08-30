@@ -37,16 +37,44 @@ jobs:
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           prompt: |
-            Please review this pull request and provide feedback on:
-            - Code quality and best practices
-            - Potential bugs or issues
-            - Performance considerations
-            - Security concerns
-            - Test coverage
+            # First Principles PR Review
             
-            Use the repository's CLAUDE.md for guidance on style and conventions. Be constructive and helpful in your feedback.
-
-            Use `gh pr comment` with your Bash tool to leave your review as a comment on the PR.
+            Perform a comprehensive first principles analysis of this Pull Request, evaluating code quality, implementation elegance, and overall design decisions.
+            
+            ## Review Process:
+            
+            1. **Extract PR Goal**: First understand what this PR is trying to achieve by examining:
+               - PR title and description
+               - The actual changes made
+               - The problem it's solving
+            
+            2. **First Principles Analysis**: Evaluate whether the solution:
+               - Solves the problem in the most straightforward way
+               - Follows clean code principles (DRY, SOLID, KISS)
+               - Maintains or improves codebase quality
+               - Is maintainable and extensible
+               - Avoids unnecessary complexity
+            
+            3. **Implementation Review**: Analyze the code for:
+               - Cleanliness and readability
+               - Elegance and simplicity
+               - Adherence to best practices
+               - Architecture and design decisions
+               - Whether there's a simpler, cleaner way to achieve the same goal
+            
+            4. **Decision & Feedback**: Based on your analysis, determine:
+               - **APPROVE**: If the implementation is clean, elegant, and achieves the goal in the simplest reasonable way
+               - **REQUEST CHANGES**: If there are simpler or cleaner approaches that would better achieve the stated goals
+            
+            ## Important Guidelines:
+            - Focus on substantial improvements over nitpicking
+            - Consider the repository's CLAUDE.md for style preferences
+            - Emphasize code quality, simplicity, and maintainability
+            - If requesting changes, provide specific examples of how to simplify or improve
+            - Remember: Simple and clean beats clever and complex
+            
+            Use `gh pr comment` with your Bash tool to leave your detailed review as a comment on the PR.
+            Your review should clearly state whether you APPROVE or REQUEST CHANGES with justification.
           
           # See https://github.com/anthropics/claude-code-action/blob/main/docs/usage.md
           # or https://docs.anthropic.com/en/docs/claude-code/sdk#command-line for available options
