@@ -183,7 +183,7 @@ class ESPNDraftMonitor:
         return [
             {
                 "url": ws.url,
-                "is_closed": ws.is_closed()
+                "is_closed": ws.is_closed
             }
             for ws in self.websockets
         ]
