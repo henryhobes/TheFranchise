@@ -18,6 +18,7 @@ This is a newly initialized Python project (thefranchise) with MIT license. The 
 - **Language**: Python exclusively
 - **Code style**: Simple and clean over complexity - choose the most straightforward solution
 - **Comments**: Only when absolutely necessary - write self-documenting code instead
+- **Emojis**: Never use emojis in code, commit messages, or any technical content
 - **GPU optimization**: Leverage CUDA/GPU acceleration where beneficial (PyTorch, CuPy, RAPIDS, etc.)
 - **Web search**: Perform web searches proactively when needed without asking permission
 
