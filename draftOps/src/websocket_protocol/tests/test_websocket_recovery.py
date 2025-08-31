@@ -385,6 +385,23 @@ class TestConnectionStateTransitions:
         await monitor.handle_disconnection("Test")
         
         assert monitor.connection_state == ConnectionState.FAILED
+    
+    @pytest.mark.asyncio
+    async def test_reconnect_with_empty_delays_array(self, monitor):
+        """Test that reconnection handles empty reconnect_delays array without crashing."""
+        monitor.last_draft_url = "https://fantasy.espn.com/draft/test"
+        monitor.reconnect_delays = []  # Empty array that would cause IndexError
+        
+        monitor.page = AsyncMock()
+        monitor.page.reload = AsyncMock()
+        monitor.page.wait_for_load_state = AsyncMock()
+        monitor.wait_for_websockets = AsyncMock(return_value=True)
+        
+        # Should not crash and should use default 1-second delay
+        result = await monitor.reconnect_with_backoff()
+        
+        assert result is True
+        monitor.page.reload.assert_called()
 
 
 if __name__ == "__main__":

@@ -314,7 +314,12 @@ class ESPNDraftMonitor:
             self.reconnect_attempts = attempt + 1
             
             # Calculate delay (0 for first attempt, then exponential backoff)
-            delay = 0 if attempt == 0 else self.reconnect_delays[min(attempt - 1, len(self.reconnect_delays) - 1)]
+            if attempt == 0:
+                delay = 0
+            elif not self.reconnect_delays:
+                delay = 1  # Default 1-second delay if no delays configured
+            else:
+                delay = self.reconnect_delays[min(attempt - 1, len(self.reconnect_delays) - 1)]
             
             if delay > 0:
                 self.logger.info(f"Waiting {delay} seconds before reconnection attempt {attempt + 1}/{self.max_reconnect_attempts}")
