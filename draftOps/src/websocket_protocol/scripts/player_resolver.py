@@ -19,9 +19,9 @@ from pathlib import Path
 from dataclasses import dataclass, asdict
 import hashlib
 
-from api.espn_api_client import ESPNApiClient, ESPNPlayer
-from utils.player_id_extractor import PlayerIdExtractor, PlayerIdExtraction
-from utils.cross_reference_validator import CrossReferenceValidator
+from ..api.espn_api_client import ESPNApiClient, ESPNPlayer
+from ..utils.player_id_extractor import PlayerIdExtractor, PlayerIdExtraction
+from ..utils.cross_reference_validator import CrossReferenceValidator
 
 
 @dataclass

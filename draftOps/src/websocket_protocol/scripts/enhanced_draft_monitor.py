@@ -19,8 +19,8 @@ from datetime import datetime
 from pathlib import Path
 from typing import Dict, List, Optional, Any
 
-from monitor.espn_draft_monitor import ESPNDraftMonitor
-from player_resolver import PlayerResolver, ResolvedPlayer
+from ..monitor.espn_draft_monitor import ESPNDraftMonitor
+from .player_resolver import PlayerResolver, ResolvedPlayer
 
 
 class EnhancedDraftMonitor:
