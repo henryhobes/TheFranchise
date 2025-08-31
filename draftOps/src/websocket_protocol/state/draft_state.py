@@ -195,6 +195,12 @@ class DraftState:
         # Calculate snake draft pick positions for our team
         if self.my_team_id in draft_order:
             my_position = draft_order.index(self.my_team_id)
+            
+            # Validate position is within bounds
+            if my_position >= self.team_count:
+                self.logger.error(f"Invalid team position {my_position} >= team_count {self.team_count}")
+                return
+                
             self._my_pick_positions = []
             
             for round_num in range(self.rounds):

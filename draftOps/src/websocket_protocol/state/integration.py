@@ -91,9 +91,14 @@ class DraftStateManager:
             bool: True if initialization successful
         """
         try:
-            # Initialize player resolver
+            # Initialize player resolver with proper async context management
             self.player_resolver = PlayerResolver(cache_db_path=self.player_cache_db)
-            await self.player_resolver.__aenter__()
+            try:
+                await self.player_resolver.__aenter__()
+            except Exception as e:
+                self.logger.error(f"Failed to initialize player resolver: {e}")
+                self.player_resolver = None
+                raise
             
             # Initialize monitor
             self.monitor = ESPNDraftMonitor(headless=True)
