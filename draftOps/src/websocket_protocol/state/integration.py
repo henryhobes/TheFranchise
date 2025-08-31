@@ -67,6 +67,13 @@ class DraftStateManager:
         self._player_positions: Dict[str, str] = {}
         self._resolution_queue: List[str] = []
         
+        # Team mapping for user-friendly display
+        self._espn_team_to_display: Dict[str, str] = {}
+        self._next_team_number = 1
+        
+        # Pending picks for name resolution updates
+        self._pending_picks: List[Dict[str, Any]] = []
+        
         # Event callbacks
         self.on_pick_processed: Optional[Callable] = None
         self.on_state_updated: Optional[Callable] = None
@@ -246,19 +253,26 @@ class DraftStateManager:
                 self.on_error(f"WebSocket message processing error: {e}")
                 
     def _handle_pick_made(self, pick_data: Dict[str, Any]):
-        """Handle pick made event."""
+        """Handle pick made event with enhanced user experience."""
         player_id = pick_data['player_id']
+        team_id = pick_data['team_id']
         
-        # Queue player for name resolution
+        # Create enriched pick data with user-friendly team name
+        enriched_pick = {
+            **pick_data,
+            'display_team_name': self.get_display_team_name(team_id),
+            'player_name': self._player_names.get(player_id, f"Player #{player_id}")
+        }
+        
+        # Queue player for name resolution if not already resolved
         if player_id not in self._player_names:
             self._resolution_queue.append(player_id)
+            # Store pick for potential name update callback later
+            self._pending_picks.append(enriched_pick)
             
-        # Trigger callback
+        # Trigger callback with current data
         if self.on_pick_processed:
-            self.on_pick_processed({
-                **pick_data,
-                'player_name': self._player_names.get(player_id, f"Player #{player_id}")
-            })
+            self.on_pick_processed(enriched_pick)
             
     def _handle_team_selecting(self, selection_data: Dict[str, Any]):
         """Handle team selecting event."""
@@ -314,11 +328,18 @@ class DraftStateManager:
             
             # Cache resolved names and positions
             resolved_count = 0
+            newly_resolved = []
+            
             for player_id, player in resolved_players.items():
                 if player:
                     self._player_names[player_id] = player.full_name
                     self._player_positions[player_id] = player.position or "BENCH"
                     resolved_count += 1
+                    newly_resolved.append(player_id)
+                    
+            # Trigger name updates for pending picks with newly resolved players
+            if newly_resolved and self.on_pick_processed:
+                self._update_pending_pick_names(newly_resolved)
                     
             self.performance_stats['player_resolutions'] += resolved_count
             self.logger.debug(f"Resolved {resolved_count} player names and positions")
@@ -339,6 +360,54 @@ class DraftStateManager:
             Player name or fallback
         """
         return self._player_names.get(player_id, f"Player #{player_id}")
+        
+    def get_display_team_name(self, espn_team_id: str) -> str:
+        """
+        Get user-friendly team name for display.
+        
+        Args:
+            espn_team_id: ESPN's internal team ID
+            
+        Returns:
+            User-friendly team name like "Team 1", "Team 2", etc.
+        """
+        if espn_team_id not in self._espn_team_to_display:
+            # Assign next sequential team number
+            self._espn_team_to_display[espn_team_id] = f"Team {self._next_team_number}"
+            self._next_team_number += 1
+            
+        return self._espn_team_to_display[espn_team_id]
+    
+    def _update_pending_pick_names(self, newly_resolved: List[str]):
+        """
+        Update pending picks with newly resolved player names.
+        
+        Args:
+            newly_resolved: List of player IDs that were just resolved
+        """
+        updated_picks = []
+        remaining_picks = []
+        
+        for pick in self._pending_picks:
+            player_id = pick['player_id']
+            if player_id in newly_resolved:
+                # Update pick with resolved name
+                updated_pick = {
+                    **pick,
+                    'player_name': self._player_names.get(player_id, f"Player #{player_id}")
+                }
+                updated_picks.append(updated_pick)
+            else:
+                # Keep pick in pending list
+                remaining_picks.append(pick)
+        
+        # Update pending picks list
+        self._pending_picks = remaining_picks
+        
+        # Trigger callbacks for updated picks
+        for pick in updated_picks:
+            if self.on_pick_processed:
+                self.on_pick_processed(pick)
         
     def get_enriched_roster(self) -> Dict[str, List[Dict[str, Any]]]:
         """
