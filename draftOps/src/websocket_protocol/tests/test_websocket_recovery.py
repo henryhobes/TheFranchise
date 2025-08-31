@@ -18,18 +18,11 @@ class TestWebSocketRecovery:
     """Test suite for WebSocket recovery features."""
     
     @pytest.fixture
-    async def monitor(self):
+    def monitor(self):
         """Create a test monitor instance."""
         monitor = ESPNDraftMonitor(headless=True, enable_recovery=True)
         monitor.logger = Mock()  # Mock logger to avoid output during tests
-        yield monitor
-        # Cleanup
-        if monitor.heartbeat_monitor_task:
-            monitor.heartbeat_monitor_task.cancel()
-            try:
-                await monitor.heartbeat_monitor_task
-            except asyncio.CancelledError:
-                pass
+        return monitor
     
     @pytest.mark.asyncio
     async def test_handle_disconnection_stores_state(self, monitor):
@@ -287,6 +280,48 @@ class TestWebSocketRecovery:
         
         assert success is False
         assert monitor.connect_to_draft.call_count == 2  # Should try exactly max attempts
+    
+    @pytest.mark.asyncio
+    async def test_heartbeat_monitor_restarts_after_reconnection(self, monitor):
+        """Test that heartbeat monitor task is restarted after successful reconnection."""
+        try:
+            monitor.last_draft_url = "https://fantasy.espn.com/draft/test"
+            monitor.enable_recovery = True
+            
+            # Start with an existing heartbeat monitor task
+            original_task = asyncio.create_task(monitor._monitor_heartbeat())
+            monitor.heartbeat_monitor_task = original_task
+            
+            # Mock successful page refresh
+            monitor.page = AsyncMock()
+            monitor.page.reload = AsyncMock()
+            monitor.page.wait_for_load_state = AsyncMock()
+            monitor.wait_for_websockets = AsyncMock(return_value=True)
+            
+            # The original task should exit when state changes to RECONNECTING
+            # during reconnection process
+            monitor.connection_state = ConnectionState.RECONNECTING
+            await asyncio.sleep(0.01)  # Let original task exit
+            
+            success = await monitor.reconnect_with_backoff()
+            
+            assert success is True
+            assert monitor.connection_state == ConnectionState.CONNECTED
+            
+            # Verify a new heartbeat monitor task was created
+            assert monitor.heartbeat_monitor_task is not original_task
+            assert monitor.heartbeat_monitor_task is not None
+            assert not monitor.heartbeat_monitor_task.done()
+            
+        finally:
+            # Cleanup all tasks
+            for task in [original_task, monitor.heartbeat_monitor_task]:
+                if task and not task.done():
+                    task.cancel()
+                    try:
+                        await task
+                    except asyncio.CancelledError:
+                        pass
 
 
 class TestConnectionStateTransitions:
