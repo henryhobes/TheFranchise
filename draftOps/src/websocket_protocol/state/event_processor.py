@@ -212,13 +212,13 @@ class DraftEventProcessor:
         
         self.logger.info(f"Processing pick: Team {team_id} selected player {player_id} (pick {pick_number})")
         
-        # Apply pick to draft state
-        # Note: Position defaulted to BENCH - would need roster analysis for proper position
+        # Apply pick to draft state with position detection
+        position = self._resolve_position(player_id)
         success = self.draft_state.apply_pick(
             player_id=player_id,
             team_id=team_id, 
             pick_number=pick_number,
-            position="BENCH"  # TODO: Add position detection logic
+            position=position
         )
         
         # Trigger callback if registered
