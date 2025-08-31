@@ -1,0 +1,782 @@
+[
+  {
+    "timestamp": "10:21:36.245",
+    "message_type": "PLAYER_SELECTED",
+    "player_ids": [
+      "4362628"
+    ],
+    "extractions_detail": [
+      {
+        "player_id": "4362628",
+        "confidence": 0.95,
+        "context": {
+          "pick_number": 1,
+          "position_code": 4,
+          "team_guid": "{856970E3-67E6-42D4-8198-28B1FB3BCA26}",
+          "draft_protocol": "espn_text"
+        }
+      }
+    ],
+    "raw_payload": "SELECTED 1 4362628 4 {856970E3-67E6-42D4-8198-28B1FB3BCA26}\n"
+  },
+  {
+    "timestamp": "10:21:50.749",
+    "message_type": "PLAYER_SELECTED",
+    "player_ids": [
+      "3929630"
+    ],
+    "extractions_detail": [
+      {
+        "player_id": "3929630",
+        "confidence": 0.95,
+        "context": {
+          "pick_number": 2,
+          "position_code": 2,
+          "team_guid": "{CF5DB87A-DECD-41E6-BD90-32228368B7B7}",
+          "draft_protocol": "espn_text"
+        }
+      }
+    ],
+    "raw_payload": "SELECTED 2 3929630 2 {CF5DB87A-DECD-41E6-BD90-32228368B7B7}\n"
+  },
+  {
+    "timestamp": "10:21:59.531",
+    "message_type": "PLAYER_SELECTED",
+    "player_ids": [
+      "4430807"
+    ],
+    "extractions_detail": [
+      {
+        "player_id": "4430807",
+        "confidence": 0.95,
+        "context": {
+          "pick_number": 3,
+          "position_code": 2,
+          "team_guid": "{E5C85BDF-7247-4F70-809C-4CC36EE48023}",
+          "draft_protocol": "espn_text"
+        }
+      }
+    ],
+    "raw_payload": "SELECTED 3 4430807 2 {E5C85BDF-7247-4F70-809C-4CC36EE48023}\n"
+  },
+  {
+    "timestamp": "10:22:29.927",
+    "message_type": "PLAYER_SELECTED",
+    "player_ids": [
+      "4262921"
+    ],
+    "extractions_detail": [
+      {
+        "player_id": "4262921",
+        "confidence": 0.95,
+        "context": {
+          "pick_number": 4,
+          "position_code": 4,
+          "team_guid": "",
+          "draft_protocol": "espn_text"
+        }
+      }
+    ],
+    "raw_payload": "SELECTED 4 4262921 4\n"
+  },
+  {
+    "timestamp": "10:22:35.785",
+    "message_type": "PLAYER_SELECTED",
+    "player_ids": [
+      "4429795"
+    ],
+    "extractions_detail": [
+      {
+        "player_id": "4429795",
+        "confidence": 0.95,
+        "context": {
+          "pick_number": 5,
+          "position_code": 2,
+          "team_guid": "{923EF964-98BF-4E7B-B4F3-1021414D8182}",
+          "draft_protocol": "espn_text"
+        }
+      }
+    ],
+    "raw_payload": "SELECTED 5 4429795 2 {923EF964-98BF-4E7B-B4F3-1021414D8182}\n"
+  },
+  {
+    "timestamp": "10:22:50.040",
+    "message_type": "PLAYER_SELECTED",
+    "player_ids": [
+      "4241389"
+    ],
+    "extractions_detail": [
+      {
+        "player_id": "4241389",
+        "confidence": 0.95,
+        "context": {
+          "pick_number": 6,
+          "position_code": 4,
+          "team_guid": "{BA57F1C7-D461-4BB9-97F1-C7D461BBB918}",
+          "draft_protocol": "espn_text"
+        }
+      }
+    ],
+    "raw_payload": "SELECTED 6 4241389 4 {BA57F1C7-D461-4BB9-97F1-C7D461BBB918}\n"
+  },
+  {
+    "timestamp": "10:22:56.296",
+    "message_type": "PLAYER_SELECTED",
+    "player_ids": [
+      "3117251"
+    ],
+    "extractions_detail": [
+      {
+        "player_id": "3117251",
+        "confidence": 0.95,
+        "context": {
+          "pick_number": 7,
+          "position_code": 2,
+          "team_guid": "{518A8111-FFEB-45B3-B697-203FCE7B26DD}",
+          "draft_protocol": "espn_text"
+        }
+      }
+    ],
+    "raw_payload": "SELECTED 7 3117251 2 {518A8111-FFEB-45B3-B697-203FCE7B26DD}\n"
+  },
+  {
+    "timestamp": "10:22:57.797",
+    "message_type": "PLAYER_SELECTED",
+    "player_ids": [
+      "4426515"
+    ],
+    "extractions_detail": [
+      {
+        "player_id": "4426515",
+        "confidence": 0.95,
+        "context": {
+          "pick_number": 8,
+          "position_code": 4,
+          "team_guid": "",
+          "draft_protocol": "espn_text"
+        }
+      }
+    ],
+    "raw_payload": "SELECTED 8 4426515 4\n"
+  },
+  {
+    "timestamp": "10:23:03.050",
+    "message_type": "PLAYER_SELECTED",
+    "player_ids": [
+      "3043078"
+    ],
+    "extractions_detail": [
+      {
+        "player_id": "3043078",
+        "confidence": 0.95,
+        "context": {
+          "pick_number": 9,
+          "position_code": 2,
+          "team_guid": "{6667C5A5-726A-4787-A05A-80980FE7C310}",
+          "draft_protocol": "espn_text"
+        }
+      }
+    ],
+    "raw_payload": "SELECTED 9 3043078 2 {6667C5A5-726A-4787-A05A-80980FE7C310}\n"
+  },
+  {
+    "timestamp": "10:23:04.549",
+    "message_type": "PLAYER_SELECTED",
+    "player_ids": [
+      "4258173"
+    ],
+    "extractions_detail": [
+      {
+        "player_id": "4258173",
+        "confidence": 0.95,
+        "context": {
+          "pick_number": 10,
+          "position_code": 4,
+          "team_guid": "",
+          "draft_protocol": "espn_text"
+        }
+      }
+    ],
+    "raw_payload": "SELECTED 10 4258173 4\n"
+  },
+  {
+    "timestamp": "10:23:06.055",
+    "message_type": "PLAYER_SELECTED",
+    "player_ids": [
+      "4432773"
+    ],
+    "extractions_detail": [
+      {
+        "player_id": "4432773",
+        "confidence": 0.95,
+        "context": {
+          "pick_number": 10,
+          "position_code": 5,
+          "team_guid": "",
+          "draft_protocol": "espn_text"
+        }
+      }
+    ],
+    "raw_payload": "SELECTED 10 4432773 5\n"
+  },
+  {
+    "timestamp": "10:23:22.315",
+    "message_type": "PLAYER_SELECTED",
+    "player_ids": [
+      "4374302"
+    ],
+    "extractions_detail": [
+      {
+        "player_id": "4374302",
+        "confidence": 0.95,
+        "context": {
+          "pick_number": 9,
+          "position_code": 4,
+          "team_guid": "{6667C5A5-726A-4787-A05A-80980FE7C310}",
+          "draft_protocol": "espn_text"
+        }
+      }
+    ],
+    "raw_payload": "SELECTED 9 4374302 4 {6667C5A5-726A-4787-A05A-80980FE7C310}\n"
+  },
+  {
+    "timestamp": "10:23:23.813",
+    "message_type": "PLAYER_SELECTED",
+    "player_ids": [
+      "4595348"
+    ],
+    "extractions_detail": [
+      {
+        "player_id": "4595348",
+        "confidence": 0.95,
+        "context": {
+          "pick_number": 8,
+          "position_code": 5,
+          "team_guid": "",
+          "draft_protocol": "espn_text"
+        }
+      }
+    ],
+    "raw_payload": "SELECTED 8 4595348 5\n"
+  },
+  {
+    "timestamp": "10:23:40.076",
+    "message_type": "PLAYER_SELECTED",
+    "player_ids": [
+      "4242335"
+    ],
+    "extractions_detail": [
+      {
+        "player_id": "4242335",
+        "confidence": 0.95,
+        "context": {
+          "pick_number": 7,
+          "position_code": 3,
+          "team_guid": "{518A8111-FFEB-45B3-B697-203FCE7B26DD}",
+          "draft_protocol": "espn_text"
+        }
+      }
+    ],
+    "raw_payload": "SELECTED 7 4242335 3 {518A8111-FFEB-45B3-B697-203FCE7B26DD}\n"
+  },
+  {
+    "timestamp": "10:23:48.331",
+    "message_type": "PLAYER_SELECTED",
+    "player_ids": [
+      "4890973"
+    ],
+    "extractions_detail": [
+      {
+        "player_id": "4890973",
+        "confidence": 0.95,
+        "context": {
+          "pick_number": 6,
+          "position_code": 2,
+          "team_guid": "{BA57F1C7-D461-4BB9-97F1-C7D461BBB918}",
+          "draft_protocol": "espn_text"
+        }
+      }
+    ],
+    "raw_payload": "SELECTED 6 4890973 2 {BA57F1C7-D461-4BB9-97F1-C7D461BBB918}\n"
+  },
+  {
+    "timestamp": "10:24:14.602",
+    "message_type": "PLAYER_SELECTED",
+    "player_ids": [
+      "4047365"
+    ],
+    "extractions_detail": [
+      {
+        "player_id": "4047365",
+        "confidence": 0.95,
+        "context": {
+          "pick_number": 5,
+          "position_code": 3,
+          "team_guid": "{923EF964-98BF-4E7B-B4F3-1021414D8182}",
+          "draft_protocol": "espn_text"
+        }
+      }
+    ],
+    "raw_payload": "SELECTED 5 4047365 3 {923EF964-98BF-4E7B-B4F3-1021414D8182}\n"
+  },
+  {
+    "timestamp": "10:24:16.159",
+    "message_type": "PLAYER_SELECTED",
+    "player_ids": [
+      "4047646"
+    ],
+    "extractions_detail": [
+      {
+        "player_id": "4047646",
+        "confidence": 0.95,
+        "context": {
+          "pick_number": 4,
+          "position_code": 5,
+          "team_guid": "",
+          "draft_protocol": "espn_text"
+        }
+      }
+    ],
+    "raw_payload": "SELECTED 4 4047646 5\n"
+  },
+  {
+    "timestamp": "10:24:35.109",
+    "message_type": "PLAYER_SELECTED",
+    "player_ids": [
+      "4430737"
+    ],
+    "extractions_detail": [
+      {
+        "player_id": "4430737",
+        "confidence": 0.95,
+        "context": {
+          "pick_number": 3,
+          "position_code": 3,
+          "team_guid": "{E5C85BDF-7247-4F70-809C-4CC36EE48023}",
+          "draft_protocol": "espn_text"
+        }
+      }
+    ],
+    "raw_payload": "SELECTED 3 4430737 3 {E5C85BDF-7247-4F70-809C-4CC36EE48023}\n"
+  },
+  {
+    "timestamp": "10:24:55.875",
+    "message_type": "PLAYER_SELECTED",
+    "player_ids": [
+      "4239993"
+    ],
+    "extractions_detail": [
+      {
+        "player_id": "4239993",
+        "confidence": 0.95,
+        "context": {
+          "pick_number": 2,
+          "position_code": 4,
+          "team_guid": "{CF5DB87A-DECD-41E6-BD90-32228368B7B7}",
+          "draft_protocol": "espn_text"
+        }
+      }
+    ],
+    "raw_payload": "SELECTED 2 4239993 4 {CF5DB87A-DECD-41E6-BD90-32228368B7B7}\n"
+  },
+  {
+    "timestamp": "10:25:01.622",
+    "message_type": "PLAYER_SELECTED",
+    "player_ids": [
+      "4361307"
+    ],
+    "extractions_detail": [
+      {
+        "player_id": "4361307",
+        "confidence": 0.95,
+        "context": {
+          "pick_number": 1,
+          "position_code": 6,
+          "team_guid": "{856970E3-67E6-42D4-8198-28B1FB3BCA26}",
+          "draft_protocol": "espn_text"
+        }
+      }
+    ],
+    "raw_payload": "SELECTED 1 4361307 6 {856970E3-67E6-42D4-8198-28B1FB3BCA26}\n"
+  },
+  {
+    "timestamp": "10:25:05.382",
+    "message_type": "PLAYER_SELECTED",
+    "player_ids": [
+      "3916387"
+    ],
+    "extractions_detail": [
+      {
+        "player_id": "3916387",
+        "confidence": 0.95,
+        "context": {
+          "pick_number": 1,
+          "position_code": 1,
+          "team_guid": "{856970E3-67E6-42D4-8198-28B1FB3BCA26}",
+          "draft_protocol": "espn_text"
+        }
+      }
+    ],
+    "raw_payload": "SELECTED 1 3916387 1 {856970E3-67E6-42D4-8198-28B1FB3BCA26}\n"
+  },
+  {
+    "timestamp": "10:25:31.891",
+    "message_type": "PLAYER_SELECTED",
+    "player_ids": [
+      "4432665"
+    ],
+    "extractions_detail": [
+      {
+        "player_id": "4432665",
+        "confidence": 0.95,
+        "context": {
+          "pick_number": 2,
+          "position_code": 6,
+          "team_guid": "{CF5DB87A-DECD-41E6-BD90-32228368B7B7}",
+          "draft_protocol": "espn_text"
+        }
+      }
+    ],
+    "raw_payload": "SELECTED 2 4432665 6 {CF5DB87A-DECD-41E6-BD90-32228368B7B7}\n"
+  },
+  {
+    "timestamp": "10:25:53.915",
+    "message_type": "PLAYER_SELECTED",
+    "player_ids": [
+      "4426502"
+    ],
+    "extractions_detail": [
+      {
+        "player_id": "4426502",
+        "confidence": 0.95,
+        "context": {
+          "pick_number": 3,
+          "position_code": 4,
+          "team_guid": "{E5C85BDF-7247-4F70-809C-4CC36EE48023}",
+          "draft_protocol": "espn_text"
+        }
+      }
+    ],
+    "raw_payload": "SELECTED 3 4426502 4 {E5C85BDF-7247-4F70-809C-4CC36EE48023}\n"
+  },
+  {
+    "timestamp": "10:25:55.420",
+    "message_type": "PLAYER_SELECTED",
+    "player_ids": [
+      "4429160"
+    ],
+    "extractions_detail": [
+      {
+        "player_id": "4429160",
+        "confidence": 0.95,
+        "context": {
+          "pick_number": 4,
+          "position_code": 2,
+          "team_guid": "",
+          "draft_protocol": "espn_text"
+        }
+      }
+    ],
+    "raw_payload": "SELECTED 4 4429160 2\n"
+  },
+  {
+    "timestamp": "10:26:07.171",
+    "message_type": "PLAYER_SELECTED",
+    "player_ids": [
+      "3116406"
+    ],
+    "extractions_detail": [
+      {
+        "player_id": "3116406",
+        "confidence": 0.95,
+        "context": {
+          "pick_number": 5,
+          "position_code": 4,
+          "team_guid": "{923EF964-98BF-4E7B-B4F3-1021414D8182}",
+          "draft_protocol": "espn_text"
+        }
+      }
+    ],
+    "raw_payload": "SELECTED 5 3116406 4 {923EF964-98BF-4E7B-B4F3-1021414D8182}\n"
+  },
+  {
+    "timestamp": "10:26:37.440",
+    "message_type": "PLAYER_SELECTED",
+    "player_ids": [
+      "16800"
+    ],
+    "extractions_detail": [
+      {
+        "player_id": "16800",
+        "confidence": 0.95,
+        "context": {
+          "pick_number": 6,
+          "position_code": 5,
+          "team_guid": "",
+          "draft_protocol": "espn_text"
+        }
+      }
+    ],
+    "raw_payload": "SELECTED 6 16800 5\n"
+  },
+  {
+    "timestamp": "10:26:46.947",
+    "message_type": "PLAYER_SELECTED",
+    "player_ids": [
+      "4426348"
+    ],
+    "extractions_detail": [
+      {
+        "player_id": "4426348",
+        "confidence": 0.95,
+        "context": {
+          "pick_number": 7,
+          "position_code": 1,
+          "team_guid": "{518A8111-FFEB-45B3-B697-203FCE7B26DD}",
+          "draft_protocol": "espn_text"
+        }
+      }
+    ],
+    "raw_payload": "SELECTED 7 4426348 1 {518A8111-FFEB-45B3-B697-203FCE7B26DD}\n"
+  },
+  {
+    "timestamp": "10:26:48.458",
+    "message_type": "PLAYER_SELECTED",
+    "player_ids": [
+      "4596448"
+    ],
+    "extractions_detail": [
+      {
+        "player_id": "4596448",
+        "confidence": 0.95,
+        "context": {
+          "pick_number": 8,
+          "position_code": 2,
+          "team_guid": "",
+          "draft_protocol": "espn_text"
+        }
+      }
+    ],
+    "raw_payload": "SELECTED 8 4596448 2\n"
+  },
+  {
+    "timestamp": "10:26:49.946",
+    "message_type": "PLAYER_SELECTED",
+    "player_ids": [
+      "4362238"
+    ],
+    "extractions_detail": [
+      {
+        "player_id": "4362238",
+        "confidence": 0.95,
+        "context": {
+          "pick_number": 9,
+          "position_code": 3,
+          "team_guid": "",
+          "draft_protocol": "espn_text"
+        }
+      }
+    ],
+    "raw_payload": "SELECTED 9 4362238 3\n"
+  },
+  {
+    "timestamp": "10:26:51.450",
+    "message_type": "PLAYER_SELECTED",
+    "player_ids": [
+      "3121422"
+    ],
+    "extractions_detail": [
+      {
+        "player_id": "3121422",
+        "confidence": 0.95,
+        "context": {
+          "pick_number": 10,
+          "position_code": 7,
+          "team_guid": "",
+          "draft_protocol": "espn_text"
+        }
+      }
+    ],
+    "raw_payload": "SELECTED 10 3121422 7\n"
+  },
+  {
+    "timestamp": "10:26:52.962",
+    "message_type": "PLAYER_SELECTED",
+    "player_ids": [
+      "4379399"
+    ],
+    "extractions_detail": [
+      {
+        "player_id": "4379399",
+        "confidence": 0.95,
+        "context": {
+          "pick_number": 10,
+          "position_code": 2,
+          "team_guid": "",
+          "draft_protocol": "espn_text"
+        }
+      }
+    ],
+    "raw_payload": "SELECTED 10 4379399 2\n"
+  },
+  {
+    "timestamp": "10:26:54.452",
+    "message_type": "PLAYER_SELECTED",
+    "player_ids": [
+      "3918298"
+    ],
+    "extractions_detail": [
+      {
+        "player_id": "3918298",
+        "confidence": 0.95,
+        "context": {
+          "pick_number": 9,
+          "position_code": 1,
+          "team_guid": "",
+          "draft_protocol": "espn_text"
+        }
+      }
+    ],
+    "raw_payload": "SELECTED 9 3918298 1\n"
+  },
+  {
+    "timestamp": "10:26:55.953",
+    "message_type": "PLAYER_SELECTED",
+    "player_ids": [
+      "4612826"
+    ],
+    "extractions_detail": [
+      {
+        "player_id": "4612826",
+        "confidence": 0.95,
+        "context": {
+          "pick_number": 8,
+          "position_code": 7,
+          "team_guid": "",
+          "draft_protocol": "espn_text"
+        }
+      }
+    ],
+    "raw_payload": "SELECTED 8 4612826 7\n"
+  },
+  {
+    "timestamp": "10:27:06.961",
+    "message_type": "PLAYER_SELECTED",
+    "player_ids": [
+      "4430878"
+    ],
+    "extractions_detail": [
+      {
+        "player_id": "4430878",
+        "confidence": 0.95,
+        "context": {
+          "pick_number": 7,
+          "position_code": 4,
+          "team_guid": "{518A8111-FFEB-45B3-B697-203FCE7B26DD}",
+          "draft_protocol": "espn_text"
+        }
+      }
+    ],
+    "raw_payload": "SELECTED 7 4430878 4 {518A8111-FFEB-45B3-B697-203FCE7B26DD}\n"
+  },
+  {
+    "timestamp": "10:27:08.464",
+    "message_type": "PLAYER_SELECTED",
+    "player_ids": [
+      "4040715"
+    ],
+    "extractions_detail": [
+      {
+        "player_id": "4040715",
+        "confidence": 0.95,
+        "context": {
+          "pick_number": 6,
+          "position_code": 1,
+          "team_guid": "",
+          "draft_protocol": "espn_text"
+        }
+      }
+    ],
+    "raw_payload": "SELECTED 6 4040715 1\n"
+  },
+  {
+    "timestamp": "10:27:33.741",
+    "message_type": "PLAYER_SELECTED",
+    "player_ids": [
+      "4685382"
+    ],
+    "extractions_detail": [
+      {
+        "player_id": "4685382",
+        "confidence": 0.95,
+        "context": {
+          "pick_number": 5,
+          "position_code": 7,
+          "team_guid": "{923EF964-98BF-4E7B-B4F3-1021414D8182}",
+          "draft_protocol": "espn_text"
+        }
+      }
+    ],
+    "raw_payload": "SELECTED 5 4685382 7 {923EF964-98BF-4E7B-B4F3-1021414D8182}\n"
+  },
+  {
+    "timestamp": "10:27:52.247",
+    "message_type": "PLAYER_SELECTED",
+    "player_ids": [
+      "3915511"
+    ],
+    "extractions_detail": [
+      {
+        "player_id": "3915511",
+        "confidence": 0.95,
+        "context": {
+          "pick_number": 3,
+          "position_code": 1,
+          "team_guid": "{E5C85BDF-7247-4F70-809C-4CC36EE48023}",
+          "draft_protocol": "espn_text"
+        }
+      }
+    ],
+    "raw_payload": "SELECTED 3 3915511 1 {E5C85BDF-7247-4F70-809C-4CC36EE48023}\n"
+  },
+  {
+    "timestamp": "10:28:18.527",
+    "message_type": "PLAYER_SELECTED",
+    "player_ids": [
+      "4047650"
+    ],
+    "extractions_detail": [
+      {
+        "player_id": "4047650",
+        "confidence": 0.95,
+        "context": {
+          "pick_number": 2,
+          "position_code": 5,
+          "team_guid": "{CF5DB87A-DECD-41E6-BD90-32228368B7B7}",
+          "draft_protocol": "espn_text"
+        }
+      }
+    ],
+    "raw_payload": "SELECTED 2 4047650 5 {CF5DB87A-DECD-41E6-BD90-32228368B7B7}\n"
+  },
+  {
+    "timestamp": "10:28:21.776",
+    "message_type": "PLAYER_SELECTED",
+    "player_ids": [
+      "4241416"
+    ],
+    "extractions_detail": [
+      {
+        "player_id": "4241416",
+        "confidence": 0.95,
+        "context": {
+          "pick_number": 1,
+          "position_code": 2,
+          "team_guid": "{856970E3-67E6-42D4-8198-28B1FB3BCA26}",
+          "draft_protocol": "espn_text"
+        }
+      }
+    ],
+    "raw_payload": "SELECTED 1 4241416 2 {856970E3-67E6-42D4-8198-28B1FB3BCA26}\n"
+  }
+]

@@ -1,0 +1,604 @@
+{
+  "extraction_timestamp": "2025-08-31T10:28:27.431774",
+  "summary": {
+    "total_extractions": 39,
+    "unique_players": 39,
+    "confidence_breakdown": {
+      "high_confidence": 39,
+      "medium_confidence": 0,
+      "low_confidence": 0
+    },
+    "by_message_type": {
+      "DRAFT_PICK": 39
+    },
+    "unique_player_ids": [
+      "4379399",
+      "4890973",
+      "4242335",
+      "4362628",
+      "4047365",
+      "4430807",
+      "4361307",
+      "4429795",
+      "3043078",
+      "4241389",
+      "4429160",
+      "4595348",
+      "4612826",
+      "3916387",
+      "3116406",
+      "3915511",
+      "4362238",
+      "3929630",
+      "4047646",
+      "4241416",
+      "4047650",
+      "4430737",
+      "4040715",
+      "4262921",
+      "4239993",
+      "4432773",
+      "4426348",
+      "3918298",
+      "4258173",
+      "4426502",
+      "3121422",
+      "4374302",
+      "4426515",
+      "4432665",
+      "16800",
+      "4685382",
+      "4596448",
+      "4430878",
+      "3117251"
+    ]
+  },
+  "extractions": [
+    {
+      "player_id": "4362628",
+      "timestamp": "2025-08-31T10:21:36.245703",
+      "message_type": "DRAFT_PICK",
+      "websocket_url": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+      "context_fields": {
+        "pick_number": 1,
+        "position_code": 4,
+        "team_guid": "{856970E3-67E6-42D4-8198-28B1FB3BCA26}",
+        "draft_protocol": "espn_text"
+      },
+      "confidence": 0.95,
+      "raw_message": "SELECTED 1 4362628 4 {856970E3-67E6-42D4-8198-28B1FB3BCA26}\n"
+    },
+    {
+      "player_id": "3929630",
+      "timestamp": "2025-08-31T10:21:50.749965",
+      "message_type": "DRAFT_PICK",
+      "websocket_url": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+      "context_fields": {
+        "pick_number": 2,
+        "position_code": 2,
+        "team_guid": "{CF5DB87A-DECD-41E6-BD90-32228368B7B7}",
+        "draft_protocol": "espn_text"
+      },
+      "confidence": 0.95,
+      "raw_message": "SELECTED 2 3929630 2 {CF5DB87A-DECD-41E6-BD90-32228368B7B7}\n"
+    },
+    {
+      "player_id": "4430807",
+      "timestamp": "2025-08-31T10:21:59.531496",
+      "message_type": "DRAFT_PICK",
+      "websocket_url": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+      "context_fields": {
+        "pick_number": 3,
+        "position_code": 2,
+        "team_guid": "{E5C85BDF-7247-4F70-809C-4CC36EE48023}",
+        "draft_protocol": "espn_text"
+      },
+      "confidence": 0.95,
+      "raw_message": "SELECTED 3 4430807 2 {E5C85BDF-7247-4F70-809C-4CC36EE48023}\n"
+    },
+    {
+      "player_id": "4262921",
+      "timestamp": "2025-08-31T10:22:29.927073",
+      "message_type": "DRAFT_PICK",
+      "websocket_url": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+      "context_fields": {
+        "pick_number": 4,
+        "position_code": 4,
+        "team_guid": "",
+        "draft_protocol": "espn_text"
+      },
+      "confidence": 0.95,
+      "raw_message": "SELECTED 4 4262921 4\n"
+    },
+    {
+      "player_id": "4429795",
+      "timestamp": "2025-08-31T10:22:35.785084",
+      "message_type": "DRAFT_PICK",
+      "websocket_url": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+      "context_fields": {
+        "pick_number": 5,
+        "position_code": 2,
+        "team_guid": "{923EF964-98BF-4E7B-B4F3-1021414D8182}",
+        "draft_protocol": "espn_text"
+      },
+      "confidence": 0.95,
+      "raw_message": "SELECTED 5 4429795 2 {923EF964-98BF-4E7B-B4F3-1021414D8182}\n"
+    },
+    {
+      "player_id": "4241389",
+      "timestamp": "2025-08-31T10:22:50.040346",
+      "message_type": "DRAFT_PICK",
+      "websocket_url": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+      "context_fields": {
+        "pick_number": 6,
+        "position_code": 4,
+        "team_guid": "{BA57F1C7-D461-4BB9-97F1-C7D461BBB918}",
+        "draft_protocol": "espn_text"
+      },
+      "confidence": 0.95,
+      "raw_message": "SELECTED 6 4241389 4 {BA57F1C7-D461-4BB9-97F1-C7D461BBB918}\n"
+    },
+    {
+      "player_id": "3117251",
+      "timestamp": "2025-08-31T10:22:56.296407",
+      "message_type": "DRAFT_PICK",
+      "websocket_url": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+      "context_fields": {
+        "pick_number": 7,
+        "position_code": 2,
+        "team_guid": "{518A8111-FFEB-45B3-B697-203FCE7B26DD}",
+        "draft_protocol": "espn_text"
+      },
+      "confidence": 0.95,
+      "raw_message": "SELECTED 7 3117251 2 {518A8111-FFEB-45B3-B697-203FCE7B26DD}\n"
+    },
+    {
+      "player_id": "4426515",
+      "timestamp": "2025-08-31T10:22:57.797670",
+      "message_type": "DRAFT_PICK",
+      "websocket_url": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+      "context_fields": {
+        "pick_number": 8,
+        "position_code": 4,
+        "team_guid": "",
+        "draft_protocol": "espn_text"
+      },
+      "confidence": 0.95,
+      "raw_message": "SELECTED 8 4426515 4\n"
+    },
+    {
+      "player_id": "3043078",
+      "timestamp": "2025-08-31T10:23:03.050733",
+      "message_type": "DRAFT_PICK",
+      "websocket_url": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+      "context_fields": {
+        "pick_number": 9,
+        "position_code": 2,
+        "team_guid": "{6667C5A5-726A-4787-A05A-80980FE7C310}",
+        "draft_protocol": "espn_text"
+      },
+      "confidence": 0.95,
+      "raw_message": "SELECTED 9 3043078 2 {6667C5A5-726A-4787-A05A-80980FE7C310}\n"
+    },
+    {
+      "player_id": "4258173",
+      "timestamp": "2025-08-31T10:23:04.549366",
+      "message_type": "DRAFT_PICK",
+      "websocket_url": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+      "context_fields": {
+        "pick_number": 10,
+        "position_code": 4,
+        "team_guid": "",
+        "draft_protocol": "espn_text"
+      },
+      "confidence": 0.95,
+      "raw_message": "SELECTED 10 4258173 4\n"
+    },
+    {
+      "player_id": "4432773",
+      "timestamp": "2025-08-31T10:23:06.055277",
+      "message_type": "DRAFT_PICK",
+      "websocket_url": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+      "context_fields": {
+        "pick_number": 10,
+        "position_code": 5,
+        "team_guid": "",
+        "draft_protocol": "espn_text"
+      },
+      "confidence": 0.95,
+      "raw_message": "SELECTED 10 4432773 5\n"
+    },
+    {
+      "player_id": "4374302",
+      "timestamp": "2025-08-31T10:23:22.315107",
+      "message_type": "DRAFT_PICK",
+      "websocket_url": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+      "context_fields": {
+        "pick_number": 9,
+        "position_code": 4,
+        "team_guid": "{6667C5A5-726A-4787-A05A-80980FE7C310}",
+        "draft_protocol": "espn_text"
+      },
+      "confidence": 0.95,
+      "raw_message": "SELECTED 9 4374302 4 {6667C5A5-726A-4787-A05A-80980FE7C310}\n"
+    },
+    {
+      "player_id": "4595348",
+      "timestamp": "2025-08-31T10:23:23.813862",
+      "message_type": "DRAFT_PICK",
+      "websocket_url": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+      "context_fields": {
+        "pick_number": 8,
+        "position_code": 5,
+        "team_guid": "",
+        "draft_protocol": "espn_text"
+      },
+      "confidence": 0.95,
+      "raw_message": "SELECTED 8 4595348 5\n"
+    },
+    {
+      "player_id": "4242335",
+      "timestamp": "2025-08-31T10:23:40.076513",
+      "message_type": "DRAFT_PICK",
+      "websocket_url": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+      "context_fields": {
+        "pick_number": 7,
+        "position_code": 3,
+        "team_guid": "{518A8111-FFEB-45B3-B697-203FCE7B26DD}",
+        "draft_protocol": "espn_text"
+      },
+      "confidence": 0.95,
+      "raw_message": "SELECTED 7 4242335 3 {518A8111-FFEB-45B3-B697-203FCE7B26DD}\n"
+    },
+    {
+      "player_id": "4890973",
+      "timestamp": "2025-08-31T10:23:48.331271",
+      "message_type": "DRAFT_PICK",
+      "websocket_url": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+      "context_fields": {
+        "pick_number": 6,
+        "position_code": 2,
+        "team_guid": "{BA57F1C7-D461-4BB9-97F1-C7D461BBB918}",
+        "draft_protocol": "espn_text"
+      },
+      "confidence": 0.95,
+      "raw_message": "SELECTED 6 4890973 2 {BA57F1C7-D461-4BB9-97F1-C7D461BBB918}\n"
+    },
+    {
+      "player_id": "4047365",
+      "timestamp": "2025-08-31T10:24:14.602639",
+      "message_type": "DRAFT_PICK",
+      "websocket_url": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+      "context_fields": {
+        "pick_number": 5,
+        "position_code": 3,
+        "team_guid": "{923EF964-98BF-4E7B-B4F3-1021414D8182}",
+        "draft_protocol": "espn_text"
+      },
+      "confidence": 0.95,
+      "raw_message": "SELECTED 5 4047365 3 {923EF964-98BF-4E7B-B4F3-1021414D8182}\n"
+    },
+    {
+      "player_id": "4047646",
+      "timestamp": "2025-08-31T10:24:16.159689",
+      "message_type": "DRAFT_PICK",
+      "websocket_url": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+      "context_fields": {
+        "pick_number": 4,
+        "position_code": 5,
+        "team_guid": "",
+        "draft_protocol": "espn_text"
+      },
+      "confidence": 0.95,
+      "raw_message": "SELECTED 4 4047646 5\n"
+    },
+    {
+      "player_id": "4430737",
+      "timestamp": "2025-08-31T10:24:35.109637",
+      "message_type": "DRAFT_PICK",
+      "websocket_url": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+      "context_fields": {
+        "pick_number": 3,
+        "position_code": 3,
+        "team_guid": "{E5C85BDF-7247-4F70-809C-4CC36EE48023}",
+        "draft_protocol": "espn_text"
+      },
+      "confidence": 0.95,
+      "raw_message": "SELECTED 3 4430737 3 {E5C85BDF-7247-4F70-809C-4CC36EE48023}\n"
+    },
+    {
+      "player_id": "4239993",
+      "timestamp": "2025-08-31T10:24:55.875831",
+      "message_type": "DRAFT_PICK",
+      "websocket_url": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+      "context_fields": {
+        "pick_number": 2,
+        "position_code": 4,
+        "team_guid": "{CF5DB87A-DECD-41E6-BD90-32228368B7B7}",
+        "draft_protocol": "espn_text"
+      },
+      "confidence": 0.95,
+      "raw_message": "SELECTED 2 4239993 4 {CF5DB87A-DECD-41E6-BD90-32228368B7B7}\n"
+    },
+    {
+      "player_id": "4361307",
+      "timestamp": "2025-08-31T10:25:01.622384",
+      "message_type": "DRAFT_PICK",
+      "websocket_url": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+      "context_fields": {
+        "pick_number": 1,
+        "position_code": 6,
+        "team_guid": "{856970E3-67E6-42D4-8198-28B1FB3BCA26}",
+        "draft_protocol": "espn_text"
+      },
+      "confidence": 0.95,
+      "raw_message": "SELECTED 1 4361307 6 {856970E3-67E6-42D4-8198-28B1FB3BCA26}\n"
+    },
+    {
+      "player_id": "3916387",
+      "timestamp": "2025-08-31T10:25:05.382225",
+      "message_type": "DRAFT_PICK",
+      "websocket_url": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+      "context_fields": {
+        "pick_number": 1,
+        "position_code": 1,
+        "team_guid": "{856970E3-67E6-42D4-8198-28B1FB3BCA26}",
+        "draft_protocol": "espn_text"
+      },
+      "confidence": 0.95,
+      "raw_message": "SELECTED 1 3916387 1 {856970E3-67E6-42D4-8198-28B1FB3BCA26}\n"
+    },
+    {
+      "player_id": "4432665",
+      "timestamp": "2025-08-31T10:25:31.891986",
+      "message_type": "DRAFT_PICK",
+      "websocket_url": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+      "context_fields": {
+        "pick_number": 2,
+        "position_code": 6,
+        "team_guid": "{CF5DB87A-DECD-41E6-BD90-32228368B7B7}",
+        "draft_protocol": "espn_text"
+      },
+      "confidence": 0.95,
+      "raw_message": "SELECTED 2 4432665 6 {CF5DB87A-DECD-41E6-BD90-32228368B7B7}\n"
+    },
+    {
+      "player_id": "4426502",
+      "timestamp": "2025-08-31T10:25:53.915191",
+      "message_type": "DRAFT_PICK",
+      "websocket_url": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+      "context_fields": {
+        "pick_number": 3,
+        "position_code": 4,
+        "team_guid": "{E5C85BDF-7247-4F70-809C-4CC36EE48023}",
+        "draft_protocol": "espn_text"
+      },
+      "confidence": 0.95,
+      "raw_message": "SELECTED 3 4426502 4 {E5C85BDF-7247-4F70-809C-4CC36EE48023}\n"
+    },
+    {
+      "player_id": "4429160",
+      "timestamp": "2025-08-31T10:25:55.420272",
+      "message_type": "DRAFT_PICK",
+      "websocket_url": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+      "context_fields": {
+        "pick_number": 4,
+        "position_code": 2,
+        "team_guid": "",
+        "draft_protocol": "espn_text"
+      },
+      "confidence": 0.95,
+      "raw_message": "SELECTED 4 4429160 2\n"
+    },
+    {
+      "player_id": "3116406",
+      "timestamp": "2025-08-31T10:26:07.171178",
+      "message_type": "DRAFT_PICK",
+      "websocket_url": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+      "context_fields": {
+        "pick_number": 5,
+        "position_code": 4,
+        "team_guid": "{923EF964-98BF-4E7B-B4F3-1021414D8182}",
+        "draft_protocol": "espn_text"
+      },
+      "confidence": 0.95,
+      "raw_message": "SELECTED 5 3116406 4 {923EF964-98BF-4E7B-B4F3-1021414D8182}\n"
+    },
+    {
+      "player_id": "16800",
+      "timestamp": "2025-08-31T10:26:37.441016",
+      "message_type": "DRAFT_PICK",
+      "websocket_url": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+      "context_fields": {
+        "pick_number": 6,
+        "position_code": 5,
+        "team_guid": "",
+        "draft_protocol": "espn_text"
+      },
+      "confidence": 0.95,
+      "raw_message": "SELECTED 6 16800 5\n"
+    },
+    {
+      "player_id": "4426348",
+      "timestamp": "2025-08-31T10:26:46.947158",
+      "message_type": "DRAFT_PICK",
+      "websocket_url": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+      "context_fields": {
+        "pick_number": 7,
+        "position_code": 1,
+        "team_guid": "{518A8111-FFEB-45B3-B697-203FCE7B26DD}",
+        "draft_protocol": "espn_text"
+      },
+      "confidence": 0.95,
+      "raw_message": "SELECTED 7 4426348 1 {518A8111-FFEB-45B3-B697-203FCE7B26DD}\n"
+    },
+    {
+      "player_id": "4596448",
+      "timestamp": "2025-08-31T10:26:48.458748",
+      "message_type": "DRAFT_PICK",
+      "websocket_url": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+      "context_fields": {
+        "pick_number": 8,
+        "position_code": 2,
+        "team_guid": "",
+        "draft_protocol": "espn_text"
+      },
+      "confidence": 0.95,
+      "raw_message": "SELECTED 8 4596448 2\n"
+    },
+    {
+      "player_id": "4362238",
+      "timestamp": "2025-08-31T10:26:49.946747",
+      "message_type": "DRAFT_PICK",
+      "websocket_url": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+      "context_fields": {
+        "pick_number": 9,
+        "position_code": 3,
+        "team_guid": "",
+        "draft_protocol": "espn_text"
+      },
+      "confidence": 0.95,
+      "raw_message": "SELECTED 9 4362238 3\n"
+    },
+    {
+      "player_id": "3121422",
+      "timestamp": "2025-08-31T10:26:51.450883",
+      "message_type": "DRAFT_PICK",
+      "websocket_url": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+      "context_fields": {
+        "pick_number": 10,
+        "position_code": 7,
+        "team_guid": "",
+        "draft_protocol": "espn_text"
+      },
+      "confidence": 0.95,
+      "raw_message": "SELECTED 10 3121422 7\n"
+    },
+    {
+      "player_id": "4379399",
+      "timestamp": "2025-08-31T10:26:52.962047",
+      "message_type": "DRAFT_PICK",
+      "websocket_url": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+      "context_fields": {
+        "pick_number": 10,
+        "position_code": 2,
+        "team_guid": "",
+        "draft_protocol": "espn_text"
+      },
+      "confidence": 0.95,
+      "raw_message": "SELECTED 10 4379399 2\n"
+    },
+    {
+      "player_id": "3918298",
+      "timestamp": "2025-08-31T10:26:54.452023",
+      "message_type": "DRAFT_PICK",
+      "websocket_url": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+      "context_fields": {
+        "pick_number": 9,
+        "position_code": 1,
+        "team_guid": "",
+        "draft_protocol": "espn_text"
+      },
+      "confidence": 0.95,
+      "raw_message": "SELECTED 9 3918298 1\n"
+    },
+    {
+      "player_id": "4612826",
+      "timestamp": "2025-08-31T10:26:55.953198",
+      "message_type": "DRAFT_PICK",
+      "websocket_url": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+      "context_fields": {
+        "pick_number": 8,
+        "position_code": 7,
+        "team_guid": "",
+        "draft_protocol": "espn_text"
+      },
+      "confidence": 0.95,
+      "raw_message": "SELECTED 8 4612826 7\n"
+    },
+    {
+      "player_id": "4430878",
+      "timestamp": "2025-08-31T10:27:06.961207",
+      "message_type": "DRAFT_PICK",
+      "websocket_url": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+      "context_fields": {
+        "pick_number": 7,
+        "position_code": 4,
+        "team_guid": "{518A8111-FFEB-45B3-B697-203FCE7B26DD}",
+        "draft_protocol": "espn_text"
+      },
+      "confidence": 0.95,
+      "raw_message": "SELECTED 7 4430878 4 {518A8111-FFEB-45B3-B697-203FCE7B26DD}\n"
+    },
+    {
+      "player_id": "4040715",
+      "timestamp": "2025-08-31T10:27:08.464260",
+      "message_type": "DRAFT_PICK",
+      "websocket_url": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+      "context_fields": {
+        "pick_number": 6,
+        "position_code": 1,
+        "team_guid": "",
+        "draft_protocol": "espn_text"
+      },
+      "confidence": 0.95,
+      "raw_message": "SELECTED 6 4040715 1\n"
+    },
+    {
+      "player_id": "4685382",
+      "timestamp": "2025-08-31T10:27:33.741312",
+      "message_type": "DRAFT_PICK",
+      "websocket_url": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+      "context_fields": {
+        "pick_number": 5,
+        "position_code": 7,
+        "team_guid": "{923EF964-98BF-4E7B-B4F3-1021414D8182}",
+        "draft_protocol": "espn_text"
+      },
+      "confidence": 0.95,
+      "raw_message": "SELECTED 5 4685382 7 {923EF964-98BF-4E7B-B4F3-1021414D8182}\n"
+    },
+    {
+      "player_id": "3915511",
+      "timestamp": "2025-08-31T10:27:52.247927",
+      "message_type": "DRAFT_PICK",
+      "websocket_url": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+      "context_fields": {
+        "pick_number": 3,
+        "position_code": 1,
+        "team_guid": "{E5C85BDF-7247-4F70-809C-4CC36EE48023}",
+        "draft_protocol": "espn_text"
+      },
+      "confidence": 0.95,
+      "raw_message": "SELECTED 3 3915511 1 {E5C85BDF-7247-4F70-809C-4CC36EE48023}\n"
+    },
+    {
+      "player_id": "4047650",
+      "timestamp": "2025-08-31T10:28:18.527835",
+      "message_type": "DRAFT_PICK",
+      "websocket_url": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+      "context_fields": {
+        "pick_number": 2,
+        "position_code": 5,
+        "team_guid": "{CF5DB87A-DECD-41E6-BD90-32228368B7B7}",
+        "draft_protocol": "espn_text"
+      },
+      "confidence": 0.95,
+      "raw_message": "SELECTED 2 4047650 5 {CF5DB87A-DECD-41E6-BD90-32228368B7B7}\n"
+    },
+    {
+      "player_id": "4241416",
+      "timestamp": "2025-08-31T10:28:21.776691",
+      "message_type": "DRAFT_PICK",
+      "websocket_url": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+      "context_fields": {
+        "pick_number": 1,
+        "position_code": 2,
+        "team_guid": "{856970E3-67E6-42D4-8198-28B1FB3BCA26}",
+        "draft_protocol": "espn_text"
+      },
+      "confidence": 0.95,
+      "raw_message": "SELECTED 1 4241416 2 {856970E3-67E6-42D4-8198-28B1FB3BCA26}\n"
+    }
+  ]
+}

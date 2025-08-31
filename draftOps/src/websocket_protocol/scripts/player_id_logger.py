@@ -46,7 +46,7 @@ class PlayerIdDraftLogger:
         """Set up enhanced event callbacks with player ID extraction."""
         
         def on_websocket_opened(websocket):
-            print(f"✅ Connected to WebSocket: {websocket.url}")
+            print(f"[CONNECTED] WebSocket: {websocket.url}")
             self.logger.info(f"WebSocket connected: {websocket.url}")
             
         def on_message_received(direction, websocket, payload):
@@ -64,7 +64,7 @@ class PlayerIdDraftLogger:
             
             if is_draft_event:
                 self.session_stats["draft_messages"] += 1
-                print(f"🎯 [{timestamp}] DRAFT EVENT: {message_type}")
+                print(f"[DRAFT] [{timestamp}] {message_type}")
                 
                 # Store the event
                 event_data = {
@@ -80,10 +80,10 @@ class PlayerIdDraftLogger:
                 # If we found player IDs, this is likely a pick event
                 if extractions:
                     self.session_stats["player_ids_found"] += len(extractions)
-                    print(f"   👤 Found {len(extractions)} player ID(s):")
+                    print(f"   [PLAYER] Found {len(extractions)} ID(s):")
                     
                     for extraction in extractions:
-                        print(f"      • Player ID: {extraction.player_id} "
+                        print(f"      - Player ID: {extraction.player_id} "
                              f"(confidence: {extraction.confidence:.2f})")
                         if extraction.context_fields:
                             print(f"        Context: {extraction.context_fields}")
@@ -100,26 +100,37 @@ class PlayerIdDraftLogger:
                 # Display parsed message nicely
                 try:
                     parsed = json.loads(payload)
-                    print(f"   📋 {json.dumps(parsed, indent=4)}")
+                    print(f"   [DATA] {json.dumps(parsed, indent=4)}")
                 except:
-                    print(f"   📋 {payload[:200]}...")
+                    print(f"   [DATA] {payload[:200]}...")
                     
             else:
                 # Still check for player IDs in non-draft messages
                 if extractions:
                     print(f"   [{timestamp}] Non-draft message with {len(extractions)} player ID(s)")
                 else:
-                    print(f"   [{timestamp}] {direction}: {len(payload)} bytes")
+                    # Only show every 10th non-draft message to avoid spam
+                    if self.session_stats["total_messages"] % 10 == 0:
+                        print(f"   [{timestamp}] Monitoring... ({self.session_stats['total_messages']} messages, waiting for draft to start)")
                     
         self.monitor.on_websocket_opened = on_websocket_opened
         self.monitor.on_message_received = on_message_received
         
     def _categorize_message(self, payload: str) -> str:
         """Attempt to categorize the message type based on content."""
+        payload_stripped = payload.strip()
         payload_lower = payload.lower()
         
-        # Look for specific ESPN message patterns
-        if any(keyword in payload_lower for keyword in ["pick_made", "pickmade", "draft_pick"]):
+        # Check for ESPN draft text protocol first (discovered from live test)
+        if payload_stripped.startswith('SELECTED '):
+            return "PLAYER_SELECTED"
+        elif payload_stripped.startswith('AUTODRAFT '):
+            return "AUTODRAFT_STATUS"
+        elif payload_stripped.startswith(('CLOCK ', 'ONTHECLOCK ')):
+            return "DRAFT_TIMER"
+        
+        # Look for JSON-based ESPN message patterns
+        elif any(keyword in payload_lower for keyword in ["pick_made", "pickmade", "draft_pick"]):
             return "PICK_MADE"
         elif any(keyword in payload_lower for keyword in ["on_the_clock", "ontheclock", "clock"]):
             return "ON_THE_CLOCK"
@@ -135,14 +146,24 @@ class PlayerIdDraftLogger:
             return "UNKNOWN"
         
     def is_potential_draft_event(self, payload: str) -> bool:
-        """Enhanced draft event detection."""
+        """Enhanced draft event detection with ESPN text protocol support."""
+        payload_stripped = payload.strip()
         payload_lower = payload.lower()
         
-        # Primary draft keywords
+        # Check for ESPN draft text protocol first (discovered from live test)
+        if (payload_stripped.startswith('SELECTED ') or 
+            payload_stripped.startswith('AUTODRAFT ') or
+            payload_stripped.startswith('CLOCK ') or
+            payload_stripped.startswith('ONTHECLOCK ')):
+            return True
+        
+        # Primary draft keywords (expanded)
         draft_keywords = [
             "pick", "draft", "player", "selected", "drafted",
             "pick_made", "on_the_clock", "roster_update", "roster",
-            "team", "turn", "available"
+            "team", "turn", "available", "autopick", "auto_pick",
+            "fantasy", "league", "draftroom", "pick_timer", "timer",
+            "round", "selection", "choose", "taken"
         ]
         
         # Secondary indicators (less certain)
@@ -172,9 +193,9 @@ class PlayerIdDraftLogger:
         Run the enhanced draft logger focused on player ID analysis.
         
         Args:
-            duration: How long to run in seconds (default 10 minutes)
+            duration: How long to run in seconds (default 20 minutes)
         """
-        print("🔍 ESPN Player ID Analysis - Enhanced Draft Logger")
+        print("ESPN Player ID Analysis - Enhanced Draft Logger")
         print("=" * 60)
         print("This enhanced logger will:")
         print("1. Monitor ESPN draft WebSocket traffic")
@@ -189,29 +210,31 @@ class PlayerIdDraftLogger:
         try:
             # Connect to ESPN mock draft
             mock_draft_url = "https://fantasy.espn.com/football/mockdraftlobby"
-            print(f"🔗 Opening ESPN mock draft lobby...")
+            print(f"[INFO] Opening ESPN mock draft lobby...")
             
             success = await self.monitor.connect_to_draft(mock_draft_url)
             if not success:
-                print("❌ Failed to connect")
+                print("[ERROR] Failed to connect")
                 return
                 
-            print("✅ Connected to ESPN")
+            print("[SUCCESS] Connected to ESPN")
             print()
-            print("📍 INSTRUCTIONS:")
+            print("INSTRUCTIONS:")
             print("   1. Navigate to and join a mock draft in the browser")
             print("   2. Watch this console for player ID extractions")
             print("   3. Let several picks happen for better analysis")
             print("   4. Press Ctrl+C to stop and generate report")
             print()
             
-            # Wait for WebSocket connections
-            print("⏳ Waiting for WebSocket connections...")
-            found_websockets = await self.monitor.wait_for_websockets(timeout=120)
+            # Wait for WebSocket connections (longer timeout for draft to start)
+            print("[WAITING] Looking for WebSocket connections...")
+            print("   TIP: The draft needs to START first - wait for the timer to reach 0")
+            print("   TIP: Once you're in the draft room, WebSocket connections will be detected")
+            found_websockets = await self.monitor.wait_for_websockets(timeout=1200)
             
             if found_websockets:
-                print(f"✅ Monitoring {len(self.monitor.websockets)} WebSocket connection(s)")
-                print("🔍 Analyzing messages for player IDs...")
+                print(f"[ACTIVE] Monitoring {len(self.monitor.websockets)} WebSocket connection(s)")
+                print("[ANALYZING] Processing messages for player IDs...")
                 print()
                 
                 # Start real-time stats display
@@ -221,16 +244,16 @@ class PlayerIdDraftLogger:
                 try:
                     await self.monitor.monitor_for_duration(duration)
                 except KeyboardInterrupt:
-                    print("\n⏹️  Analysis stopped by user")
+                    print("\n[STOPPED] Analysis stopped by user")
                 finally:
                     stats_task.cancel()
                     
             else:
-                print("❌ No WebSocket connections found")
+                print("[ERROR] No WebSocket connections found")
                 print("   Make sure you joined a draft room")
                 
         except Exception as e:
-            print(f"❌ Error: {e}")
+            print(f"[ERROR] {e}")
             self.logger.error(f"Error during analysis: {e}")
             
         finally:
@@ -245,7 +268,7 @@ class PlayerIdDraftLogger:
                 runtime = datetime.now() - self.session_stats["start_time"]
                 unique_ids = len(self.player_id_extractor.unique_player_ids)
                 
-                print(f"\n📊 Real-time Stats (Runtime: {runtime}):")
+                print(f"\n[STATS] Runtime: {runtime}")
                 print(f"   Messages: {self.session_stats['total_messages']} | "
                       f"Draft Events: {self.session_stats['draft_messages']} | "
                       f"Player IDs: {unique_ids}")
@@ -319,8 +342,8 @@ class PlayerIdDraftLogger:
         
         summary_data = {
             "analysis_timestamp": datetime.now().isoformat(),
-            "session_duration": str(datetime.now() - self.session_stats["start_time"]),
-            "session_stats": self.session_stats,
+            "session_duration": str(datetime.now() - self.session_stats["start_time"]) if self.session_stats["start_time"] else "0:00:00",
+            "session_stats": {k: v for k, v in self.session_stats.items() if k != "start_time"},
             "player_id_analysis": extraction_summary,
             "websocket_info": self.monitor.get_websocket_info(),
             "files_generated": [
@@ -343,39 +366,39 @@ class PlayerIdDraftLogger:
         extraction_summary = self.player_id_extractor.get_extraction_summary()
         
         print("\n" + "=" * 60)
-        print("🔍 PLAYER ID ANALYSIS COMPLETE")
+        print("PLAYER ID ANALYSIS COMPLETE")
         print("=" * 60)
-        print(f"📊 Session Summary:")
+        print(f"Session Summary:")
         print(f"   Runtime: {runtime}")
         print(f"   Total WebSocket messages: {self.session_stats['total_messages']}")
         print(f"   Draft-related messages: {self.session_stats['draft_messages']}")
         print(f"   Player picks detected: {len(self.player_picks)}")
         print()
-        print(f"👤 Player ID Analysis:")
+        print(f"Player ID Analysis:")
         print(f"   Total player ID extractions: {extraction_summary['total_extractions']}")
         print(f"   Unique player IDs found: {extraction_summary['unique_players']}")
         print(f"   High confidence IDs: {extraction_summary['confidence_breakdown']['high_confidence']}")
         print(f"   Medium confidence IDs: {extraction_summary['confidence_breakdown']['medium_confidence']}")
         
         if extraction_summary['unique_player_ids']:
-            print(f"\n🎯 Sample Player IDs Found:")
+            print(f"\nSample Player IDs Found:")
             sample_ids = list(extraction_summary['unique_player_ids'])[:10]
             for i, player_id in enumerate(sample_ids, 1):
                 print(f"   {i}. {player_id}")
             if len(extraction_summary['unique_player_ids']) > 10:
                 print(f"   ... and {len(extraction_summary['unique_player_ids']) - 10} more")
                 
-        print(f"\n💾 Files Generated in reports/player_id_analysis/:")
-        print(f"   • player_id_extractions_{timestamp}.json - Detailed extraction data")
-        print(f"   • draft_events_{timestamp}.json - All draft-related messages")
-        print(f"   • player_picks_{timestamp}.json - Specific player selection events")
-        print(f"   • full_websocket_log_{timestamp}.json - Complete message log")
-        print(f"   • analysis_summary_{timestamp}.json - Session summary")
+        print(f"\nFiles Generated in reports/player_id_analysis/:")
+        print(f"   - player_id_extractions_{timestamp}.json - Detailed extraction data")
+        print(f"   - draft_events_{timestamp}.json - All draft-related messages")
+        print(f"   - player_picks_{timestamp}.json - Specific player selection events")
+        print(f"   - full_websocket_log_{timestamp}.json - Complete message log")
+        print(f"   - analysis_summary_{timestamp}.json - Session summary")
         
         if extraction_summary['unique_players'] > 0:
-            print("\n✅ SUCCESS: Player IDs detected! Ready for Phase 2 (ESPN API integration)")
+            print("\n[SUCCESS] Player IDs detected! Ready for Phase 2 (ESPN API integration)")
         else:
-            print("\n⚠️  WARNING: No player IDs found. May need to join an active draft.")
+            print("\n[WARNING] No player IDs found. May need to join an active draft.")
 
 
 async def main():
@@ -386,7 +409,7 @@ async def main():
 
 if __name__ == "__main__":
     print("""
-    🔍 ESPN Player ID Analysis - Enhanced Draft Logger
+    ESPN Player ID Analysis - Enhanced Draft Logger
     ================================================
     
     This enhanced tool focuses on extracting and analyzing player identifiers
@@ -408,6 +431,6 @@ if __name__ == "__main__":
     try:
         asyncio.run(main())
     except KeyboardInterrupt:
-        print("\n👋 Analysis stopped. Generating final reports...")
+        print("\n[INFO] Analysis stopped. Generating final reports...")
     except Exception as e:
         print(f"Error: {e}")
