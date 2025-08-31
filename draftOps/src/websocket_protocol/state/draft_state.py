@@ -434,7 +434,7 @@ class DraftState:
             bool: True if rollback successful
         """
         try:
-            if index >= len(self._state_snapshots) or index < 0:
+            if index >= len(self._state_snapshots) or index < -len(self._state_snapshots):
                 return False
                 
             snapshot = self._state_snapshots[index]
