@@ -338,6 +338,12 @@ class ESPNDraftMonitor:
                             self.connection_state = ConnectionState.CONNECTED
                             self.reconnect_attempts = 0
                             self.last_heartbeat_time = datetime.now()
+                            
+                            # Restart heartbeat monitor after successful reconnection
+                            if self.enable_recovery:
+                                self.heartbeat_monitor_task = asyncio.create_task(self._monitor_heartbeat())
+                                self.logger.info("Restarted heartbeat monitor after reconnection")
+                            
                             return True
                     except Exception as e:
                         self.logger.debug(f"Page refresh failed: {e}, trying full reconnect")
