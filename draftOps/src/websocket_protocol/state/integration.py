@@ -59,8 +59,9 @@ class DraftStateManager:
         self.player_resolver: Optional[PlayerResolver] = None
         self.player_cache_db = player_cache_db or f"draft_cache_{league_id}.db"
         
-        # Resolved player name cache
+        # Resolved player caches
         self._player_names: Dict[str, str] = {}
+        self._player_positions: Dict[str, str] = {}
         self._resolution_queue: List[str] = []
         
         # Event callbacks
@@ -250,29 +251,34 @@ class DraftStateManager:
         if time_remaining <= 5.0 and time_remaining > 0:
             self.logger.warning(f"Pick clock running low: {time_remaining:.1f}s remaining")
             
-    async def _resolve_player_position(self, player_id: str) -> str:
+    def _resolve_player_position(self, player_id: str) -> str:
         """
-        Resolve player position for roster placement.
+        Resolve player position for roster placement (synchronous).
+        
+        This method needs to be synchronous as it's called during message processing.
+        It checks the position cache first, then queues for async resolution.
         
         Args:
             player_id: ESPN player ID
             
         Returns:
-            Position string
+            Position string (QB, RB, WR, TE, K, DST, FLEX, BENCH)
         """
-        if self.player_resolver:
-            try:
-                resolved = await self.player_resolver.resolve_espn_id(player_id)
-                if resolved:
-                    return resolved.position
-            except Exception as e:
-                self.logger.warning(f"Position resolution failed for {player_id}: {e}")
-                
+        # Check position cache first for fast synchronous lookup
+        if player_id in self._player_positions:
+            return self._player_positions[player_id]
+            
+        # Queue player for async resolution if not already queued
+        if player_id not in self._resolution_queue:
+            self._resolution_queue.append(player_id)
+            
+        # Return default position to avoid blocking message processing
+        # Position will be updated after async resolution completes
         return "BENCH"
         
     async def resolve_queued_players(self) -> int:
         """
-        Resolve player names from queue.
+        Resolve player names and positions from queue.
         
         Returns:
             Number of players resolved
@@ -287,15 +293,16 @@ class DraftStateManager:
             
             resolved_players = await self.player_resolver.batch_resolve_ids(player_ids)
             
-            # Cache resolved names
+            # Cache resolved names and positions
             resolved_count = 0
             for player_id, player in resolved_players.items():
                 if player:
                     self._player_names[player_id] = player.full_name
+                    self._player_positions[player_id] = player.position or "BENCH"
                     resolved_count += 1
                     
             self.performance_stats['player_resolutions'] += resolved_count
-            self.logger.debug(f"Resolved {resolved_count} player names")
+            self.logger.debug(f"Resolved {resolved_count} player names and positions")
             return resolved_count
             
         except Exception as e:
