@@ -30,7 +30,7 @@ ESPN fantasy football draft rooms use a **text-based WebSocket protocol** for re
 
 **Primary WebSocket Endpoint:**
 ```
-wss://fantasydraft.espn.com/game-1/league-262233108/JOIN?1=1&2=262233108&3=2&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:262233108:2:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:-2093442536&6=false&7=false&8=KONA&nocache=487371
+wss://fantasydraft.espn.com/game-1/league-{LEAGUE_ID}/JOIN?1=1&2={LEAGUE_ID}&3={TEAM_ID}&4={MEMBER_ID_REDACTED}&5={SESSION_TOKEN_REDACTED}&6=false&7=false&8=KONA&nocache={CACHE_BUSTER}
 ```
 
 **URL Structure:**
@@ -76,8 +76,8 @@ Sec-WebSocket-Extensions: permessage-deflate; client_max_window_bits
 
 **Examples:**
 ```
-SELECTED 1 3918298 1 {D912C7E4-B61D-4E98-92C7-E4B61D9E983C}
-SELECTED 2 4362238 3 {3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}
+SELECTED 1 3918298 1 {MEMBER_ID_REDACTED}
+SELECTED 2 4362238 3 {MEMBER_ID_REDACTED}
 ```
 
 **Fields:**
@@ -169,18 +169,44 @@ AUTODRAFT 7 false
 ESPN uses simple space-delimited text commands, not JSON. Message parsing:
 ```python
 def parse_message(message: str) -> dict:
-    parts = message.strip().split()
-    command = parts[0]
+    try:
+        parts = message.strip().split()
+        if not parts:
+            return {"type": "UNKNOWN", "raw": message}
+        
+        command = parts[0]
+        
+        if command == "SELECTED" and len(parts) >= 5:
+            return {
+                "type": "SELECTED",
+                "teamId": int(parts[1]),
+                "playerId": parts[2], 
+                "overallPick": int(parts[3]),
+                "memberId": parts[4]
+            }
+        elif command == "SELECTING" and len(parts) >= 3:
+            return {
+                "type": "SELECTING",
+                "teamId": int(parts[1]),
+                "timeMs": int(parts[2])
+            }
+        elif command == "CLOCK" and len(parts) >= 3:
+            return {
+                "type": "CLOCK",
+                "teamId": int(parts[1]),
+                "timeRemainingMs": int(parts[2]),
+                "round": int(parts[3]) if len(parts) > 3 else None
+            }
+        elif command == "AUTOSUGGEST" and len(parts) >= 2:
+            return {
+                "type": "AUTOSUGGEST",
+                "playerId": parts[1]
+            }
+        else:
+            return {"type": command, "raw": message}
     
-    if command == "SELECTED":
-        return {
-            "type": "SELECTED",
-            "teamId": int(parts[1]),
-            "playerId": parts[2],
-            "overallPick": int(parts[3]),
-            "memberId": parts[4]
-        }
-    # ... other message types
+    except (ValueError, IndexError):
+        return {"type": "PARSE_ERROR", "raw": message}
 ```
 
 ## Connection Stability Analysis
@@ -320,6 +346,25 @@ def parse_message(message: str) -> dict:
 - Status: No documented cases for draft room monitoring
 - Mitigation: Test with mock drafts, conservative usage
 
+## Known Limitations
+
+**Sprint 0 Discovery Scope**
+This analysis documents initial protocol discovery. The following limitations are expected to be addressed in Sprint 1 implementation:
+
+**Error Handling**: Connection drops, malformed messages, and network failures require robust error handling patterns in production code.
+
+**Edge Cases**: Limited testing with only one draft session. Additional validation needed for:
+- High-traffic periods during peak draft season
+- Different league configurations (auction, keeper, dynasty)
+- Network interruptions and reconnection scenarios
+- Malformed or unexpected message formats
+
+**Message Parsing**: The example parser is simplified for documentation. Production implementation should include:
+- Comprehensive message validation
+- Graceful degradation for unknown message types
+- Rate limiting and backpressure handling
+- Detailed logging and monitoring
+
 ## Testing Results
 
 ### Mock Draft Analysis
@@ -378,14 +423,14 @@ def parse_message(message: str) -> dict:
 **Complete message sequence from live draft:**
 ```
 AUTODRAFT 2 false
-TOKEN 1:262233108:2:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:-2093442536
+TOKEN {SESSION_TOKEN_REDACTED}
 CLOCK 0 76305
 AUTOSUGGEST 4262921
-JOINED 2 {3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}
+JOINED 2 {MEMBER_ID_REDACTED}
 SELECTING 2 30000
-SELECTED 1 3918298 1 {D912C7E4-B61D-4E98-92C7-E4B61D9E983C}
+SELECTED 1 3918298 1 {MEMBER_ID_REDACTED}
 SELECT 4362238
-SELECTED 2 4362238 3 {3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}
+SELECTED 2 4362238 3 {MEMBER_ID_REDACTED}
 SELECTING 3 30000
 CLOCK 6 25245 3
 ```
@@ -394,7 +439,7 @@ CLOCK 6 25245 3
 
 **WebSocket Endpoint:**
 ```
-wss://fantasydraft.espn.com/game-1/league-262233108/JOIN?1=1&2=262233108&3=2&4={memberId}&5={sessionToken}&6=false&7=false&8=KONA&nocache=487371
+wss://fantasydraft.espn.com/game-1/league-{LEAGUE_ID}/JOIN?1=1&2={LEAGUE_ID}&3={TEAM_ID}&4={MEMBER_ID}&5={SESSION_TOKEN}&6=false&7=false&8=KONA&nocache={CACHE_BUSTER}
 ```
 
 **Authentication**: Session-based via ESPN login cookies
