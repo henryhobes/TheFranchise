@@ -414,10 +414,16 @@ class DraftStateManager:
         """Clean up resources."""
         try:
             if self.player_resolver:
-                await self.player_resolver.__aexit__(None, None, None)
+                try:
+                    await self.player_resolver.__aexit__(None, None, None)
+                except Exception as e:
+                    self.logger.warning(f"Error during player resolver cleanup: {e}")
                 
             if self.monitor:
-                await self.monitor.close()
+                try:
+                    await self.monitor.close()
+                except Exception as e:
+                    self.logger.warning(f"Error during monitor cleanup: {e}")
                 
             self.logger.info("DraftStateManager closed")
             

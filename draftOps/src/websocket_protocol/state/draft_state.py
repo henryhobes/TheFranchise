@@ -404,9 +404,9 @@ class DraftState:
         
         self._state_snapshots.append(snapshot)
         
-        # Limit snapshot history
+        # Limit snapshot history with efficient cleanup
         if len(self._state_snapshots) > self._max_snapshots:
-            self._state_snapshots.pop(0)
+            self._state_snapshots = self._state_snapshots[1:]
             
     def get_snapshot(self, index: int = -1) -> Optional[DraftStateSnapshot]:
         """

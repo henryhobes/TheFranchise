@@ -386,11 +386,17 @@ class StateUpdateHandlers:
         
     def get_stats(self) -> Dict[str, Any]:
         """Get handler statistics."""
-        total_picks = max(self.stats['picks_processed'], 1)
-        total_validations = max(self.stats['validation_checks'], 1)
+        picks_processed = max(self.stats['picks_processed'], 0)
+        picks_failed = max(self.stats['picks_failed'], 0)
+        validation_checks = max(self.stats['validation_checks'], 0)
+        validation_failures = max(self.stats['validation_failures'], 0)
+        
+        # Calculate success rates with proper bounds checking
+        pick_success_rate = 1.0 if picks_processed == 0 else max(0.0, min(1.0, (picks_processed - picks_failed) / picks_processed))
+        validation_success_rate = 1.0 if validation_checks == 0 else max(0.0, min(1.0, (validation_checks - validation_failures) / validation_checks))
         
         return {
             **self.stats,
-            'pick_success_rate': (self.stats['picks_processed'] - self.stats['picks_failed']) / total_picks,
-            'validation_success_rate': (self.stats['validation_checks'] - self.stats['validation_failures']) / total_validations
+            'pick_success_rate': pick_success_rate,
+            'validation_success_rate': validation_success_rate
         }

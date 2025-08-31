@@ -121,7 +121,7 @@ class DraftEventProcessor:
             if command == "SELECTED" and len(parts) >= 5:
                 return {
                     "type": "SELECTED",
-                    "team_id": int(parts[1]),
+                    "team_id": parts[1],
                     "player_id": parts[2],
                     "overall_pick": int(parts[3]),
                     "member_id": parts[4],
@@ -131,7 +131,7 @@ class DraftEventProcessor:
             elif command == "SELECTING" and len(parts) >= 3:
                 return {
                     "type": "SELECTING", 
-                    "team_id": int(parts[1]),
+                    "team_id": parts[1],
                     "time_ms": int(parts[2]),
                     "raw": message
                 }
@@ -139,7 +139,7 @@ class DraftEventProcessor:
             elif command == "CLOCK" and len(parts) >= 3:
                 return {
                     "type": "CLOCK",
-                    "team_id": int(parts[1]), 
+                    "team_id": parts[1], 
                     "time_remaining_ms": int(parts[2]),
                     "round": int(parts[3]) if len(parts) > 3 else None,
                     "raw": message
@@ -206,7 +206,7 @@ class DraftEventProcessor:
         """
         self.stats['selected_messages'] += 1
         
-        team_id = str(parsed['team_id'])
+        team_id = parsed['team_id']
         player_id = parsed['player_id'] 
         pick_number = parsed['overall_pick']
         
@@ -244,7 +244,7 @@ class DraftEventProcessor:
         """
         self.stats['selecting_messages'] += 1
         
-        team_id = str(parsed['team_id'])
+        team_id = parsed['team_id']
         time_limit_ms = parsed['time_ms']
         time_limit_seconds = time_limit_ms / 1000.0
         
@@ -317,7 +317,7 @@ class DraftEventProcessor:
         if self.on_autodraft_change:
             try:
                 self.on_autodraft_change({
-                    'team_id': str(team_id),
+                    'team_id': team_id,
                     'enabled': enabled
                 })
             except Exception as e:
