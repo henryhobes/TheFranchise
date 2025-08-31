@@ -290,6 +290,8 @@ class DraftMonitorConsole:
         def signal_handler(signum, frame):
             print("\n[WARNING] Interrupt received, shutting down...")
             self.running = False
+            # Raise KeyboardInterrupt to properly interrupt async operations
+            raise KeyboardInterrupt()
             
         signal.signal(signal.SIGINT, signal_handler)
         signal.signal(signal.SIGTERM, signal_handler)
