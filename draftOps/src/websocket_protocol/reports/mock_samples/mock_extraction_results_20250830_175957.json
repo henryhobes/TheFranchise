@@ -1,0 +1,126 @@
+{
+  "extraction_timestamp": "2025-08-30T17:59:57.353743",
+  "summary": {
+    "total_extractions": 8,
+    "unique_players": 5,
+    "confidence_breakdown": {
+      "high_confidence": 8,
+      "medium_confidence": 0,
+      "low_confidence": 0
+    },
+    "by_message_type": {
+      "mock_test": 8
+    },
+    "unique_player_ids": [
+      "123456",
+      "4241457",
+      "4567890",
+      "4362628",
+      "3916387"
+    ]
+  },
+  "extractions": [
+    {
+      "player_id": "4241457",
+      "timestamp": "2025-08-30T17:59:57.352743",
+      "message_type": "mock_test",
+      "websocket_url": "mock_ws_1",
+      "context_fields": {
+        "teamId": 1,
+        "pickNumber": 12,
+        "round": 1
+      },
+      "confidence": 0.8,
+      "raw_message": "{\"type\": \"PICK_MADE\", \"playerId\": 4241457, \"teamId\": 1, \"pickNumber\": 12, \"round\": 1, \"timestamp\": \"2025-08-30T17:59:57.352743\"}"
+    },
+    {
+      "player_id": "3916387",
+      "timestamp": "2025-08-30T17:59:57.352743",
+      "message_type": "mock_test",
+      "websocket_url": "mock_ws_2",
+      "context_fields": {
+        "pos": "QB",
+        "name": "Josh Allen",
+        "fullName": "Josh Allen",
+        "team": "BUF"
+      },
+      "confidence": 0.8,
+      "raw_message": "{\"event\": \"draft_pick\", \"player\": {\"id\": 3916387, \"name\": \"Josh Allen\", \"pos\": \"QB\", \"team\": \"BUF\", \"fullName\": \"Josh Allen\"}, \"draftInfo\": {\"pickNumber\": 1, \"round\": 1, \"teamId\": 2}}"
+    },
+    {
+      "player_id": "4362628",
+      "timestamp": "2025-08-30T17:59:57.352743",
+      "message_type": "mock_test",
+      "websocket_url": "mock_ws_3",
+      "context_fields": {
+        "position": "WR",
+        "fullName": "Justin Jefferson",
+        "nflTeam": "MIN",
+        "injuryStatus": "ACTIVE"
+      },
+      "confidence": 1.0,
+      "raw_message": "{\"data\": {\"selectedPlayer\": {\"playerId\": \"4362628\", \"fullName\": \"Justin Jefferson\", \"position\": \"WR\", \"nflTeam\": \"MIN\", \"injuryStatus\": \"ACTIVE\"}, \"pickInfo\": {\"overall\": 3, \"round\": 1, \"teamIndex\": 2}}}"
+    },
+    {
+      "player_id": "3916387",
+      "timestamp": "2025-08-30T17:59:57.352743",
+      "message_type": "mock_test",
+      "websocket_url": "mock_ws_5",
+      "context_fields": {
+        "name": "Josh Allen"
+      },
+      "confidence": 0.9,
+      "raw_message": "{\"type\": \"ROSTER_UPDATE\", \"teamId\": 1, \"roster\": {\"QB\": [{\"playerId\": 3916387, \"name\": \"Josh Allen\"}], \"RB\": [{\"playerId\": 4241457, \"name\": \"Najee Harris\"}], \"WR\": [{\"playerId\": 4362628, \"name\": \"Justin Jefferson\"}], \"TE\": [], \"K\": [], \"DST\": []}}"
+    },
+    {
+      "player_id": "4241457",
+      "timestamp": "2025-08-30T17:59:57.352743",
+      "message_type": "mock_test",
+      "websocket_url": "mock_ws_5",
+      "context_fields": {
+        "name": "Najee Harris"
+      },
+      "confidence": 0.9,
+      "raw_message": "{\"type\": \"ROSTER_UPDATE\", \"teamId\": 1, \"roster\": {\"QB\": [{\"playerId\": 3916387, \"name\": \"Josh Allen\"}], \"RB\": [{\"playerId\": 4241457, \"name\": \"Najee Harris\"}], \"WR\": [{\"playerId\": 4362628, \"name\": \"Justin Jefferson\"}], \"TE\": [], \"K\": [], \"DST\": []}}"
+    },
+    {
+      "player_id": "4362628",
+      "timestamp": "2025-08-30T17:59:57.352743",
+      "message_type": "mock_test",
+      "websocket_url": "mock_ws_5",
+      "context_fields": {
+        "name": "Justin Jefferson"
+      },
+      "confidence": 0.9,
+      "raw_message": "{\"type\": \"ROSTER_UPDATE\", \"teamId\": 1, \"roster\": {\"QB\": [{\"playerId\": 3916387, \"name\": \"Josh Allen\"}], \"RB\": [{\"playerId\": 4241457, \"name\": \"Najee Harris\"}], \"WR\": [{\"playerId\": 4362628, \"name\": \"Justin Jefferson\"}], \"TE\": [], \"K\": [], \"DST\": []}}"
+    },
+    {
+      "player_id": "4567890",
+      "timestamp": "2025-08-30T17:59:57.352743",
+      "message_type": "mock_test",
+      "websocket_url": "mock_ws_6",
+      "context_fields": {
+        "pos": "RB",
+        "name": "Rookie Player",
+        "fullName": "Mock Rookie Player",
+        "team": "NYG"
+      },
+      "confidence": 0.8,
+      "raw_message": "{\"event\": \"draft_pick\", \"player\": {\"id\": 4567890, \"name\": \"Rookie Player\", \"pos\": \"RB\", \"team\": \"NYG\", \"fullName\": \"Mock Rookie Player\", \"rookieYear\": 2025}}"
+    },
+    {
+      "player_id": "123456",
+      "timestamp": "2025-08-30T17:59:57.352743",
+      "message_type": "mock_test",
+      "websocket_url": "mock_ws_7",
+      "context_fields": {
+        "teamId": 3,
+        "pickNumber": 120,
+        "round": 9,
+        "nflTeam": "SF"
+      },
+      "confidence": 0.8500000000000001,
+      "raw_message": "{\"type\": \"PICK_MADE\", \"playerId\": 123456, \"teamId\": 3, \"pickNumber\": 120, \"round\": 9, \"playerType\": \"DST\", \"nflTeam\": \"SF\"}"
+    }
+  ]
+}

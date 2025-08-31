@@ -1,0 +1,35 @@
+{
+  "generation_info": {
+    "timestamp": "2025-08-30T18:06:45.512416",
+    "method": "Sprint 0 reverse engineering",
+    "source": "ESPN WebSocket analysis + API validation"
+  },
+  "player_mappings": {
+    "4241457": {
+      "name": "Najee Harris",
+      "position": "RB",
+      "nfl_team": "PIT",
+      "resolution_method": "API",
+      "confidence": 1.0
+    },
+    "4362628": {
+      "name": "Justin Jefferson",
+      "position": "WR",
+      "nfl_team": "MIN",
+      "resolution_method": "API",
+      "confidence": 1.0
+    },
+    "3916387": {
+      "name": "Josh Allen",
+      "position": "QB",
+      "nfl_team": "BUF",
+      "resolution_method": "API",
+      "confidence": 1.0
+    }
+  },
+  "statistics": {
+    "total_players": 4,
+    "resolved_players": 3,
+    "resolution_rate": 0.75
+  }
+}
