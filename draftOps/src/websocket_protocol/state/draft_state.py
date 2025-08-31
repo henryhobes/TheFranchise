@@ -354,10 +354,15 @@ class DraftState:
         if len(self._drafted_players) != len(self._pick_history):
             errors.append(f"Drafted players count ({len(self._drafted_players)}) != pick history ({len(self._pick_history)})")
             
-        # Pick number should match drafted player count
-        expected_picks = len(self._drafted_players)
-        if self._current_pick > 0 and self._current_pick != expected_picks:
-            errors.append(f"Current pick ({self._current_pick}) != drafted players ({expected_picks})")
+        # Pick number should match completed picks (not in-progress picks)
+        completed_picks = len(self._drafted_players)
+        if completed_picks > 0 or self._current_pick > 0:
+            # Current pick should be either equal to completed picks (no pick in progress)
+            # or exactly one more (pick in progress)
+            if self._current_pick < completed_picks:
+                errors.append(f"Current pick ({self._current_pick}) is behind completed picks ({completed_picks})")
+            elif self._current_pick > completed_picks + 1:
+                errors.append(f"Current pick ({self._current_pick}) is too far ahead of completed picks ({completed_picks})")
             
         # All drafted players should be out of available pool
         overlap = self._drafted_players.intersection(set(self._available_players))
