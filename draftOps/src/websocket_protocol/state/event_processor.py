@@ -148,7 +148,7 @@ class DraftEventProcessor:
             elif command == "AUTODRAFT" and len(parts) >= 3:
                 return {
                     "type": "AUTODRAFT",
-                    "team_id": int(parts[1]),
+                    "team_id": parts[1],
                     "enabled": parts[2].lower() == "true",
                     "raw": message
                 }
@@ -370,7 +370,16 @@ class DraftEventProcessor:
         
     def get_stats(self) -> Dict[str, Any]:
         """Get event processing statistics."""
-        total = max(self.stats['total_messages'], 1)
+        total = self.stats['total_messages']
+        
+        # Prevent division by zero with proper guards
+        if total == 0:
+            return {
+                **self.stats,
+                'success_rate': 1.0,
+                'parse_error_rate': 0.0,
+                'state_error_rate': 0.0
+            }
         
         return {
             **self.stats,
