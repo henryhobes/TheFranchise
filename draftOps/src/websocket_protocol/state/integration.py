@@ -97,6 +97,12 @@ class DraftStateManager:
                 await self.player_resolver.__aenter__()
             except Exception as e:
                 self.logger.error(f"Failed to initialize player resolver: {e}")
+                # Ensure proper cleanup if __aenter__ partially succeeded
+                if hasattr(self.player_resolver, '__aexit__'):
+                    try:
+                        await self.player_resolver.__aexit__(type(e), e, e.__traceback__)
+                    except Exception as cleanup_error:
+                        self.logger.warning(f"Error during player resolver cleanup: {cleanup_error}")
                 self.player_resolver = None
                 raise
             
