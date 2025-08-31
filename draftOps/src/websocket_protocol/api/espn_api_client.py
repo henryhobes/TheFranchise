@@ -73,11 +73,21 @@ class ESPNApiClient:
         self.player_cache: Dict[str, ESPNPlayer] = {}
         self.cache_expiry = timedelta(hours=1)  # Cache for 1 hour
         
-        # Known player mappings for testing
+        # Known player mappings for testing (updated with live test data)
         self.known_players = {
             "4241457": {"name": "Najee Harris", "pos": "RB", "team": "PIT"},
             "3916387": {"name": "Josh Allen", "pos": "QB", "team": "BUF"},
-            "4362628": {"name": "Justin Jefferson", "pos": "WR", "team": "MIN"}
+            "4362628": {"name": "Justin Jefferson", "pos": "WR", "team": "MIN"},
+            # Real player IDs captured from live test
+            "4430807": {"name": "Player_4430807", "pos": "RB", "team": "TBD"},  # Pick 1
+            "3929630": {"name": "Player_3929630", "pos": "RB", "team": "TBD"},  # Pick 3
+            "3117251": {"name": "Player_3117251", "pos": "RB", "team": "TBD"},  # Pick 4
+            "4241389": {"name": "Player_4241389", "pos": "WR", "team": "TBD"},  # Pick 5
+            "4262921": {"name": "Player_4262921", "pos": "WR", "team": "TBD"},  # Pick 6
+            "4890973": {"name": "Player_4890973", "pos": "RB", "team": "TBD"},  # Pick 7
+            "4429795": {"name": "Player_4429795", "pos": "RB", "team": "TBD"},  # Pick 8
+            "4595348": {"name": "Player_4595348", "pos": "WR", "team": "TBD"},  # Pick 9
+            "4426515": {"name": "Player_4426515", "pos": "WR", "team": "TBD"},  # Pick 10
         }
         
         self.logger = logging.getLogger(__name__)
@@ -340,9 +350,42 @@ class ESPNApiClient:
         
     def _pro_team_id_to_string(self, team_id: int) -> str:
         """Convert ESPN pro team ID to team abbreviation."""
-        # This would need to be populated with actual ESPN team mappings
-        # For now, return a placeholder
-        return f"TEAM_{team_id}"
+        team_map = {
+            0: "FA",   # Free Agent
+            1: "ATL",  # Atlanta Falcons
+            2: "BUF",  # Buffalo Bills
+            3: "CHI",  # Chicago Bears
+            4: "CIN",  # Cincinnati Bengals
+            5: "CLE",  # Cleveland Browns
+            6: "DAL",  # Dallas Cowboys
+            7: "DEN",  # Denver Broncos
+            8: "DET",  # Detroit Lions
+            9: "GB",   # Green Bay Packers
+            10: "TEN", # Tennessee Titans
+            11: "IND", # Indianapolis Colts
+            12: "KC",  # Kansas City Chiefs
+            13: "LV",  # Las Vegas Raiders
+            14: "LAR", # Los Angeles Rams
+            15: "MIA", # Miami Dolphins
+            16: "MIN", # Minnesota Vikings
+            17: "NE",  # New England Patriots
+            18: "NO",  # New Orleans Saints
+            19: "NYG", # New York Giants
+            20: "NYJ", # New York Jets
+            21: "PHI", # Philadelphia Eagles
+            22: "ARI", # Arizona Cardinals
+            23: "PIT", # Pittsburgh Steelers
+            24: "LAC", # Los Angeles Chargers
+            25: "SF",  # San Francisco 49ers
+            26: "SEA", # Seattle Seahawks
+            27: "TB",  # Tampa Bay Buccaneers
+            28: "WSH", # Washington Commanders
+            29: "CAR", # Carolina Panthers
+            30: "JAX", # Jacksonville Jaguars
+            33: "BAL", # Baltimore Ravens
+            34: "HOU"  # Houston Texans
+        }
+        return team_map.get(team_id, f"TEAM_{team_id}")
         
     async def batch_get_players(self, player_ids: List[str], 
                               max_concurrent: int = 5) -> Dict[str, Optional[ESPNPlayer]]:

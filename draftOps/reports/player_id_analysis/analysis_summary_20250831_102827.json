@@ -1,0 +1,65 @@
+{
+  "analysis_timestamp": "2025-08-31T10:28:27.445261",
+  "session_duration": "0:11:09.923059",
+  "session_stats": {
+    "total_messages": 504,
+    "draft_messages": 184,
+    "player_ids_found": 39
+  },
+  "player_id_analysis": {
+    "total_extractions": 39,
+    "unique_players": 39,
+    "confidence_breakdown": {
+      "high_confidence": 39,
+      "medium_confidence": 0,
+      "low_confidence": 0
+    },
+    "by_message_type": {
+      "DRAFT_PICK": 39
+    },
+    "unique_player_ids": [
+      "4379399",
+      "4890973",
+      "4242335",
+      "4362628",
+      "4047365",
+      "4430807",
+      "4361307",
+      "4429795",
+      "3043078",
+      "4241389",
+      "4429160",
+      "4595348",
+      "4612826",
+      "3916387",
+      "3116406",
+      "3915511",
+      "4362238",
+      "3929630",
+      "4047646",
+      "4241416",
+      "4047650",
+      "4430737",
+      "4040715",
+      "4262921",
+      "4239993",
+      "4432773",
+      "4426348",
+      "3918298",
+      "4258173",
+      "4426502",
+      "3121422",
+      "4374302",
+      "4426515",
+      "4432665",
+      "16800",
+      "4685382",
+      "4596448",
+      "4430878",
+      "3117251"
+    ]
+  },
+  "websocket_info": [
+    {
+      "url": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+      "is_closed": 

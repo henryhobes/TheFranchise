@@ -57,8 +57,8 @@ class ESPNDraftMonitor:
             self.logger.info(f"Connecting to draft: {draft_url}")
             await self.page.goto(draft_url)
             
-            # Wait for page to load
-            await self.page.wait_for_load_state("networkidle", timeout=10000)
+            # Wait for page to load (increased timeout for slower connections)
+            await self.page.wait_for_load_state("domcontentloaded", timeout=30000)
             
             # Check if we're on the draft page
             title = await self.page.title()

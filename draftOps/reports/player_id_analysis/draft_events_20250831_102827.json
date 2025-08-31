@@ -1,0 +1,1474 @@
+[
+  {
+    "timestamp": "10:17:19.966",
+    "direction": "sent",
+    "websocket": "wss://espn.connections.edge.bamgrid.com/04fe8d/connection?X-Application-Version=0.0.1&X-BAMSDK-Client-ID=espn-a9b93989&X-BAMSDK-Platform=javascript/windows/chrome&X-BAMSDK-Version=32.5&X-DSS-Edge-Accept=vnd.dss.edge+json;%20version=2&X-Request-ID=8c4c1777-73bc-4d5d-b296-178d3e041722",
+    "payload": "{\"data\":{\"invocation\":{\"urn\":\"urn:bamtech:dust:bamsdk:api:session:create\",\"location\":{\"file\":\"SDK.SdkSession\"}},\"startTime\":\"2025-08-31T14:17:18.863Z\",\"totalDuration\":197,\"services\":[{\"request\":{\"host\":\"https://bam-sdk-configs.bamgrid.com\",\"path\":\"/bam-sdk/v5.0/espn-a9b93989/browser/v32.5/windows/chrome/prod.json\",\"method\":\"GET\"},\"response\":{\"requestId\":null,\"region\":null,\"cloudFrontPop\":null,\"cloudFrontId\":null,\"statusCode\":200,\"roundTripTime\":184},\"timing\":{\"requestStart\":10,\"requestEnd\":194},\"configuration\":{\"endpoint\":\"getConfiguration\"}}],\"sdkInstanceId\":\"3b9f51ae-a94c-463c-a3ff-b871a44ce061\"},\"datacontenttype\":\"application/json;charset=utf-8\",\"subject\":\"sessionId=33f03040-8675-11f0-a074-c6202ff5d047,profileId=61e36bb7-1fb6-4dfa-92c9-6f191833497e\",\"source\":\"urn:dss:source:sdk:javascript:windows:chrome\",\"type\":\"urn:dss:event:sdk:api:event\",\"schemaurl\":\"https://github.bamtech.co/schema-registry/schema-registry-sdk/blob/series/0.X.X/yaml/dss/event/sdk/client/api/event.oas2.yaml\",\"id\":\"7a622a43-78ad-429e-8104-0ade8f082d3c\",\"time\":\"2025-08-31T14:17:19.060Z\"}",
+    "message_type": "UNKNOWN",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:17:19.966",
+    "direction": "sent",
+    "websocket": "wss://espn.connections.edge.bamgrid.com/04fe8d/connection?X-Application-Version=0.0.1&X-BAMSDK-Client-ID=espn-a9b93989&X-BAMSDK-Platform=javascript/windows/chrome&X-BAMSDK-Version=32.5&X-DSS-Edge-Accept=vnd.dss.edge+json;%20version=2&X-Request-ID=8c4c1777-73bc-4d5d-b296-178d3e041722",
+    "payload": "{\"data\":{\"invocation\":{\"urn\":\"urn:bamtech:dust:bamsdk:api:session:initialize\",\"location\":{\"file\":\"SDK.SdkSession\"}},\"startTime\":\"2025-08-31T14:17:19.060Z\",\"totalDuration\":351,\"services\":[{\"request\":{\"host\":\"https://espn.api.edge.bamgrid.com\",\"path\":\"/graph/v1/device/graphql\",\"method\":\"POST\"},\"response\":{\"requestId\":\"75750019-7eae-4f5f-ac0e-b6e5e633a8e3\",\"region\":\"eu-central-1\",\"cloudFrontPop\":null,\"cloudFrontId\":null,\"statusCode\":200,\"roundTripTime\":347},\"timing\":{\"requestStart\":1,\"requestEnd\":348},\"configuration\":{\"endpoint\":\"registerDevice\"}}],\"sdkInstanceId\":\"3b9f51ae-a94c-463c-a3ff-b871a44ce061\"},\"datacontenttype\":\"application/json;charset=utf-8\",\"subject\":\"sessionId=33f03040-8675-11f0-a074-c6202ff5d047,profileId=61e36bb7-1fb6-4dfa-92c9-6f191833497e\",\"source\":\"urn:dss:source:sdk:javascript:windows:chrome\",\"type\":\"urn:dss:event:sdk:api:event\",\"schemaurl\":\"https://github.bamtech.co/schema-registry/schema-registry-sdk/blob/series/0.X.X/yaml/dss/event/sdk/client/api/event.oas2.yaml\",\"id\":\"4d8d3dfe-2777-4e22-a4bb-5c85ff25a773\",\"time\":\"2025-08-31T14:17:19.411Z\"}",
+    "message_type": "UNKNOWN",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:17:19.968",
+    "direction": "sent",
+    "websocket": "wss://espn.connections.edge.bamgrid.com/04fe8d/connection?X-Application-Version=0.0.1&X-BAMSDK-Client-ID=espn-a9b93989&X-BAMSDK-Platform=javascript/windows/chrome&X-BAMSDK-Version=32.5&X-DSS-Edge-Accept=vnd.dss.edge+json;%20version=2&X-Request-ID=8c4c1777-73bc-4d5d-b296-178d3e041722",
+    "payload": "{\"data\":{\"invocation\":{\"urn\":\"urn:bamtech:dust:bamsdk:api:dictionary:getDictionaries\",\"location\":{\"file\":\"SDK.Dictionary.DictionaryApi\"}},\"startTime\":\"2025-08-31T14:17:19.412Z\",\"totalDuration\":35,\"services\":[{\"request\":{\"host\":\"https://espn.api.edge.bamgrid.com\",\"path\":\"/dictionary/v1/dictionaries?variables={\\\"dictionary\\\":[{\\\"resourceKey\\\":\\\"accessibility\\\",\\\"version\\\":\\\"latest\\\"},{\\\"resourceKey\\\":\\\"application\\\",\\\"version\\\":\\\"latest\\\"},{\\\"resourceKey\\\":\\\"media\\\",\\\"version\\\":\\\"latest\\\"},{\\\"resourceKey\\\":\\\"sdk-errors\\\",\\\"version\\\":\\\"latest\\\"}],\\\"location\\\":\\\"US\\\",\\\"pinnedPlatformVersion\\\":\\\"1.0\\\",\\\"pinnedPlatformName\\\":\\\"web\\\",\\\"platform\\\":\\\"web\\\",\\\"preferredLanguage\\\":\\\"en\\\",\\\"tenant\\\":\\\"espn\\\"}\",\"method\":\"GET\"},\"response\":{\"requestId\":\"2b4051fa-a7f9-4661-829b-bd7488c31bb2\",\"region\":\"eu-central-1\",\"cloudFrontPop\":null,\"cloudFrontId\":null,\"statusCode\":200,\"roundTripTime\":35},\"timing\":{\"requestStart\":0,\"requestEnd\":35},\"configuration\":{\"endpoint\":\"getDictionaries\"}}],\"sdkInstanceId\":\"3b9f51ae-a94c-463c-a3ff-b871a44ce061\"},\"datacontenttype\":\"application/json;charset=utf-8\",\"subject\":\"sessionId=33f03040-8675-11f0-a074-c6202ff5d047,profileId=61e36bb7-1fb6-4dfa-92c9-6f191833497e\",\"source\":\"urn:dss:source:sdk:javascript:windows:chrome\",\"type\":\"urn:dss:event:sdk:api:event\",\"schemaurl\":\"https://github.bamtech.co/schema-registry/schema-registry-sdk/blob/series/0.X.X/yaml/dss/event/sdk/client/api/event.oas2.yaml\",\"id\":\"2ae96a89-30c2-4a63-b614-da2481f35d86\",\"time\":\"2025-08-31T14:17:19.447Z\"}",
+    "message_type": "UNKNOWN",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:17:24.640",
+    "direction": "sent",
+    "websocket": "wss://espn.connections.edge.bamgrid.com/04fe8d/connection?X-Application-Version=0.0.1&X-BAMSDK-Client-ID=espn-a9b93989&X-BAMSDK-Platform=javascript/windows/chrome&X-BAMSDK-Version=32.5&X-DSS-Edge-Accept=vnd.dss.edge+json;%20version=2&X-Request-ID=8bfb6cf5-ba49-40f4-a559-73ffe1292fb2",
+    "payload": "{\"data\":{\"invocation\":{\"urn\":\"urn:bamtech:dust:bamsdk:api:session:create\",\"location\":{\"file\":\"SDK.SdkSession\"}},\"startTime\":\"2025-08-31T14:17:23.740Z\",\"totalDuration\":45,\"services\":[{\"request\":{\"host\":\"https://bam-sdk-configs.bamgrid.com\",\"path\":\"/bam-sdk/v5.0/espn-a9b93989/browser/v32.5/windows/chrome/prod.json\",\"method\":\"GET\"},\"response\":{\"requestId\":null,\"region\":null,\"cloudFrontPop\":null,\"cloudFrontId\":null,\"statusCode\":200,\"roundTripTime\":21},\"timing\":{\"requestStart\":22,\"requestEnd\":43},\"configuration\":{\"endpoint\":\"getConfiguration\"}}],\"sdkInstanceId\":\"f67d33c0-6d6d-4072-8302-9a2ca2d5e21d\"},\"datacontenttype\":\"application/json;charset=utf-8\",\"subject\":\"sessionId=36a84b60-8675-11f0-a8e2-76b8d2d005e9,profileId=61e36bb7-1fb6-4dfa-92c9-6f191833497e\",\"source\":\"urn:dss:source:sdk:javascript:windows:chrome\",\"type\":\"urn:dss:event:sdk:api:event\",\"schemaurl\":\"https://github.bamtech.co/schema-registry/schema-registry-sdk/blob/series/0.X.X/yaml/dss/event/sdk/client/api/event.oas2.yaml\",\"id\":\"6704797f-1632-4c98-bc7b-650c80ea472a\",\"time\":\"2025-08-31T14:17:23.785Z\"}",
+    "message_type": "UNKNOWN",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:17:24.641",
+    "direction": "sent",
+    "websocket": "wss://espn.connections.edge.bamgrid.com/04fe8d/connection?X-Application-Version=0.0.1&X-BAMSDK-Client-ID=espn-a9b93989&X-BAMSDK-Platform=javascript/windows/chrome&X-BAMSDK-Version=32.5&X-DSS-Edge-Accept=vnd.dss.edge+json;%20version=2&X-Request-ID=8bfb6cf5-ba49-40f4-a559-73ffe1292fb2",
+    "payload": "{\"data\":{\"invocation\":{\"urn\":\"urn:bamtech:dust:bamsdk:api:session:initialize\",\"location\":{\"file\":\"SDK.SdkSession\"}},\"startTime\":\"2025-08-31T14:17:23.785Z\",\"totalDuration\":184,\"services\":[{\"request\":{\"host\":\"https://espn.api.edge.bamgrid.com\",\"path\":\"/graph/v1/device/graphql\",\"method\":\"POST\"},\"response\":{\"requestId\":\"a7365ca6-ea14-4f82-ac0c-73db797dfa67\",\"region\":\"eu-central-1\",\"cloudFrontPop\":null,\"cloudFrontId\":null,\"statusCode\":200,\"roundTripTime\":181},\"timing\":{\"requestStart\":1,\"requestEnd\":182},\"configuration\":{\"endpoint\":\"refreshToken\"}}],\"sdkInstanceId\":\"f67d33c0-6d6d-4072-8302-9a2ca2d5e21d\"},\"datacontenttype\":\"application/json;charset=utf-8\",\"subject\":\"sessionId=36a84b60-8675-11f0-a8e2-76b8d2d005e9,profileId=61e36bb7-1fb6-4dfa-92c9-6f191833497e\",\"source\":\"urn:dss:source:sdk:javascript:windows:chrome\",\"type\":\"urn:dss:event:sdk:api:event\",\"schemaurl\":\"https://github.bamtech.co/schema-registry/schema-registry-sdk/blob/series/0.X.X/yaml/dss/event/sdk/client/api/event.oas2.yaml\",\"id\":\"a0b5d6e9-4f83-4ac3-8052-d2ebf59bb4a5\",\"time\":\"2025-08-31T14:17:23.969Z\"}",
+    "message_type": "UNKNOWN",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:17:26.400",
+    "direction": "sent",
+    "websocket": "wss://espn.connections.edge.bamgrid.com/04fe8d/connection?X-Application-Version=0.0.1&X-BAMSDK-Client-ID=espn-a9b93989&X-BAMSDK-Platform=javascript/windows/chrome&X-BAMSDK-Version=32.5&X-DSS-Edge-Accept=vnd.dss.edge+json;%20version=2&X-Request-ID=c1c5a92b-6681-4a1c-880d-3bf52e0821e7",
+    "payload": "{\"data\":{\"invocation\":{\"urn\":\"urn:bamtech:dust:bamsdk:api:session:create\",\"location\":{\"file\":\"SDK.SdkSession\"}},\"startTime\":\"2025-08-31T14:17:25.744Z\",\"totalDuration\":59,\"services\":[{\"request\":{\"host\":\"https://bam-sdk-configs.bamgrid.com\",\"path\":\"/bam-sdk/v5.0/espn-a9b93989/browser/v32.5/windows/chrome/prod.json\",\"method\":\"GET\"},\"response\":{\"requestId\":null,\"region\":null,\"cloudFrontPop\":null,\"cloudFrontId\":null,\"statusCode\":200,\"roundTripTime\":45},\"timing\":{\"requestStart\":13,\"requestEnd\":58},\"configuration\":{\"endpoint\":\"getConfiguration\"}}],\"sdkInstanceId\":\"28d9a192-a488-4201-8667-c2c284fcdefb\"},\"datacontenttype\":\"application/json;charset=utf-8\",\"subject\":\"sessionId=37dcacb0-8675-11f0-b2f9-daf0a4bce64d,profileId=61e36bb7-1fb6-4dfa-92c9-6f191833497e\",\"source\":\"urn:dss:source:sdk:javascript:windows:chrome\",\"type\":\"urn:dss:event:sdk:api:event\",\"schemaurl\":\"https://github.bamtech.co/schema-registry/schema-registry-sdk/blob/series/0.X.X/yaml/dss/event/sdk/client/api/event.oas2.yaml\",\"id\":\"c6b86806-1505-49e4-b0e4-988656d777f7\",\"time\":\"2025-08-31T14:17:25.803Z\"}",
+    "message_type": "UNKNOWN",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:17:26.401",
+    "direction": "sent",
+    "websocket": "wss://espn.connections.edge.bamgrid.com/04fe8d/connection?X-Application-Version=0.0.1&X-BAMSDK-Client-ID=espn-a9b93989&X-BAMSDK-Platform=javascript/windows/chrome&X-BAMSDK-Version=32.5&X-DSS-Edge-Accept=vnd.dss.edge+json;%20version=2&X-Request-ID=c1c5a92b-6681-4a1c-880d-3bf52e0821e7",
+    "payload": "{\"data\":{\"invocation\":{\"urn\":\"urn:bamtech:dust:bamsdk:api:session:initialize\",\"location\":{\"file\":\"SDK.SdkSession\"}},\"startTime\":\"2025-08-31T14:17:25.804Z\",\"totalDuration\":186,\"services\":[{\"request\":{\"host\":\"https://espn.api.edge.bamgrid.com\",\"path\":\"/graph/v1/device/graphql\",\"method\":\"POST\"},\"response\":{\"requestId\":\"0a18b979-af25-43d6-89b3-926da85f1a29\",\"region\":\"eu-central-1\",\"cloudFrontPop\":null,\"cloudFrontId\":null,\"statusCode\":200,\"roundTripTime\":185},\"timing\":{\"requestStart\":0,\"requestEnd\":185},\"configuration\":{\"endpoint\":\"refreshToken\"}}],\"sdkInstanceId\":\"28d9a192-a488-4201-8667-c2c284fcdefb\"},\"datacontenttype\":\"application/json;charset=utf-8\",\"subject\":\"sessionId=37dcacb0-8675-11f0-b2f9-daf0a4bce64d,profileId=61e36bb7-1fb6-4dfa-92c9-6f191833497e\",\"source\":\"urn:dss:source:sdk:javascript:windows:chrome\",\"type\":\"urn:dss:event:sdk:api:event\",\"schemaurl\":\"https://github.bamtech.co/schema-registry/schema-registry-sdk/blob/series/0.X.X/yaml/dss/event/sdk/client/api/event.oas2.yaml\",\"id\":\"c145575e-4a05-4dcd-bfa7-764d33ba8299\",\"time\":\"2025-08-31T14:17:25.990Z\"}",
+    "message_type": "UNKNOWN",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:17:31.750",
+    "direction": "sent",
+    "websocket": "wss://espn.connections.edge.bamgrid.com/04fe8d/connection?X-Application-Version=0.0.1&X-BAMSDK-Client-ID=espn-a9b93989&X-BAMSDK-Platform=javascript/windows/chrome&X-BAMSDK-Version=32.5&X-DSS-Edge-Accept=vnd.dss.edge+json;%20version=2&X-Request-ID=738d6e1d-152c-4a8c-963e-b99ed9185507",
+    "payload": "{\"data\":{\"invocation\":{\"urn\":\"urn:bamtech:dust:bamsdk:api:session:create\",\"location\":{\"file\":\"SDK.SdkSession\"}},\"startTime\":\"2025-08-31T14:17:31.126Z\",\"totalDuration\":38,\"services\":[{\"request\":{\"host\":\"https://bam-sdk-configs.bamgrid.com\",\"path\":\"/bam-sdk/v5.0/espn-a9b93989/browser/v32.5/windows/chrome/prod.json\",\"method\":\"GET\"},\"response\":{\"requestId\":null,\"region\":null,\"cloudFrontPop\":null,\"cloudFrontId\":null,\"statusCode\":200,\"roundTripTime\":31},\"timing\":{\"requestStart\":6,\"requestEnd\":37},\"configuration\":{\"endpoint\":\"getConfiguration\"}}],\"sdkInstanceId\":\"d6c433b1-ff95-451e-b65c-da8961414d07\"},\"datacontenttype\":\"application/json;charset=utf-8\",\"subject\":\"sessionId=3b0e3d90-8675-11f0-9f6c-9a35e6ab83e1,profileId=61e36bb7-1fb6-4dfa-92c9-6f191833497e\",\"source\":\"urn:dss:source:sdk:javascript:windows:chrome\",\"type\":\"urn:dss:event:sdk:api:event\",\"schemaurl\":\"https://github.bamtech.co/schema-registry/schema-registry-sdk/blob/series/0.X.X/yaml/dss/event/sdk/client/api/event.oas2.yaml\",\"id\":\"d0d34f7c-3296-4ff4-934c-88ebb8e3239c\",\"time\":\"2025-08-31T14:17:31.164Z\"}",
+    "message_type": "UNKNOWN",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:17:31.751",
+    "direction": "sent",
+    "websocket": "wss://espn.connections.edge.bamgrid.com/04fe8d/connection?X-Application-Version=0.0.1&X-BAMSDK-Client-ID=espn-a9b93989&X-BAMSDK-Platform=javascript/windows/chrome&X-BAMSDK-Version=32.5&X-DSS-Edge-Accept=vnd.dss.edge+json;%20version=2&X-Request-ID=738d6e1d-152c-4a8c-963e-b99ed9185507",
+    "payload": "{\"data\":{\"invocation\":{\"urn\":\"urn:bamtech:dust:bamsdk:api:session:initialize\",\"location\":{\"file\":\"SDK.SdkSession\"}},\"startTime\":\"2025-08-31T14:17:31.164Z\",\"totalDuration\":184,\"services\":[{\"request\":{\"host\":\"https://espn.api.edge.bamgrid.com\",\"path\":\"/graph/v1/device/graphql\",\"method\":\"POST\"},\"response\":{\"requestId\":\"5a582c23-585f-480b-a37b-acf9d5cf1dd5\",\"region\":\"eu-central-1\",\"cloudFrontPop\":null,\"cloudFrontId\":null,\"statusCode\":200,\"roundTripTime\":183},\"timing\":{\"requestStart\":0,\"requestEnd\":183},\"configuration\":{\"endpoint\":\"refreshToken\"}}],\"sdkInstanceId\":\"d6c433b1-ff95-451e-b65c-da8961414d07\"},\"datacontenttype\":\"application/json;charset=utf-8\",\"subject\":\"sessionId=3b0e3d90-8675-11f0-9f6c-9a35e6ab83e1,profileId=61e36bb7-1fb6-4dfa-92c9-6f191833497e\",\"source\":\"urn:dss:source:sdk:javascript:windows:chrome\",\"type\":\"urn:dss:event:sdk:api:event\",\"schemaurl\":\"https://github.bamtech.co/schema-registry/schema-registry-sdk/blob/series/0.X.X/yaml/dss/event/sdk/client/api/event.oas2.yaml\",\"id\":\"add47ac6-fb81-4936-a4d0-2f0a02b12e1a\",\"time\":\"2025-08-31T14:17:31.348Z\"}",
+    "message_type": "UNKNOWN",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:17:33.191",
+    "direction": "sent",
+    "websocket": "wss://espn.connections.edge.bamgrid.com/04fe8d/connection?X-Application-Version=0.0.1&X-BAMSDK-Client-ID=espn-a9b93989&X-BAMSDK-Platform=javascript/windows/chrome&X-BAMSDK-Version=32.5&X-DSS-Edge-Accept=vnd.dss.edge+json;%20version=2&X-Request-ID=3b32df6f-1976-4cc4-8adf-f7bf21565aa2",
+    "payload": "{\"data\":{\"invocation\":{\"urn\":\"urn:bamtech:dust:bamsdk:api:session:create\",\"location\":{\"file\":\"SDK.SdkSession\"}},\"startTime\":\"2025-08-31T14:17:32.555Z\",\"totalDuration\":55,\"services\":[{\"request\":{\"host\":\"https://bam-sdk-configs.bamgrid.com\",\"path\":\"/bam-sdk/v5.0/espn-a9b93989/browser/v32.5/windows/chrome/prod.json\",\"method\":\"GET\"},\"response\":{\"requestId\":null,\"region\":null,\"cloudFrontPop\":null,\"cloudFrontId\":null,\"statusCode\":200,\"roundTripTime\":42},\"timing\":{\"requestStart\":12,\"requestEnd\":54},\"configuration\":{\"endpoint\":\"getConfiguration\"}}],\"sdkInstanceId\":\"53a2676b-882c-400c-b7b5-6a85aa064cad\"},\"datacontenttype\":\"application/json;charset=utf-8\",\"subject\":\"sessionId=3bea93d0-8675-11f0-b5be-164b395baa27,profileId=61e36bb7-1fb6-4dfa-92c9-6f191833497e\",\"source\":\"urn:dss:source:sdk:javascript:windows:chrome\",\"type\":\"urn:dss:event:sdk:api:event\",\"schemaurl\":\"https://github.bamtech.co/schema-registry/schema-registry-sdk/blob/series/0.X.X/yaml/dss/event/sdk/client/api/event.oas2.yaml\",\"id\":\"0071dabf-a830-426a-b31f-e3c23f47d93e\",\"time\":\"2025-08-31T14:17:32.610Z\"}",
+    "message_type": "UNKNOWN",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:17:33.191",
+    "direction": "sent",
+    "websocket": "wss://espn.connections.edge.bamgrid.com/04fe8d/connection?X-Application-Version=0.0.1&X-BAMSDK-Client-ID=espn-a9b93989&X-BAMSDK-Platform=javascript/windows/chrome&X-BAMSDK-Version=32.5&X-DSS-Edge-Accept=vnd.dss.edge+json;%20version=2&X-Request-ID=3b32df6f-1976-4cc4-8adf-f7bf21565aa2",
+    "payload": "{\"data\":{\"invocation\":{\"urn\":\"urn:bamtech:dust:bamsdk:api:session:initialize\",\"location\":{\"file\":\"SDK.SdkSession\"}},\"startTime\":\"2025-08-31T14:17:32.611Z\",\"totalDuration\":182,\"services\":[{\"request\":{\"host\":\"https://espn.api.edge.bamgrid.com\",\"path\":\"/graph/v1/device/graphql\",\"method\":\"POST\"},\"response\":{\"requestId\":\"4d5023dd-e922-4720-ab33-3f8facedc00a\",\"region\":\"eu-central-1\",\"cloudFrontPop\":null,\"cloudFrontId\":null,\"statusCode\":200,\"roundTripTime\":181},\"timing\":{\"requestStart\":0,\"requestEnd\":181},\"configuration\":{\"endpoint\":\"refreshToken\"}}],\"sdkInstanceId\":\"53a2676b-882c-400c-b7b5-6a85aa064cad\"},\"datacontenttype\":\"application/json;charset=utf-8\",\"subject\":\"sessionId=3bea93d0-8675-11f0-b5be-164b395baa27,profileId=61e36bb7-1fb6-4dfa-92c9-6f191833497e\",\"source\":\"urn:dss:source:sdk:javascript:windows:chrome\",\"type\":\"urn:dss:event:sdk:api:event\",\"schemaurl\":\"https://github.bamtech.co/schema-registry/schema-registry-sdk/blob/series/0.X.X/yaml/dss/event/sdk/client/api/event.oas2.yaml\",\"id\":\"2095eb41-41b9-413d-bfc7-8bb11721acfa\",\"time\":\"2025-08-31T14:17:32.793Z\"}",
+    "message_type": "UNKNOWN",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:17:51.405",
+    "direction": "sent",
+    "websocket": "wss://espn.connections.edge.bamgrid.com/04fe8d/connection?X-Application-Version=0.0.1&X-BAMSDK-Client-ID=espn-a9b93989&X-BAMSDK-Platform=javascript/windows/chrome&X-BAMSDK-Version=32.5&X-DSS-Edge-Accept=vnd.dss.edge+json;%20version=2&X-Request-ID=75b6b3ca-f174-49a5-928d-beaa8b71f3a7",
+    "payload": "{\"data\":{\"invocation\":{\"urn\":\"urn:bamtech:dust:bamsdk:api:session:create\",\"location\":{\"file\":\"SDK.SdkSession\"}},\"startTime\":\"2025-08-31T14:17:50.774Z\",\"totalDuration\":31,\"services\":[{\"request\":{\"host\":\"https://bam-sdk-configs.bamgrid.com\",\"path\":\"/bam-sdk/v5.0/espn-a9b93989/browser/v32.5/windows/chrome/prod.json\",\"method\":\"GET\"},\"response\":{\"requestId\":null,\"region\":null,\"cloudFrontPop\":null,\"cloudFrontId\":null,\"statusCode\":200,\"roundTripTime\":21},\"timing\":{\"requestStart\":8,\"requestEnd\":29},\"configuration\":{\"endpoint\":\"getConfiguration\"}}],\"sdkInstanceId\":\"af54b2a2-b3c7-4432-864d-3492a3059974\"},\"datacontenttype\":\"application/json;charset=utf-8\",\"subject\":\"sessionId=46c3d460-8675-11f0-849c-e66ccb1a6e3b,profileId=61e36bb7-1fb6-4dfa-92c9-6f191833497e\",\"source\":\"urn:dss:source:sdk:javascript:windows:chrome\",\"type\":\"urn:dss:event:sdk:api:event\",\"schemaurl\":\"https://github.bamtech.co/schema-registry/schema-registry-sdk/blob/series/0.X.X/yaml/dss/event/sdk/client/api/event.oas2.yaml\",\"id\":\"c3438f10-10d6-4de6-8b4c-cc760804266b\",\"time\":\"2025-08-31T14:17:50.805Z\"}",
+    "message_type": "UNKNOWN",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:17:51.406",
+    "direction": "sent",
+    "websocket": "wss://espn.connections.edge.bamgrid.com/04fe8d/connection?X-Application-Version=0.0.1&X-BAMSDK-Client-ID=espn-a9b93989&X-BAMSDK-Platform=javascript/windows/chrome&X-BAMSDK-Version=32.5&X-DSS-Edge-Accept=vnd.dss.edge+json;%20version=2&X-Request-ID=75b6b3ca-f174-49a5-928d-beaa8b71f3a7",
+    "payload": "{\"data\":{\"invocation\":{\"urn\":\"urn:bamtech:dust:bamsdk:api:session:initialize\",\"location\":{\"file\":\"SDK.SdkSession\"}},\"startTime\":\"2025-08-31T14:17:50.805Z\",\"totalDuration\":208,\"services\":[{\"request\":{\"host\":\"https://espn.api.edge.bamgrid.com\",\"path\":\"/graph/v1/device/graphql\",\"method\":\"POST\"},\"response\":{\"requestId\":\"18a4563e-689d-439b-aa09-792c9357e1f2\",\"region\":\"eu-central-1\",\"cloudFrontPop\":null,\"cloudFrontId\":null,\"statusCode\":200,\"roundTripTime\":207},\"timing\":{\"requestStart\":0,\"requestEnd\":207},\"configuration\":{\"endpoint\":\"refreshToken\"}}],\"sdkInstanceId\":\"af54b2a2-b3c7-4432-864d-3492a3059974\"},\"datacontenttype\":\"application/json;charset=utf-8\",\"subject\":\"sessionId=46c3d460-8675-11f0-849c-e66ccb1a6e3b,profileId=61e36bb7-1fb6-4dfa-92c9-6f191833497e\",\"source\":\"urn:dss:source:sdk:javascript:windows:chrome\",\"type\":\"urn:dss:event:sdk:api:event\",\"schemaurl\":\"https://github.bamtech.co/schema-registry/schema-registry-sdk/blob/series/0.X.X/yaml/dss/event/sdk/client/api/event.oas2.yaml\",\"id\":\"69efdc1e-672a-4464-b80d-1d5e43ea0af6\",\"time\":\"2025-08-31T14:17:51.013Z\"}",
+    "message_type": "UNKNOWN",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:18:07.169",
+    "direction": "sent",
+    "websocket": "wss://espn.connections.edge.bamgrid.com/04fe8d/connection?X-Application-Version=0.0.1&X-BAMSDK-Client-ID=espn-a9b93989&X-BAMSDK-Platform=javascript/windows/chrome&X-BAMSDK-Version=32.5&X-DSS-Edge-Accept=vnd.dss.edge+json;%20version=2&X-Request-ID=9d3f58ae-86c9-44f4-8c07-9146de0971b7",
+    "payload": "{\"data\":{\"invocation\":{\"urn\":\"urn:bamtech:dust:bamsdk:api:session:create\",\"location\":{\"file\":\"SDK.SdkSession\"}},\"startTime\":\"2025-08-31T14:18:06.503Z\",\"totalDuration\":71,\"services\":[{\"request\":{\"host\":\"https://bam-sdk-configs.bamgrid.com\",\"path\":\"/bam-sdk/v5.0/espn-a9b93989/browser/v32.5/windows/chrome/prod.json\",\"method\":\"GET\"},\"response\":{\"requestId\":null,\"region\":null,\"cloudFrontPop\":null,\"cloudFrontId\":null,\"statusCode\":200,\"roundTripTime\":52},\"timing\":{\"requestStart\":18,\"requestEnd\":70},\"configuration\":{\"endpoint\":\"getConfiguration\"}}],\"sdkInstanceId\":\"ad5e264c-d540-4135-9ccf-835bc7901c05\"},\"datacontenttype\":\"application/json;charset=utf-8\",\"subject\":\"sessionId=504c03e0-8675-11f0-b4ec-ae5550ab182d,profileId=063ede44-65db-4623-acf4-205ce05a67e2\",\"source\":\"urn:dss:source:sdk:javascript:windows:chrome\",\"type\":\"urn:dss:event:sdk:api:event\",\"schemaurl\":\"https://github.bamtech.co/schema-registry/schema-registry-sdk/blob/series/0.X.X/yaml/dss/event/sdk/client/api/event.oas2.yaml\",\"id\":\"173e288f-08cd-4410-9c0e-c40328cd654c\",\"time\":\"2025-08-31T14:18:06.574Z\"}",
+    "message_type": "UNKNOWN",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:18:07.170",
+    "direction": "sent",
+    "websocket": "wss://espn.connections.edge.bamgrid.com/04fe8d/connection?X-Application-Version=0.0.1&X-BAMSDK-Client-ID=espn-a9b93989&X-BAMSDK-Platform=javascript/windows/chrome&X-BAMSDK-Version=32.5&X-DSS-Edge-Accept=vnd.dss.edge+json;%20version=2&X-Request-ID=9d3f58ae-86c9-44f4-8c07-9146de0971b7",
+    "payload": "{\"data\":{\"invocation\":{\"urn\":\"urn:bamtech:dust:bamsdk:api:session:initialize\",\"location\":{\"file\":\"SDK.SdkSession\"}},\"startTime\":\"2025-08-31T14:18:06.574Z\",\"totalDuration\":183,\"services\":[{\"request\":{\"host\":\"https://espn.api.edge.bamgrid.com\",\"path\":\"/graph/v1/device/graphql\",\"method\":\"POST\"},\"response\":{\"requestId\":\"b98f8538-d4e6-4611-b16b-ad8291353054\",\"region\":\"eu-central-1\",\"cloudFrontPop\":null,\"cloudFrontId\":null,\"statusCode\":200,\"roundTripTime\":182},\"timing\":{\"requestStart\":0,\"requestEnd\":182},\"configuration\":{\"endpoint\":\"refreshToken\"}}],\"sdkInstanceId\":\"ad5e264c-d540-4135-9ccf-835bc7901c05\"},\"datacontenttype\":\"application/json;charset=utf-8\",\"subject\":\"sessionId=504c03e0-8675-11f0-b4ec-ae5550ab182d,profileId=063ede44-65db-4623-acf4-205ce05a67e2\",\"source\":\"urn:dss:source:sdk:javascript:windows:chrome\",\"type\":\"urn:dss:event:sdk:api:event\",\"schemaurl\":\"https://github.bamtech.co/schema-registry/schema-registry-sdk/blob/series/0.X.X/yaml/dss/event/sdk/client/api/event.oas2.yaml\",\"id\":\"8334c78c-341b-4fb8-864a-d907426ad7e7\",\"time\":\"2025-08-31T14:18:06.757Z\"}",
+    "message_type": "UNKNOWN",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:18:07.170",
+    "direction": "sent",
+    "websocket": "wss://espn.connections.edge.bamgrid.com/04fe8d/connection?X-Application-Version=0.0.1&X-BAMSDK-Client-ID=espn-a9b93989&X-BAMSDK-Platform=javascript/windows/chrome&X-BAMSDK-Version=32.5&X-DSS-Edge-Accept=vnd.dss.edge+json;%20version=2&X-Request-ID=9d3f58ae-86c9-44f4-8c07-9146de0971b7",
+    "payload": "{\"data\":{\"invocation\":{\"urn\":\"urn:bamtech:dust:bamsdk:api:orchestration:query\",\"location\":{\"file\":\"SDK.Orchestration.OrchestrationApi\"}},\"startTime\":\"2025-08-31T14:18:06.757Z\",\"totalDuration\":255,\"services\":[{\"request\":{\"host\":\"https://espn.api.edge.bamgrid.com\",\"path\":\"/v1/public/graphql\",\"method\":\"POST\"},\"response\":{\"requestId\":\"80380f03-8646-4c45-a460-22340aae4fa0\",\"region\":\"eu-central-1\",\"cloudFrontPop\":null,\"cloudFrontId\":null,\"statusCode\":200,\"roundTripTime\":254},\"timing\":{\"requestStart\":0,\"requestEnd\":254},\"configuration\":{\"endpoint\":\"exchangeIDTokenForAccessToken\"}}],\"sdkInstanceId\":\"ad5e264c-d540-4135-9ccf-835bc7901c05\"},\"datacontenttype\":\"application/json;charset=utf-8\",\"subject\":\"sessionId=504c03e0-8675-11f0-b4ec-ae5550ab182d,profileId=063ede44-65db-4623-acf4-205ce05a67e2\",\"source\":\"urn:dss:source:sdk:javascript:windows:chrome\",\"type\":\"urn:dss:event:sdk:api:event\",\"schemaurl\":\"https://github.bamtech.co/schema-registry/schema-registry-sdk/blob/series/0.X.X/yaml/dss/event/sdk/client/api/event.oas2.yaml\",\"id\":\"1b699435-8184-4ea8-b161-68791016fc7a\",\"time\":\"2025-08-31T14:18:07.012Z\"}",
+    "message_type": "UNKNOWN",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:18:07.172",
+    "direction": "sent",
+    "websocket": "wss://espn.connections.edge.bamgrid.com/04fe8d/connection?X-Application-Version=0.0.1&X-BAMSDK-Client-ID=espn-a9b93989&X-BAMSDK-Platform=javascript/windows/chrome&X-BAMSDK-Version=32.5&X-DSS-Edge-Accept=vnd.dss.edge+json;%20version=2&X-Request-ID=9d3f58ae-86c9-44f4-8c07-9146de0971b7",
+    "payload": "{\"data\":{\"invocation\":{\"urn\":\"urn:bamtech:dust:bamsdk:api:subscription:getSubscriberInfo\",\"location\":{\"file\":\"SDK.Subscription.SubscriptionApi\"}},\"startTime\":\"2025-08-31T14:18:07.014Z\",\"totalDuration\":132,\"services\":[{\"request\":{\"host\":\"https://espn.api.edge.bamgrid.com\",\"path\":\"/v2/subscribers\",\"method\":\"GET\"},\"response\":{\"requestId\":\"5813cf67-3850-4e3e-a045-68e652bba463\",\"region\":\"eu-central-1\",\"cloudFrontPop\":null,\"cloudFrontId\":null,\"statusCode\":404,\"roundTripTime\":132},\"timing\":{\"requestStart\":0,\"requestEnd\":132},\"configuration\":{\"endpoint\":\"getSubscriberInfo\"},\"error\":[{\"code\":\"subscription.not.found\",\"description\":\"No subscriber found\"}]},{\"request\":{\"host\":\"https://espn.api.edge.bamgrid.com\",\"path\":\"/v2/subscribers\",\"method\":\"GET\"},\"response\":{\"requestId\":\"5813cf67-3850-4e3e-a045-68e652bba463\",\"region\":\"eu-central-1\",\"cloudFrontPop\":null,\"cloudFrontId\":null,\"statusCode\":404,\"roundTripTime\":132},\"timing\":{\"requestStart\":0,\"requestEnd\":132},\"configuration\":{\"endpoint\":\"getSubscriberInfo\"}}],\"error\":{\"code\":\"SubscriptionNotFoundException\"},\"sdkInstanceId\":\"ad5e264c-d540-4135-9ccf-835bc7901c05\"},\"datacontenttype\":\"application/json;charset=utf-8\",\"subject\":\"sessionId=504c03e0-8675-11f0-b4ec-ae5550ab182d,profileId=063ede44-65db-4623-acf4-205ce05a67e2\",\"source\":\"urn:dss:source:sdk:javascript:windows:chrome\",\"type\":\"urn:dss:event:sdk:api:event\",\"schemaurl\":\"https://github.bamtech.co/schema-registry/schema-registry-sdk/blob/series/0.X.X/yaml/dss/event/sdk/client/api/event.oas2.yaml\",\"id\":\"983ccbde-d012-466f-a91a-c82ac2a8579e\",\"time\":\"2025-08-31T14:18:07.146Z\"}",
+    "message_type": "UNKNOWN",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:18:10.105",
+    "direction": "sent",
+    "websocket": "wss://espn.connections.edge.bamgrid.com/04fe8d/connection?X-Application-Version=0.0.1&X-BAMSDK-Client-ID=espn-a9b93989&X-BAMSDK-Platform=javascript/windows/chrome&X-BAMSDK-Version=32.5&X-DSS-Edge-Accept=vnd.dss.edge+json;%20version=2&X-Request-ID=301118dd-5873-4158-84a2-bf5d525927f1",
+    "payload": "{\"data\":{\"invocation\":{\"urn\":\"urn:bamtech:dust:bamsdk:api:session:create\",\"location\":{\"file\":\"SDK.SdkSession\"}},\"startTime\":\"2025-08-31T14:18:09.450Z\",\"totalDuration\":47,\"services\":[{\"request\":{\"host\":\"https://bam-sdk-configs.bamgrid.com\",\"path\":\"/bam-sdk/v5.0/espn-a9b93989/browser/v32.5/windows/chrome/prod.json\",\"method\":\"GET\"},\"response\":{\"requestId\":null,\"region\":null,\"cloudFrontPop\":null,\"cloudFrontId\":null,\"statusCode\":200,\"roundTripTime\":11},\"timing\":{\"requestStart\":34,\"requestEnd\":45},\"configuration\":{\"endpoint\":\"getConfiguration\"}}],\"sdkInstanceId\":\"7e4dd3e2-5c5b-4033-bc7a-4559d5785b27\"},\"datacontenttype\":\"application/json;charset=utf-8\",\"subject\":\"sessionId=51e7d990-8675-11f0-a5f9-7e5fe82b71b8,profileId=063ede44-65db-4623-acf4-205ce05a67e2\",\"source\":\"urn:dss:source:sdk:javascript:windows:chrome\",\"type\":\"urn:dss:event:sdk:api:event\",\"schemaurl\":\"https://github.bamtech.co/schema-registry/schema-registry-sdk/blob/series/0.X.X/yaml/dss/event/sdk/client/api/event.oas2.yaml\",\"id\":\"f3d00e4e-07e4-4cbb-826f-4780b2269e9f\",\"time\":\"2025-08-31T14:18:09.497Z\"}",
+    "message_type": "UNKNOWN",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:18:10.106",
+    "direction": "sent",
+    "websocket": "wss://espn.connections.edge.bamgrid.com/04fe8d/connection?X-Application-Version=0.0.1&X-BAMSDK-Client-ID=espn-a9b93989&X-BAMSDK-Platform=javascript/windows/chrome&X-BAMSDK-Version=32.5&X-DSS-Edge-Accept=vnd.dss.edge+json;%20version=2&X-Request-ID=301118dd-5873-4158-84a2-bf5d525927f1",
+    "payload": "{\"data\":{\"invocation\":{\"urn\":\"urn:bamtech:dust:bamsdk:api:session:initialize\",\"location\":{\"file\":\"SDK.SdkSession\"}},\"startTime\":\"2025-08-31T14:18:09.497Z\",\"totalDuration\":203,\"services\":[{\"request\":{\"host\":\"https://espn.api.edge.bamgrid.com\",\"path\":\"/graph/v1/device/graphql\",\"method\":\"POST\"},\"response\":{\"requestId\":\"e4dd8b8e-841a-45b9-8c45-1a25d828f385\",\"region\":\"eu-central-1\",\"cloudFrontPop\":null,\"cloudFrontId\":null,\"statusCode\":200,\"roundTripTime\":201},\"timing\":{\"requestStart\":0,\"requestEnd\":201},\"configuration\":{\"endpoint\":\"refreshToken\"}}],\"sdkInstanceId\":\"7e4dd3e2-5c5b-4033-bc7a-4559d5785b27\"},\"datacontenttype\":\"application/json;charset=utf-8\",\"subject\":\"sessionId=51e7d990-8675-11f0-a5f9-7e5fe82b71b8,profileId=063ede44-65db-4623-acf4-205ce05a67e2\",\"source\":\"urn:dss:source:sdk:javascript:windows:chrome\",\"type\":\"urn:dss:event:sdk:api:event\",\"schemaurl\":\"https://github.bamtech.co/schema-registry/schema-registry-sdk/blob/series/0.X.X/yaml/dss/event/sdk/client/api/event.oas2.yaml\",\"id\":\"66630135-4a74-4915-b538-c57d95d76734\",\"time\":\"2025-08-31T14:18:09.700Z\"}",
+    "message_type": "UNKNOWN",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:18:10.107",
+    "direction": "sent",
+    "websocket": "wss://espn.connections.edge.bamgrid.com/04fe8d/connection?X-Application-Version=0.0.1&X-BAMSDK-Client-ID=espn-a9b93989&X-BAMSDK-Platform=javascript/windows/chrome&X-BAMSDK-Version=32.5&X-DSS-Edge-Accept=vnd.dss.edge+json;%20version=2&X-Request-ID=301118dd-5873-4158-84a2-bf5d525927f1",
+    "payload": "{\"data\":{\"invocation\":{\"urn\":\"urn:bamtech:dust:bamsdk:api:subscription:getSubscriberInfo\",\"location\":{\"file\":\"SDK.Subscription.SubscriptionApi\"}},\"startTime\":\"2025-08-31T14:18:09.705Z\",\"totalDuration\":115,\"services\":[{\"request\":{\"host\":\"https://espn.api.edge.bamgrid.com\",\"path\":\"/v2/subscribers\",\"method\":\"GET\"},\"response\":{\"requestId\":\"34e816f4-6381-4e9d-8f07-82be5fd29044\",\"region\":\"eu-central-1\",\"cloudFrontPop\":null,\"cloudFrontId\":null,\"statusCode\":404,\"roundTripTime\":114},\"timing\":{\"requestStart\":0,\"requestEnd\":114},\"configuration\":{\"endpoint\":\"getSubscriberInfo\"},\"error\":[{\"code\":\"subscription.not.found\",\"description\":\"No subscriber found\"}]},{\"request\":{\"host\":\"https://espn.api.edge.bamgrid.com\",\"path\":\"/v2/subscribers\",\"method\":\"GET\"},\"response\":{\"requestId\":\"34e816f4-6381-4e9d-8f07-82be5fd29044\",\"region\":\"eu-central-1\",\"cloudFrontPop\":null,\"cloudFrontId\":null,\"statusCode\":404,\"roundTripTime\":114},\"timing\":{\"requestStart\":0,\"requestEnd\":114},\"configuration\":{\"endpoint\":\"getSubscriberInfo\"}}],\"error\":{\"code\":\"SubscriptionNotFoundException\"},\"sdkInstanceId\":\"7e4dd3e2-5c5b-4033-bc7a-4559d5785b27\"},\"datacontenttype\":\"application/json;charset=utf-8\",\"subject\":\"sessionId=51e7d990-8675-11f0-a5f9-7e5fe82b71b8,profileId=063ede44-65db-4623-acf4-205ce05a67e2\",\"source\":\"urn:dss:source:sdk:javascript:windows:chrome\",\"type\":\"urn:dss:event:sdk:api:event\",\"schemaurl\":\"https://github.bamtech.co/schema-registry/schema-registry-sdk/blob/series/0.X.X/yaml/dss/event/sdk/client/api/event.oas2.yaml\",\"id\":\"ee7a89cf-59bb-4eee-926e-926f32c7105f\",\"time\":\"2025-08-31T14:18:09.820Z\"}",
+    "message_type": "UNKNOWN",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:18:12.725",
+    "direction": "sent",
+    "websocket": "wss://espn.connections.edge.bamgrid.com/04fe8d/connection?X-Application-Version=0.0.1&X-BAMSDK-Client-ID=espn-a9b93989&X-BAMSDK-Platform=javascript/windows/chrome&X-BAMSDK-Version=32.5&X-DSS-Edge-Accept=vnd.dss.edge+json;%20version=2&X-Request-ID=3076e4b6-1010-429b-a5be-187cb1cd373e",
+    "payload": "{\"data\":{\"invocation\":{\"urn\":\"urn:bamtech:dust:bamsdk:api:session:create\",\"location\":{\"file\":\"SDK.SdkSession\"}},\"startTime\":\"2025-08-31T14:18:12.057Z\",\"totalDuration\":67,\"services\":[{\"request\":{\"host\":\"https://bam-sdk-configs.bamgrid.com\",\"path\":\"/bam-sdk/v5.0/espn-a9b93989/browser/v32.5/windows/chrome/prod.json\",\"method\":\"GET\"},\"response\":{\"requestId\":null,\"region\":null,\"cloudFrontPop\":null,\"cloudFrontId\":null,\"statusCode\":200,\"roundTripTime\":50},\"timing\":{\"requestStart\":16,\"requestEnd\":66},\"configuration\":{\"endpoint\":\"getConfiguration\"}}],\"sdkInstanceId\":\"7c651e89-5d29-43e3-ad20-3e9c8e1cfa55\"},\"datacontenttype\":\"application/json;charset=utf-8\",\"subject\":\"sessionId=5378b2c0-8675-11f0-9d5c-b2e3c57ecd4d,profileId=063ede44-65db-4623-acf4-205ce05a67e2\",\"source\":\"urn:dss:source:sdk:javascript:windows:chrome\",\"type\":\"urn:dss:event:sdk:api:event\",\"schemaurl\":\"https://github.bamtech.co/schema-registry/schema-registry-sdk/blob/series/0.X.X/yaml/dss/event/sdk/client/api/event.oas2.yaml\",\"id\":\"c1bb1ce5-b005-4408-a5b9-99ef66ebf135\",\"time\":\"2025-08-31T14:18:12.124Z\"}",
+    "message_type": "UNKNOWN",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:18:12.726",
+    "direction": "sent",
+    "websocket": "wss://espn.connections.edge.bamgrid.com/04fe8d/connection?X-Application-Version=0.0.1&X-BAMSDK-Client-ID=espn-a9b93989&X-BAMSDK-Platform=javascript/windows/chrome&X-BAMSDK-Version=32.5&X-DSS-Edge-Accept=vnd.dss.edge+json;%20version=2&X-Request-ID=3076e4b6-1010-429b-a5be-187cb1cd373e",
+    "payload": "{\"data\":{\"invocation\":{\"urn\":\"urn:bamtech:dust:bamsdk:api:session:initialize\",\"location\":{\"file\":\"SDK.SdkSession\"}},\"startTime\":\"2025-08-31T14:18:12.124Z\",\"totalDuration\":194,\"services\":[{\"request\":{\"host\":\"https://espn.api.edge.bamgrid.com\",\"path\":\"/graph/v1/device/graphql\",\"method\":\"POST\"},\"response\":{\"requestId\":\"0e0f8afc-fa4a-43a8-83d3-76356fe75c97\",\"region\":\"eu-central-1\",\"cloudFrontPop\":null,\"cloudFrontId\":null,\"statusCode\":200,\"roundTripTime\":193},\"timing\":{\"requestStart\":0,\"requestEnd\":193},\"configuration\":{\"endpoint\":\"refreshToken\"}}],\"sdkInstanceId\":\"7c651e89-5d29-43e3-ad20-3e9c8e1cfa55\"},\"datacontenttype\":\"application/json;charset=utf-8\",\"subject\":\"sessionId=5378b2c0-8675-11f0-9d5c-b2e3c57ecd4d,profileId=063ede44-65db-4623-acf4-205ce05a67e2\",\"source\":\"urn:dss:source:sdk:javascript:windows:chrome\",\"type\":\"urn:dss:event:sdk:api:event\",\"schemaurl\":\"https://github.bamtech.co/schema-registry/schema-registry-sdk/blob/series/0.X.X/yaml/dss/event/sdk/client/api/event.oas2.yaml\",\"id\":\"875f18b3-e20a-46e2-9a63-7873e8241180\",\"time\":\"2025-08-31T14:18:12.318Z\"}",
+    "message_type": "UNKNOWN",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:18:12.727",
+    "direction": "sent",
+    "websocket": "wss://espn.connections.edge.bamgrid.com/04fe8d/connection?X-Application-Version=0.0.1&X-BAMSDK-Client-ID=espn-a9b93989&X-BAMSDK-Platform=javascript/windows/chrome&X-BAMSDK-Version=32.5&X-DSS-Edge-Accept=vnd.dss.edge+json;%20version=2&X-Request-ID=3076e4b6-1010-429b-a5be-187cb1cd373e",
+    "payload": "{\"data\":{\"invocation\":{\"urn\":\"urn:bamtech:dust:bamsdk:api:subscription:getSubscriberInfo\",\"location\":{\"file\":\"SDK.Subscription.SubscriptionApi\"}},\"startTime\":\"2025-08-31T14:18:12.319Z\",\"totalDuration\":118,\"services\":[{\"request\":{\"host\":\"https://espn.api.edge.bamgrid.com\",\"path\":\"/v2/subscribers\",\"method\":\"GET\"},\"response\":{\"requestId\":\"15726a6c-1915-4177-ada2-a7a2035da562\",\"region\":\"eu-central-1\",\"cloudFrontPop\":null,\"cloudFrontId\":null,\"statusCode\":404,\"roundTripTime\":118},\"timing\":{\"requestStart\":0,\"requestEnd\":118},\"configuration\":{\"endpoint\":\"getSubscriberInfo\"},\"error\":[{\"code\":\"subscription.not.found\",\"description\":\"No subscriber found\"}]},{\"request\":{\"host\":\"https://espn.api.edge.bamgrid.com\",\"path\":\"/v2/subscribers\",\"method\":\"GET\"},\"response\":{\"requestId\":\"15726a6c-1915-4177-ada2-a7a2035da562\",\"region\":\"eu-central-1\",\"cloudFrontPop\":null,\"cloudFrontId\":null,\"statusCode\":404,\"roundTripTime\":118},\"timing\":{\"requestStart\":0,\"requestEnd\":118},\"configuration\":{\"endpoint\":\"getSubscriberInfo\"}}],\"error\":{\"code\":\"SubscriptionNotFoundException\"},\"sdkInstanceId\":\"7c651e89-5d29-43e3-ad20-3e9c8e1cfa55\"},\"datacontenttype\":\"application/json;charset=utf-8\",\"subject\":\"sessionId=5378b2c0-8675-11f0-9d5c-b2e3c57ecd4d,profileId=063ede44-65db-4623-acf4-205ce05a67e2\",\"source\":\"urn:dss:source:sdk:javascript:windows:chrome\",\"type\":\"urn:dss:event:sdk:api:event\",\"schemaurl\":\"https://github.bamtech.co/schema-registry/schema-registry-sdk/blob/series/0.X.X/yaml/dss/event/sdk/client/api/event.oas2.yaml\",\"id\":\"40289de2-94e8-4290-9421-a87982dd82a8\",\"time\":\"2025-08-31T14:18:12.437Z\"}",
+    "message_type": "UNKNOWN",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:18:18.439",
+    "direction": "sent",
+    "websocket": "wss://espn.connections.edge.bamgrid.com/04fe8d/connection?X-Application-Version=0.0.1&X-BAMSDK-Client-ID=espn-a9b93989&X-BAMSDK-Platform=javascript/windows/chrome&X-BAMSDK-Version=32.5&X-DSS-Edge-Accept=vnd.dss.edge+json;%20version=2&X-Request-ID=4334208c-7711-4a11-9f70-fa97d6dee53d",
+    "payload": "{\"data\":{\"invocation\":{\"urn\":\"urn:bamtech:dust:bamsdk:api:session:create\",\"location\":{\"file\":\"SDK.SdkSession\"}},\"startTime\":\"2025-08-31T14:18:17.758Z\",\"totalDuration\":40,\"services\":[{\"request\":{\"host\":\"https://bam-sdk-configs.bamgrid.com\",\"path\":\"/bam-sdk/v5.0/espn-a9b93989/browser/v32.5/windows/chrome/prod.json\",\"method\":\"GET\"},\"response\":{\"requestId\":null,\"region\":null,\"cloudFrontPop\":null,\"cloudFrontId\":null,\"statusCode\":200,\"roundTripTime\":27},\"timing\":{\"requestStart\":12,\"requestEnd\":39},\"configuration\":{\"endpoint\":\"getConfiguration\"}}],\"sdkInstanceId\":\"f5a20157-7537-4088-a3d5-e6a716991f33\"},\"datacontenttype\":\"application/json;charset=utf-8\",\"subject\":\"sessionId=56db65c0-8675-11f0-93c8-1ab6a7432a7a,profileId=063ede44-65db-4623-acf4-205ce05a67e2\",\"source\":\"urn:dss:source:sdk:javascript:windows:chrome\",\"type\":\"urn:dss:event:sdk:api:event\",\"schemaurl\":\"https://github.bamtech.co/schema-registry/schema-registry-sdk/blob/series/0.X.X/yaml/dss/event/sdk/client/api/event.oas2.yaml\",\"id\":\"a99efa6f-b03e-450d-8b90-fc779f9b4969\",\"time\":\"2025-08-31T14:18:17.798Z\"}",
+    "message_type": "UNKNOWN",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:18:18.440",
+    "direction": "sent",
+    "websocket": "wss://espn.connections.edge.bamgrid.com/04fe8d/connection?X-Application-Version=0.0.1&X-BAMSDK-Client-ID=espn-a9b93989&X-BAMSDK-Platform=javascript/windows/chrome&X-BAMSDK-Version=32.5&X-DSS-Edge-Accept=vnd.dss.edge+json;%20version=2&X-Request-ID=4334208c-7711-4a11-9f70-fa97d6dee53d",
+    "payload": "{\"data\":{\"invocation\":{\"urn\":\"urn:bamtech:dust:bamsdk:api:session:initialize\",\"location\":{\"file\":\"SDK.SdkSession\"}},\"startTime\":\"2025-08-31T14:18:17.798Z\",\"totalDuration\":200,\"services\":[{\"request\":{\"host\":\"https://espn.api.edge.bamgrid.com\",\"path\":\"/graph/v1/device/graphql\",\"method\":\"POST\"},\"response\":{\"requestId\":\"dc017730-c633-42d8-98f1-857adef9bd68\",\"region\":\"eu-central-1\",\"cloudFrontPop\":null,\"cloudFrontId\":null,\"statusCode\":200,\"roundTripTime\":199},\"timing\":{\"requestStart\":0,\"requestEnd\":199},\"configuration\":{\"endpoint\":\"refreshToken\"}}],\"sdkInstanceId\":\"f5a20157-7537-4088-a3d5-e6a716991f33\"},\"datacontenttype\":\"application/json;charset=utf-8\",\"subject\":\"sessionId=56db65c0-8675-11f0-93c8-1ab6a7432a7a,profileId=063ede44-65db-4623-acf4-205ce05a67e2\",\"source\":\"urn:dss:source:sdk:javascript:windows:chrome\",\"type\":\"urn:dss:event:sdk:api:event\",\"schemaurl\":\"https://github.bamtech.co/schema-registry/schema-registry-sdk/blob/series/0.X.X/yaml/dss/event/sdk/client/api/event.oas2.yaml\",\"id\":\"743b141f-8733-4594-953f-c24e43fd13a2\",\"time\":\"2025-08-31T14:18:17.998Z\"}",
+    "message_type": "UNKNOWN",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:18:18.441",
+    "direction": "sent",
+    "websocket": "wss://espn.connections.edge.bamgrid.com/04fe8d/connection?X-Application-Version=0.0.1&X-BAMSDK-Client-ID=espn-a9b93989&X-BAMSDK-Platform=javascript/windows/chrome&X-BAMSDK-Version=32.5&X-DSS-Edge-Accept=vnd.dss.edge+json;%20version=2&X-Request-ID=4334208c-7711-4a11-9f70-fa97d6dee53d",
+    "payload": "{\"data\":{\"invocation\":{\"urn\":\"urn:bamtech:dust:bamsdk:api:subscription:getSubscriberInfo\",\"location\":{\"file\":\"SDK.Subscription.SubscriptionApi\"}},\"startTime\":\"2025-08-31T14:18:18.000Z\",\"totalDuration\":118,\"services\":[{\"request\":{\"host\":\"https://espn.api.edge.bamgrid.com\",\"path\":\"/v2/subscribers\",\"method\":\"GET\"},\"response\":{\"requestId\":\"164c75d1-13ed-4b6b-ab5e-b9093386883c\",\"region\":\"eu-central-1\",\"cloudFrontPop\":null,\"cloudFrontId\":null,\"statusCode\":404,\"roundTripTime\":118},\"timing\":{\"requestStart\":0,\"requestEnd\":118},\"configuration\":{\"endpoint\":\"getSubscriberInfo\"},\"error\":[{\"code\":\"subscription.not.found\",\"description\":\"No subscriber found\"}]},{\"request\":{\"host\":\"https://espn.api.edge.bamgrid.com\",\"path\":\"/v2/subscribers\",\"method\":\"GET\"},\"response\":{\"requestId\":\"164c75d1-13ed-4b6b-ab5e-b9093386883c\",\"region\":\"eu-central-1\",\"cloudFrontPop\":null,\"cloudFrontId\":null,\"statusCode\":404,\"roundTripTime\":118},\"timing\":{\"requestStart\":0,\"requestEnd\":118},\"configuration\":{\"endpoint\":\"getSubscriberInfo\"}}],\"error\":{\"code\":\"SubscriptionNotFoundException\"},\"sdkInstanceId\":\"f5a20157-7537-4088-a3d5-e6a716991f33\"},\"datacontenttype\":\"application/json;charset=utf-8\",\"subject\":\"sessionId=56db65c0-8675-11f0-93c8-1ab6a7432a7a,profileId=063ede44-65db-4623-acf4-205ce05a67e2\",\"source\":\"urn:dss:source:sdk:javascript:windows:chrome\",\"type\":\"urn:dss:event:sdk:api:event\",\"schemaurl\":\"https://github.bamtech.co/schema-registry/schema-registry-sdk/blob/series/0.X.X/yaml/dss/event/sdk/client/api/event.oas2.yaml\",\"id\":\"d3b81ca4-6425-473c-af08-e032c7090731\",\"time\":\"2025-08-31T14:18:18.118Z\"}",
+    "message_type": "UNKNOWN",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:18:20.238",
+    "direction": "sent",
+    "websocket": "wss://espn.connections.edge.bamgrid.com/04fe8d/connection?X-Application-Version=0.0.1&X-BAMSDK-Client-ID=espn-a9b93989&X-BAMSDK-Platform=javascript/windows/chrome&X-BAMSDK-Version=32.5&X-DSS-Edge-Accept=vnd.dss.edge+json;%20version=2&X-Request-ID=c9bb7494-8f34-4d8f-b88e-af355702d09f",
+    "payload": "{\"data\":{\"invocation\":{\"urn\":\"urn:bamtech:dust:bamsdk:api:session:create\",\"location\":{\"file\":\"SDK.SdkSession\"}},\"startTime\":\"2025-08-31T14:18:19.553Z\",\"totalDuration\":65,\"services\":[{\"request\":{\"host\":\"https://bam-sdk-configs.bamgrid.com\",\"path\":\"/bam-sdk/v5.0/espn-a9b93989/browser/v32.5/windows/chrome/prod.json\",\"method\":\"GET\"},\"response\":{\"requestId\":null,\"region\":null,\"cloudFrontPop\":null,\"cloudFrontId\":null,\"statusCode\":200,\"roundTripTime\":49},\"timing\":{\"requestStart\":15,\"requestEnd\":64},\"configuration\":{\"endpoint\":\"getConfiguration\"}}],\"sdkInstanceId\":\"30d71a4c-0cab-4840-bc85-e22d17ab6026\"},\"datacontenttype\":\"application/json;charset=utf-8\",\"subject\":\"sessionId=57f0f470-8675-11f0-8e56-02a5773b9c6c,profileId=063ede44-65db-4623-acf4-205ce05a67e2\",\"source\":\"urn:dss:source:sdk:javascript:windows:chrome\",\"type\":\"urn:dss:event:sdk:api:event\",\"schemaurl\":\"https://github.bamtech.co/schema-registry/schema-registry-sdk/blob/series/0.X.X/yaml/dss/event/sdk/client/api/event.oas2.yaml\",\"id\":\"bdb9a930-6ce7-4148-8562-3872110b99f7\",\"time\":\"2025-08-31T14:18:19.618Z\"}",
+    "message_type": "UNKNOWN",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:18:20.239",
+    "direction": "sent",
+    "websocket": "wss://espn.connections.edge.bamgrid.com/04fe8d/connection?X-Application-Version=0.0.1&X-BAMSDK-Client-ID=espn-a9b93989&X-BAMSDK-Platform=javascript/windows/chrome&X-BAMSDK-Version=32.5&X-DSS-Edge-Accept=vnd.dss.edge+json;%20version=2&X-Request-ID=c9bb7494-8f34-4d8f-b88e-af355702d09f",
+    "payload": "{\"data\":{\"invocation\":{\"urn\":\"urn:bamtech:dust:bamsdk:api:session:initialize\",\"location\":{\"file\":\"SDK.SdkSession\"}},\"startTime\":\"2025-08-31T14:18:19.618Z\",\"totalDuration\":201,\"services\":[{\"request\":{\"host\":\"https://espn.api.edge.bamgrid.com\",\"path\":\"/graph/v1/device/graphql\",\"method\":\"POST\"},\"response\":{\"requestId\":\"da2c6c38-b25e-44f3-8591-c56ba44f916b\",\"region\":\"eu-central-1\",\"cloudFrontPop\":null,\"cloudFrontId\":null,\"statusCode\":200,\"roundTripTime\":199},\"timing\":{\"requestStart\":1,\"requestEnd\":200},\"configuration\":{\"endpoint\":\"refreshToken\"}}],\"sdkInstanceId\":\"30d71a4c-0cab-4840-bc85-e22d17ab6026\"},\"datacontenttype\":\"application/json;charset=utf-8\",\"subject\":\"sessionId=57f0f470-8675-11f0-8e56-02a5773b9c6c,profileId=063ede44-65db-4623-acf4-205ce05a67e2\",\"source\":\"urn:dss:source:sdk:javascript:windows:chrome\",\"type\":\"urn:dss:event:sdk:api:event\",\"schemaurl\":\"https://github.bamtech.co/schema-registry/schema-registry-sdk/blob/series/0.X.X/yaml/dss/event/sdk/client/api/event.oas2.yaml\",\"id\":\"bf1c6e8c-8001-4d34-9d37-23975130e6d5\",\"time\":\"2025-08-31T14:18:19.819Z\"}",
+    "message_type": "UNKNOWN",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:18:20.240",
+    "direction": "sent",
+    "websocket": "wss://espn.connections.edge.bamgrid.com/04fe8d/connection?X-Application-Version=0.0.1&X-BAMSDK-Client-ID=espn-a9b93989&X-BAMSDK-Platform=javascript/windows/chrome&X-BAMSDK-Version=32.5&X-DSS-Edge-Accept=vnd.dss.edge+json;%20version=2&X-Request-ID=c9bb7494-8f34-4d8f-b88e-af355702d09f",
+    "payload": "{\"data\":{\"invocation\":{\"urn\":\"urn:bamtech:dust:bamsdk:api:subscription:getSubscriberInfo\",\"location\":{\"file\":\"SDK.Subscription.SubscriptionApi\"}},\"startTime\":\"2025-08-31T14:18:19.821Z\",\"totalDuration\":112,\"services\":[{\"request\":{\"host\":\"https://espn.api.edge.bamgrid.com\",\"path\":\"/v2/subscribers\",\"method\":\"GET\"},\"response\":{\"requestId\":\"298f66c6-b406-4a18-b709-4de994d0bb5b\",\"region\":\"eu-central-1\",\"cloudFrontPop\":null,\"cloudFrontId\":null,\"statusCode\":404,\"roundTripTime\":112},\"timing\":{\"requestStart\":0,\"requestEnd\":112},\"configuration\":{\"endpoint\":\"getSubscriberInfo\"},\"error\":[{\"code\":\"subscription.not.found\",\"description\":\"No subscriber found\"}]},{\"request\":{\"host\":\"https://espn.api.edge.bamgrid.com\",\"path\":\"/v2/subscribers\",\"method\":\"GET\"},\"response\":{\"requestId\":\"298f66c6-b406-4a18-b709-4de994d0bb5b\",\"region\":\"eu-central-1\",\"cloudFrontPop\":null,\"cloudFrontId\":null,\"statusCode\":404,\"roundTripTime\":112},\"timing\":{\"requestStart\":0,\"requestEnd\":112},\"configuration\":{\"endpoint\":\"getSubscriberInfo\"}}],\"error\":{\"code\":\"SubscriptionNotFoundException\"},\"sdkInstanceId\":\"30d71a4c-0cab-4840-bc85-e22d17ab6026\"},\"datacontenttype\":\"application/json;charset=utf-8\",\"subject\":\"sessionId=57f0f470-8675-11f0-8e56-02a5773b9c6c,profileId=063ede44-65db-4623-acf4-205ce05a67e2\",\"source\":\"urn:dss:source:sdk:javascript:windows:chrome\",\"type\":\"urn:dss:event:sdk:api:event\",\"schemaurl\":\"https://github.bamtech.co/schema-registry/schema-registry-sdk/blob/series/0.X.X/yaml/dss/event/sdk/client/api/event.oas2.yaml\",\"id\":\"3b03411e-022d-4457-8c6d-fe34ffc13c0f\",\"time\":\"2025-08-31T14:18:19.933Z\"}",
+    "message_type": "UNKNOWN",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:18:34.578",
+    "direction": "sent",
+    "websocket": "wss://espn.connections.edge.bamgrid.com/04fe8d/connection?X-Application-Version=0.0.1&X-BAMSDK-Client-ID=espn-a9b93989&X-BAMSDK-Platform=javascript/windows/chrome&X-BAMSDK-Version=32.5&X-DSS-Edge-Accept=vnd.dss.edge+json;%20version=2&X-Request-ID=f1a3d06a-8e16-4b56-8a09-13b534d24135",
+    "payload": "{\"data\":{\"invocation\":{\"urn\":\"urn:bamtech:dust:bamsdk:api:session:create\",\"location\":{\"file\":\"SDK.SdkSession\"}},\"startTime\":\"2025-08-31T14:18:33.874Z\",\"totalDuration\":58,\"services\":[{\"request\":{\"host\":\"https://bam-sdk-configs.bamgrid.com\",\"path\":\"/bam-sdk/v5.0/espn-a9b93989/browser/v32.5/windows/chrome/prod.json\",\"method\":\"GET\"},\"response\":{\"requestId\":null,\"region\":null,\"cloudFrontPop\":null,\"cloudFrontId\":null,\"statusCode\":200,\"roundTripTime\":22},\"timing\":{\"requestStart\":35,\"requestEnd\":57},\"configuration\":{\"endpoint\":\"getConfiguration\"}}],\"sdkInstanceId\":\"9a0f2442-d34f-40d4-93bf-e3f81ebd88a8\"},\"datacontenttype\":\"application/json;charset=utf-8\",\"subject\":\"sessionId=607807a0-8675-11f0-b8aa-369d134843f6,profileId=063ede44-65db-4623-acf4-205ce05a67e2\",\"source\":\"urn:dss:source:sdk:javascript:windows:chrome\",\"type\":\"urn:dss:event:sdk:api:event\",\"schemaurl\":\"https://github.bamtech.co/schema-registry/schema-registry-sdk/blob/series/0.X.X/yaml/dss/event/sdk/client/api/event.oas2.yaml\",\"id\":\"ffd5ac80-6a24-4e93-bd61-9042366687b6\",\"time\":\"2025-08-31T14:18:33.932Z\"}",
+    "message_type": "UNKNOWN",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:18:34.579",
+    "direction": "sent",
+    "websocket": "wss://espn.connections.edge.bamgrid.com/04fe8d/connection?X-Application-Version=0.0.1&X-BAMSDK-Client-ID=espn-a9b93989&X-BAMSDK-Platform=javascript/windows/chrome&X-BAMSDK-Version=32.5&X-DSS-Edge-Accept=vnd.dss.edge+json;%20version=2&X-Request-ID=f1a3d06a-8e16-4b56-8a09-13b534d24135",
+    "payload": "{\"data\":{\"invocation\":{\"urn\":\"urn:bamtech:dust:bamsdk:api:session:initialize\",\"location\":{\"file\":\"SDK.SdkSession\"}},\"startTime\":\"2025-08-31T14:18:33.933Z\",\"totalDuration\":208,\"services\":[{\"request\":{\"host\":\"https://espn.api.edge.bamgrid.com\",\"path\":\"/graph/v1/device/graphql\",\"method\":\"POST\"},\"response\":{\"requestId\":\"5eb70592-c781-4e7f-85c5-fb3014de9548\",\"region\":\"eu-central-1\",\"cloudFrontPop\":null,\"cloudFrontId\":null,\"statusCode\":200,\"roundTripTime\":207},\"timing\":{\"requestStart\":0,\"requestEnd\":207},\"configuration\":{\"endpoint\":\"refreshToken\"}}],\"sdkInstanceId\":\"9a0f2442-d34f-40d4-93bf-e3f81ebd88a8\"},\"datacontenttype\":\"application/json;charset=utf-8\",\"subject\":\"sessionId=607807a0-8675-11f0-b8aa-369d134843f6,profileId=063ede44-65db-4623-acf4-205ce05a67e2\",\"source\":\"urn:dss:source:sdk:javascript:windows:chrome\",\"type\":\"urn:dss:event:sdk:api:event\",\"schemaurl\":\"https://github.bamtech.co/schema-registry/schema-registry-sdk/blob/series/0.X.X/yaml/dss/event/sdk/client/api/event.oas2.yaml\",\"id\":\"aa108839-f149-4fbb-983d-0a89a64bd09d\",\"time\":\"2025-08-31T14:18:34.141Z\"}",
+    "message_type": "UNKNOWN",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:18:34.580",
+    "direction": "sent",
+    "websocket": "wss://espn.connections.edge.bamgrid.com/04fe8d/connection?X-Application-Version=0.0.1&X-BAMSDK-Client-ID=espn-a9b93989&X-BAMSDK-Platform=javascript/windows/chrome&X-BAMSDK-Version=32.5&X-DSS-Edge-Accept=vnd.dss.edge+json;%20version=2&X-Request-ID=f1a3d06a-8e16-4b56-8a09-13b534d24135",
+    "payload": "{\"data\":{\"invocation\":{\"urn\":\"urn:bamtech:dust:bamsdk:api:subscription:getSubscriberInfo\",\"location\":{\"file\":\"SDK.Subscription.SubscriptionApi\"}},\"startTime\":\"2025-08-31T14:18:34.143Z\",\"totalDuration\":117,\"services\":[{\"request\":{\"host\":\"https://espn.api.edge.bamgrid.com\",\"path\":\"/v2/subscribers\",\"method\":\"GET\"},\"response\":{\"requestId\":\"6c0fcbba-6aee-4a93-b702-c434b2199e49\",\"region\":\"eu-central-1\",\"cloudFrontPop\":null,\"cloudFrontId\":null,\"statusCode\":404,\"roundTripTime\":117},\"timing\":{\"requestStart\":0,\"requestEnd\":117},\"configuration\":{\"endpoint\":\"getSubscriberInfo\"},\"error\":[{\"code\":\"subscription.not.found\",\"description\":\"No subscriber found\"}]},{\"request\":{\"host\":\"https://espn.api.edge.bamgrid.com\",\"path\":\"/v2/subscribers\",\"method\":\"GET\"},\"response\":{\"requestId\":\"6c0fcbba-6aee-4a93-b702-c434b2199e49\",\"region\":\"eu-central-1\",\"cloudFrontPop\":null,\"cloudFrontId\":null,\"statusCode\":404,\"roundTripTime\":117},\"timing\":{\"requestStart\":0,\"requestEnd\":117},\"configuration\":{\"endpoint\":\"getSubscriberInfo\"}}],\"error\":{\"code\":\"SubscriptionNotFoundException\"},\"sdkInstanceId\":\"9a0f2442-d34f-40d4-93bf-e3f81ebd88a8\"},\"datacontenttype\":\"application/json;charset=utf-8\",\"subject\":\"sessionId=607807a0-8675-11f0-b8aa-369d134843f6,profileId=063ede44-65db-4623-acf4-205ce05a67e2\",\"source\":\"urn:dss:source:sdk:javascript:windows:chrome\",\"type\":\"urn:dss:event:sdk:api:event\",\"schemaurl\":\"https://github.bamtech.co/schema-registry/schema-registry-sdk/blob/series/0.X.X/yaml/dss/event/sdk/client/api/event.oas2.yaml\",\"id\":\"a2ec3fbb-ef03-45e3-8acd-3cc4e0996cc9\",\"time\":\"2025-08-31T14:18:34.260Z\"}",
+    "message_type": "UNKNOWN",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:20:07.722",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "AUTODRAFT 4 false\n",
+    "message_type": "AUTODRAFT_STATUS",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:20:08.080",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "CLOCK 0 83767\n",
+    "message_type": "DRAFT_TIMER",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:20:08.727",
+    "direction": "sent",
+    "websocket": "wss://espn.connections.edge.bamgrid.com/04fe8d/connection?X-Application-Version=0.0.1&X-BAMSDK-Client-ID=espn-a9b93989&X-BAMSDK-Platform=javascript/windows/chrome&X-BAMSDK-Version=32.5&X-DSS-Edge-Accept=vnd.dss.edge+json;%20version=2&X-Request-ID=a3fe11f2-91b7-454d-bb99-b747393eb1c5",
+    "payload": "{\"data\":{\"invocation\":{\"urn\":\"urn:bamtech:dust:bamsdk:api:session:create\",\"location\":{\"file\":\"SDK.SdkSession\"}},\"startTime\":\"2025-08-31T14:20:07.974Z\",\"totalDuration\":127,\"services\":[{\"request\":{\"host\":\"https://bam-sdk-configs.bamgrid.com\",\"path\":\"/bam-sdk/v5.0/espn-a9b93989/browser/v32.5/windows/chrome/prod.json\",\"method\":\"GET\"},\"response\":{\"requestId\":null,\"region\":null,\"cloudFrontPop\":null,\"cloudFrontId\":null,\"statusCode\":200,\"roundTripTime\":83},\"timing\":{\"requestStart\":38,\"requestEnd\":121},\"configuration\":{\"endpoint\":\"getConfiguration\"}}],\"sdkInstanceId\":\"32c5b285-74c2-416c-bf09-4151adf1177c\"},\"datacontenttype\":\"application/json;charset=utf-8\",\"subject\":\"sessionId=989ac1e0-8675-11f0-917c-8ab58c4cc969,profileId=063ede44-65db-4623-acf4-205ce05a67e2\",\"source\":\"urn:dss:source:sdk:javascript:windows:chrome\",\"type\":\"urn:dss:event:sdk:api:event\",\"schemaurl\":\"https://github.bamtech.co/schema-registry/schema-registry-sdk/blob/series/0.X.X/yaml/dss/event/sdk/client/api/event.oas2.yaml\",\"id\":\"10c64cb7-2d12-4c6a-aa55-b1abd57fd02e\",\"time\":\"2025-08-31T14:20:08.101Z\"}",
+    "message_type": "UNKNOWN",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:20:08.728",
+    "direction": "sent",
+    "websocket": "wss://espn.connections.edge.bamgrid.com/04fe8d/connection?X-Application-Version=0.0.1&X-BAMSDK-Client-ID=espn-a9b93989&X-BAMSDK-Platform=javascript/windows/chrome&X-BAMSDK-Version=32.5&X-DSS-Edge-Accept=vnd.dss.edge+json;%20version=2&X-Request-ID=a3fe11f2-91b7-454d-bb99-b747393eb1c5",
+    "payload": "{\"data\":{\"invocation\":{\"urn\":\"urn:bamtech:dust:bamsdk:api:session:initialize\",\"location\":{\"file\":\"SDK.SdkSession\"}},\"startTime\":\"2025-08-31T14:20:08.102Z\",\"totalDuration\":208,\"services\":[{\"request\":{\"host\":\"https://espn.api.edge.bamgrid.com\",\"path\":\"/graph/v1/device/graphql\",\"method\":\"POST\"},\"response\":{\"requestId\":\"fc48d8d7-76d2-48c8-9b7d-5240f3d2d970\",\"region\":\"eu-central-1\",\"cloudFrontPop\":null,\"cloudFrontId\":null,\"statusCode\":200,\"roundTripTime\":205},\"timing\":{\"requestStart\":0,\"requestEnd\":205},\"configuration\":{\"endpoint\":\"refreshToken\"}}],\"sdkInstanceId\":\"32c5b285-74c2-416c-bf09-4151adf1177c\"},\"datacontenttype\":\"application/json;charset=utf-8\",\"subject\":\"sessionId=989ac1e0-8675-11f0-917c-8ab58c4cc969,profileId=063ede44-65db-4623-acf4-205ce05a67e2\",\"source\":\"urn:dss:source:sdk:javascript:windows:chrome\",\"type\":\"urn:dss:event:sdk:api:event\",\"schemaurl\":\"https://github.bamtech.co/schema-registry/schema-registry-sdk/blob/series/0.X.X/yaml/dss/event/sdk/client/api/event.oas2.yaml\",\"id\":\"d0c5df4a-4c52-47ec-81ad-1b48edc47306\",\"time\":\"2025-08-31T14:20:08.310Z\"}",
+    "message_type": "UNKNOWN",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:20:08.729",
+    "direction": "sent",
+    "websocket": "wss://espn.connections.edge.bamgrid.com/04fe8d/connection?X-Application-Version=0.0.1&X-BAMSDK-Client-ID=espn-a9b93989&X-BAMSDK-Platform=javascript/windows/chrome&X-BAMSDK-Version=32.5&X-DSS-Edge-Accept=vnd.dss.edge+json;%20version=2&X-Request-ID=a3fe11f2-91b7-454d-bb99-b747393eb1c5",
+    "payload": "{\"data\":{\"invocation\":{\"urn\":\"urn:bamtech:dust:bamsdk:api:subscription:getSubscriberInfo\",\"location\":{\"file\":\"SDK.Subscription.SubscriptionApi\"}},\"startTime\":\"2025-08-31T14:20:08.312Z\",\"totalDuration\":127,\"services\":[{\"request\":{\"host\":\"https://espn.api.edge.bamgrid.com\",\"path\":\"/v2/subscribers\",\"method\":\"GET\"},\"response\":{\"requestId\":\"98d814fa-ee2c-42bd-af1b-9cd62fe7fa7c\",\"region\":\"eu-central-1\",\"cloudFrontPop\":null,\"cloudFrontId\":null,\"statusCode\":404,\"roundTripTime\":127},\"timing\":{\"requestStart\":0,\"requestEnd\":127},\"configuration\":{\"endpoint\":\"getSubscriberInfo\"},\"error\":[{\"code\":\"subscription.not.found\",\"description\":\"No subscriber found\"}]},{\"request\":{\"host\":\"https://espn.api.edge.bamgrid.com\",\"path\":\"/v2/subscribers\",\"method\":\"GET\"},\"response\":{\"requestId\":\"98d814fa-ee2c-42bd-af1b-9cd62fe7fa7c\",\"region\":\"eu-central-1\",\"cloudFrontPop\":null,\"cloudFrontId\":null,\"statusCode\":404,\"roundTripTime\":127},\"timing\":{\"requestStart\":0,\"requestEnd\":127},\"configuration\":{\"endpoint\":\"getSubscriberInfo\"}}],\"error\":{\"code\":\"SubscriptionNotFoundException\"},\"sdkInstanceId\":\"32c5b285-74c2-416c-bf09-4151adf1177c\"},\"datacontenttype\":\"application/json;charset=utf-8\",\"subject\":\"sessionId=989ac1e0-8675-11f0-917c-8ab58c4cc969,profileId=063ede44-65db-4623-acf4-205ce05a67e2\",\"source\":\"urn:dss:source:sdk:javascript:windows:chrome\",\"type\":\"urn:dss:event:sdk:api:event\",\"schemaurl\":\"https://github.bamtech.co/schema-registry/schema-registry-sdk/blob/series/0.X.X/yaml/dss/event/sdk/client/api/event.oas2.yaml\",\"id\":\"4533227a-85d3-4628-808f-8a09bbdbc2ea\",\"time\":\"2025-08-31T14:20:08.439Z\"}",
+    "message_type": "UNKNOWN",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:20:09.782",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "AUTODRAFT 2 false\n",
+    "message_type": "AUTODRAFT_STATUS",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:20:11.657",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "CLOCK 0 79832\n",
+    "message_type": "DRAFT_TIMER",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:20:15.574",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "AUTODRAFT 5 false\n",
+    "message_type": "AUTODRAFT_STATUS",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:20:16.665",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "CLOCK 0 74827\n",
+    "message_type": "DRAFT_TIMER",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:20:21.668",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "CLOCK 0 69824\n",
+    "message_type": "DRAFT_TIMER",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:20:22.110",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "AUTODRAFT 6 false\n",
+    "message_type": "AUTODRAFT_STATUS",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:20:26.670",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "CLOCK 0 64821\n",
+    "message_type": "DRAFT_TIMER",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:20:31.677",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "CLOCK 0 59816\n",
+    "message_type": "DRAFT_TIMER",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:20:36.676",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "CLOCK 0 54813\n",
+    "message_type": "DRAFT_TIMER",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:20:41.682",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "CLOCK 0 49809\n",
+    "message_type": "DRAFT_TIMER",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:20:46.686",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "CLOCK 0 44805\n",
+    "message_type": "DRAFT_TIMER",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:20:51.692",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "CLOCK 0 39801\n",
+    "message_type": "DRAFT_TIMER",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:20:56.694",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "CLOCK 0 34797\n",
+    "message_type": "DRAFT_TIMER",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:21:01.698",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "CLOCK 0 29793\n",
+    "message_type": "DRAFT_TIMER",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:21:06.711",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "CLOCK 0 24789\n",
+    "message_type": "DRAFT_TIMER",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:21:11.703",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "CLOCK 0 19786\n",
+    "message_type": "DRAFT_TIMER",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:21:16.708",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "CLOCK 0 14782\n",
+    "message_type": "DRAFT_TIMER",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:21:21.710",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "CLOCK 0 9779\n",
+    "message_type": "DRAFT_TIMER",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:21:26.713",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "CLOCK 0 4775\n",
+    "message_type": "DRAFT_TIMER",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:21:36.245",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "SELECTED 1 4362628 4 {856970E3-67E6-42D4-8198-28B1FB3BCA26}\n",
+    "message_type": "PLAYER_SELECTED",
+    "player_extractions": 1
+  },
+  {
+    "timestamp": "10:21:36.722",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "CLOCK 6 29750 2\n",
+    "message_type": "DRAFT_TIMER",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:21:41.726",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "CLOCK 6 24746 2\n",
+    "message_type": "DRAFT_TIMER",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:21:46.731",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "CLOCK 6 19742 2\n",
+    "message_type": "DRAFT_TIMER",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:21:50.749",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "SELECTED 2 3929630 2 {CF5DB87A-DECD-41E6-BD90-32228368B7B7}\n",
+    "message_type": "PLAYER_SELECTED",
+    "player_extractions": 1
+  },
+  {
+    "timestamp": "10:21:51.734",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "CLOCK 6 29250 3\n",
+    "message_type": "DRAFT_TIMER",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:21:56.739",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "CLOCK 6 24246 3\n",
+    "message_type": "DRAFT_TIMER",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:21:59.531",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "SELECTED 3 4430807 2 {E5C85BDF-7247-4F70-809C-4CC36EE48023}\n",
+    "message_type": "PLAYER_SELECTED",
+    "player_extractions": 1
+  },
+  {
+    "timestamp": "10:22:01.743",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "CLOCK 6 27998 4\n",
+    "message_type": "DRAFT_TIMER",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:22:06.747",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "CLOCK 6 22995 4\n",
+    "message_type": "DRAFT_TIMER",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:22:11.748",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "CLOCK 6 17992 4\n",
+    "message_type": "DRAFT_TIMER",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:22:16.752",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "CLOCK 6 12988 4\n",
+    "message_type": "DRAFT_TIMER",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:22:21.753",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "CLOCK 6 7983 4\n",
+    "message_type": "DRAFT_TIMER",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:22:26.761",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "CLOCK 6 2979 4\n",
+    "message_type": "DRAFT_TIMER",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:22:29.901",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "AUTODRAFT 4 true\n",
+    "message_type": "AUTODRAFT_STATUS",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:22:29.927",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "SELECTED 4 4262921 4\n",
+    "message_type": "PLAYER_SELECTED",
+    "player_extractions": 1
+  },
+  {
+    "timestamp": "10:22:31.765",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "CLOCK 6 28249 5\n",
+    "message_type": "DRAFT_TIMER",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:22:35.785",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "SELECTED 5 4429795 2 {923EF964-98BF-4E7B-B4F3-1021414D8182}\n",
+    "message_type": "PLAYER_SELECTED",
+    "player_extractions": 1
+  },
+  {
+    "timestamp": "10:22:36.770",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "CLOCK 6 29249 6\n",
+    "message_type": "DRAFT_TIMER",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:22:41.771",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "CLOCK 6 24245 6\n",
+    "message_type": "DRAFT_TIMER",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:22:46.777",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "CLOCK 6 19242 6\n",
+    "message_type": "DRAFT_TIMER",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:22:50.040",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "SELECTED 6 4241389 4 {BA57F1C7-D461-4BB9-97F1-C7D461BBB918}\n",
+    "message_type": "PLAYER_SELECTED",
+    "player_extractions": 1
+  },
+  {
+    "timestamp": "10:22:51.777",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "CLOCK 6 28499 7\n",
+    "message_type": "DRAFT_TIMER",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:22:56.296",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "SELECTED 7 3117251 2 {518A8111-FFEB-45B3-B697-203FCE7B26DD}\n",
+    "message_type": "PLAYER_SELECTED",
+    "player_extractions": 1
+  },
+  {
+    "timestamp": "10:22:56.778",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "CLOCK 6 29750 8\n",
+    "message_type": "DRAFT_TIMER",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:22:57.797",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "SELECTED 8 4426515 4\n",
+    "message_type": "PLAYER_SELECTED",
+    "player_extractions": 1
+  },
+  {
+    "timestamp": "10:23:01.785",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "CLOCK 6 26248 9\n",
+    "message_type": "DRAFT_TIMER",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:23:03.050",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "SELECTED 9 3043078 2 {6667C5A5-726A-4787-A05A-80980FE7C310}\n",
+    "message_type": "PLAYER_SELECTED",
+    "player_extractions": 1
+  },
+  {
+    "timestamp": "10:23:04.549",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "SELECTED 10 4258173 4\n",
+    "message_type": "PLAYER_SELECTED",
+    "player_extractions": 1
+  },
+  {
+    "timestamp": "10:23:06.055",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "SELECTED 10 4432773 5\n",
+    "message_type": "PLAYER_SELECTED",
+    "player_extractions": 1
+  },
+  {
+    "timestamp": "10:23:06.787",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "CLOCK 6 29499 9\n",
+    "message_type": "DRAFT_TIMER",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:23:11.792",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "CLOCK 6 24496 9\n",
+    "message_type": "DRAFT_TIMER",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:23:16.797",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "CLOCK 6 19493 9\n",
+    "message_type": "DRAFT_TIMER",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:23:21.801",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "CLOCK 6 14489 9\n",
+    "message_type": "DRAFT_TIMER",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:23:22.315",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "SELECTED 9 4374302 4 {6667C5A5-726A-4787-A05A-80980FE7C310}\n",
+    "message_type": "PLAYER_SELECTED",
+    "player_extractions": 1
+  },
+  {
+    "timestamp": "10:23:23.813",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "SELECTED 8 4595348 5\n",
+    "message_type": "PLAYER_SELECTED",
+    "player_extractions": 1
+  },
+  {
+    "timestamp": "10:23:26.805",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "CLOCK 6 27247 7\n",
+    "message_type": "DRAFT_TIMER",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:23:31.806",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "CLOCK 6 22243 7\n",
+    "message_type": "DRAFT_TIMER",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:23:36.810",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "CLOCK 6 17240 7\n",
+    "message_type": "DRAFT_TIMER",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:23:40.076",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "SELECTED 7 4242335 3 {518A8111-FFEB-45B3-B697-203FCE7B26DD}\n",
+    "message_type": "PLAYER_SELECTED",
+    "player_extractions": 1
+  },
+  {
+    "timestamp": "10:23:41.812",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "CLOCK 6 28499 6\n",
+    "message_type": "DRAFT_TIMER",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:23:46.813",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "CLOCK 6 23497 6\n",
+    "message_type": "DRAFT_TIMER",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:23:48.331",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "SELECTED 6 4890973 2 {BA57F1C7-D461-4BB9-97F1-C7D461BBB918}\n",
+    "message_type": "PLAYER_SELECTED",
+    "player_extractions": 1
+  },
+  {
+    "timestamp": "10:23:51.821",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "CLOCK 6 26749 5\n",
+    "message_type": "DRAFT_TIMER",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:23:56.820",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "CLOCK 6 21747 5\n",
+    "message_type": "DRAFT_TIMER",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:24:01.826",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "CLOCK 6 16742 5\n",
+    "message_type": "DRAFT_TIMER",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:24:06.827",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "CLOCK 6 11740 5\n",
+    "message_type": "DRAFT_TIMER",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:24:11.827",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "CLOCK 6 6737 5\n",
+    "message_type": "DRAFT_TIMER",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:24:14.602",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "SELECTED 5 4047365 3 {923EF964-98BF-4E7B-B4F3-1021414D8182}\n",
+    "message_type": "PLAYER_SELECTED",
+    "player_extractions": 1
+  },
+  {
+    "timestamp": "10:24:16.159",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "SELECTED 4 4047646 5\n",
+    "message_type": "PLAYER_SELECTED",
+    "player_extractions": 1
+  },
+  {
+    "timestamp": "10:24:16.833",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "CLOCK 6 29500 3\n",
+    "message_type": "DRAFT_TIMER",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:24:21.838",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "CLOCK 6 24496 3\n",
+    "message_type": "DRAFT_TIMER",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:24:26.840",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "CLOCK 6 19494 3\n",
+    "message_type": "DRAFT_TIMER",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:24:31.841",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "CLOCK 6 14492 3\n",
+    "message_type": "DRAFT_TIMER",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:24:35.109",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "SELECTED 3 4430737 3 {E5C85BDF-7247-4F70-809C-4CC36EE48023}\n",
+    "message_type": "PLAYER_SELECTED",
+    "player_extractions": 1
+  },
+  {
+    "timestamp": "10:24:36.844",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "CLOCK 6 28500 2\n",
+    "message_type": "DRAFT_TIMER",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:24:41.846",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "CLOCK 6 23496 2\n",
+    "message_type": "DRAFT_TIMER",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:24:46.851",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "CLOCK 6 18494 2\n",
+    "message_type": "DRAFT_TIMER",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:24:51.850",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "CLOCK 6 13492 2\n",
+    "message_type": "DRAFT_TIMER",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:24:55.875",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "SELECTED 2 4239993 4 {CF5DB87A-DECD-41E6-BD90-32228368B7B7}\n",
+    "message_type": "PLAYER_SELECTED",
+    "player_extractions": 1
+  },
+  {
+    "timestamp": "10:24:56.852",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "CLOCK 6 29250 1\n",
+    "message_type": "DRAFT_TIMER",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:25:01.622",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "SELECTED 1 4361307 6 {856970E3-67E6-42D4-8198-28B1FB3BCA26}\n",
+    "message_type": "PLAYER_SELECTED",
+    "player_extractions": 1
+  },
+  {
+    "timestamp": "10:25:01.859",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "CLOCK 6 30000 1\n",
+    "message_type": "DRAFT_TIMER",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:25:05.382",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "SELECTED 1 3916387 1 {856970E3-67E6-42D4-8198-28B1FB3BCA26}\n",
+    "message_type": "PLAYER_SELECTED",
+    "player_extractions": 1
+  },
+  {
+    "timestamp": "10:25:06.860",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "CLOCK 6 28749 2\n",
+    "message_type": "DRAFT_TIMER",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:25:11.862",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "CLOCK 6 23746 2\n",
+    "message_type": "DRAFT_TIMER",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:25:16.867",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "CLOCK 6 18743 2\n",
+    "message_type": "DRAFT_TIMER",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:25:21.867",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "CLOCK 6 13740 2\n",
+    "message_type": "DRAFT_TIMER",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:25:26.872",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "CLOCK 6 8737 2\n",
+    "message_type": "DRAFT_TIMER",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:25:31.891",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "SELECTED 2 4432665 6 {CF5DB87A-DECD-41E6-BD90-32228368B7B7}\n",
+    "message_type": "PLAYER_SELECTED",
+    "player_extractions": 1
+  },
+  {
+    "timestamp": "10:25:36.875",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "CLOCK 6 25248 3\n",
+    "message_type": "DRAFT_TIMER",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:25:41.880",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "CLOCK 6 20246 3\n",
+    "message_type": "DRAFT_TIMER",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:25:46.879",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "CLOCK 6 15243 3\n",
+    "message_type": "DRAFT_TIMER",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:25:51.896",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "CLOCK 6 10226 3\n",
+    "message_type": "DRAFT_TIMER",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:25:53.915",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "SELECTED 3 4426502 4 {E5C85BDF-7247-4F70-809C-4CC36EE48023}\n",
+    "message_type": "PLAYER_SELECTED",
+    "player_extractions": 1
+  },
+  {
+    "timestamp": "10:25:55.420",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "SELECTED 4 4429160 2\n",
+    "message_type": "PLAYER_SELECTED",
+    "player_extractions": 1
+  },
+  {
+    "timestamp": "10:25:56.899",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "CLOCK 6 28749 5\n",
+    "message_type": "DRAFT_TIMER",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:26:01.904",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "CLOCK 6 23747 5\n",
+    "message_type": "DRAFT_TIMER",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:26:04.273",
+    "direction": "sent",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "AUTODRAFT false\n",
+    "message_type": "AUTODRAFT_STATUS",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:26:04.390",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "AUTODRAFT 4 false\n",
+    "message_type": "AUTODRAFT_STATUS",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:26:06.905",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "CLOCK 6 18743 5\n",
+    "message_type": "DRAFT_TIMER",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:26:07.171",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "SELECTED 5 3116406 4 {923EF964-98BF-4E7B-B4F3-1021414D8182}\n",
+    "message_type": "PLAYER_SELECTED",
+    "player_extractions": 1
+  },
+  {
+    "timestamp": "10:26:11.910",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "CLOCK 6 25497 6\n",
+    "message_type": "DRAFT_TIMER",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:26:16.914",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "CLOCK 6 20494 6\n",
+    "message_type": "DRAFT_TIMER",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:26:21.914",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "CLOCK 6 15492 6\n",
+    "message_type": "DRAFT_TIMER",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:26:26.919",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "CLOCK 6 10489 6\n",
+    "message_type": "DRAFT_TIMER",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:26:31.925",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "CLOCK 6 5485 6\n",
+    "message_type": "DRAFT_TIMER",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:26:36.928",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "CLOCK 6 482 6\n",
+    "message_type": "DRAFT_TIMER",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:26:37.424",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "AUTODRAFT 6 true\n",
+    "message_type": "AUTODRAFT_STATUS",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:26:37.440",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "SELECTED 6 16800 5\n",
+    "message_type": "PLAYER_SELECTED",
+    "player_extractions": 1
+  },
+  {
+    "timestamp": "10:26:41.932",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "CLOCK 6 25747 7\n",
+    "message_type": "DRAFT_TIMER",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:26:46.947",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "SELECTED 7 4426348 1 {518A8111-FFEB-45B3-B697-203FCE7B26DD}\n",
+    "message_type": "PLAYER_SELECTED",
+    "player_extractions": 1
+  },
+  {
+    "timestamp": "10:26:48.458",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "SELECTED 8 4596448 2\n",
+    "message_type": "PLAYER_SELECTED",
+    "player_extractions": 1
+  },
+  {
+    "timestamp": "10:26:48.682",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "AUTODRAFT 9 true\n",
+    "message_type": "AUTODRAFT_STATUS",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:26:49.841",
+    "direction": "sent",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "DRAFT_LIST -16024\n",
+    "message_type": "UNKNOWN",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:26:49.946",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "SELECTED 9 4362238 3\n",
+    "message_type": "PLAYER_SELECTED",
+    "player_extractions": 1
+  },
+  {
+    "timestamp": "10:26:49.958",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "DRAFT_LIST -16024\n",
+    "message_type": "UNKNOWN",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:26:51.450",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "SELECTED 10 3121422 7\n",
+    "message_type": "PLAYER_SELECTED",
+    "player_extractions": 1
+  },
+  {
+    "timestamp": "10:26:51.931",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "CLOCK 6 29750 10\n",
+    "message_type": "DRAFT_TIMER",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:26:52.962",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "SELECTED 10 4379399 2\n",
+    "message_type": "PLAYER_SELECTED",
+    "player_extractions": 1
+  },
+  {
+    "timestamp": "10:26:54.452",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "SELECTED 9 3918298 1\n",
+    "message_type": "PLAYER_SELECTED",
+    "player_extractions": 1
+  },
+  {
+    "timestamp": "10:26:55.953",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "SELECTED 8 4612826 7\n",
+    "message_type": "PLAYER_SELECTED",
+    "player_extractions": 1
+  },
+  {
+    "timestamp": "10:26:56.939",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "CLOCK 6 29250 7\n",
+    "message_type": "DRAFT_TIMER",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:27:01.941",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "CLOCK 6 24247 7\n",
+    "message_type": "DRAFT_TIMER",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:27:06.961",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "SELECTED 7 4430878 4 {518A8111-FFEB-45B3-B697-203FCE7B26DD}\n",
+    "message_type": "PLAYER_SELECTED",
+    "player_extractions": 1
+  },
+  {
+    "timestamp": "10:27:08.464",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "SELECTED 6 4040715 1\n",
+    "message_type": "PLAYER_SELECTED",
+    "player_extractions": 1
+  },
+  {
+    "timestamp": "10:27:10.247",
+    "direction": "sent",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "DRAFT_LIST\n",
+    "message_type": "UNKNOWN",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:27:10.362",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "DRAFT_LIST\n",
+    "message_type": "UNKNOWN",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:27:11.947",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "CLOCK 6 26748 5\n",
+    "message_type": "DRAFT_TIMER",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:27:16.952",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "CLOCK 6 21744 5\n",
+    "message_type": "DRAFT_TIMER",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:27:21.958",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "CLOCK 6 16739 5\n",
+    "message_type": "DRAFT_TIMER",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:27:26.962",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "CLOCK 6 11736 5\n",
+    "message_type": "DRAFT_TIMER",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:27:31.734",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "CLOCK 6 6984 5\n",
+    "message_type": "DRAFT_TIMER",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:27:33.741",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "SELECTED 5 4685382 7 {923EF964-98BF-4E7B-B4F3-1021414D8182}\n",
+    "message_type": "PLAYER_SELECTED",
+    "player_extractions": 1
+  },
+  {
+    "timestamp": "10:27:36.719",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "CLOCK 6 27247 4\n",
+    "message_type": "DRAFT_TIMER",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:27:39.746",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "SELECTED 4 -16014 8 {3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}\n",
+    "message_type": "PLAYER_SELECTED",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:27:41.720",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "CLOCK 6 28249 3\n",
+    "message_type": "DRAFT_TIMER",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:27:46.727",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "CLOCK 6 23243 3\n",
+    "message_type": "DRAFT_TIMER",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:27:51.731",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "CLOCK 6 18240 3\n",
+    "message_type": "DRAFT_TIMER",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:27:52.247",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "SELECTED 3 3915511 1 {E5C85BDF-7247-4F70-809C-4CC36EE48023}\n",
+    "message_type": "PLAYER_SELECTED",
+    "player_extractions": 1
+  },
+  {
+    "timestamp": "10:27:56.736",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "CLOCK 6 25746 2\n",
+    "message_type": "DRAFT_TIMER",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:28:01.744",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "CLOCK 6 20740 2\n",
+    "message_type": "DRAFT_TIMER",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:28:06.742",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "CLOCK 6 15737 2\n",
+    "message_type": "DRAFT_TIMER",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:28:11.751",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "CLOCK 6 10733 2\n",
+    "message_type": "DRAFT_TIMER",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:28:16.753",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "CLOCK 6 5728 2\n",
+    "message_type": "DRAFT_TIMER",
+    "player_extractions": 0
+  },
+  {
+    "timestamp": "10:28:18.527",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "SELECTED 2 4047650 5 {CF5DB87A-DECD-41E6-BD90-32228368B7B7}\n",
+    "message_type": "PLAYER_SELECTED",
+    "player_extractions": 1
+  },
+  {
+    "timestamp": "10:28:21.776",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "SELECTED 1 4241416 2 {856970E3-67E6-42D4-8198-28B1FB3BCA26}\n",
+    "message_type": "PLAYER_SELECTED",
+    "player_extractions": 1
+  },
+  {
+    "timestamp": "10:28:26.760",
+    "direction": "received",
+    "websocket": "wss://fantasydraft.espn.com/game-1/league-266254290/JOIN?1=1&2=266254290&3=4&4={3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}&5=1:266254290:4:{3F54F436-FF9F-44B7-94F4-36FF9F54B7FA}:160569179&6=false&7=false&8=KONA&nocache=596788",
+    "payload": "CLOCK 6 25247 1\n",
+    "message_type": "DRAFT_TIMER",
+    "player_extractions": 0
+  }
+]

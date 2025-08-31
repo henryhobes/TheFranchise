@@ -70,17 +70,23 @@ class PlayerIdExtractor:
         extractions = []
         timestamp = datetime.now().isoformat()
         
-        try:
-            # Try to parse as JSON
-            data = json.loads(payload)
-            extractions.extend(self._extract_from_json(
-                data, payload, websocket_url, message_type, timestamp
-            ))
-        except json.JSONDecodeError:
-            # Try pattern-based extraction for non-JSON messages
-            extractions.extend(self._extract_from_text(
+        # Check for ESPN draft text protocol first (discovered from live test)
+        if self._is_espn_draft_text(payload):
+            extractions.extend(self._extract_from_espn_draft_text(
                 payload, websocket_url, message_type, timestamp
             ))
+        else:
+            try:
+                # Try to parse as JSON
+                data = json.loads(payload)
+                extractions.extend(self._extract_from_json(
+                    data, payload, websocket_url, message_type, timestamp
+                ))
+            except json.JSONDecodeError:
+                # Try pattern-based extraction for non-JSON messages
+                extractions.extend(self._extract_from_text(
+                    payload, websocket_url, message_type, timestamp
+                ))
             
         # Store extractions
         self.extracted_ids.extend(extractions)
@@ -175,6 +181,72 @@ class PlayerIdExtractor:
                         confidence=0.7  # Lower confidence for pattern matching
                     )
                     extractions.append(extraction)
+                    
+        return extractions
+        
+    def _is_espn_draft_text(self, payload: str) -> bool:
+        """
+        Check if payload is ESPN draft text protocol.
+        
+        Based on live test discovery:
+        - SELECTED [pick] [player_id] [position] [team_guid]
+        - AUTODRAFT [team] [enabled]
+        """
+        payload_stripped = payload.strip()
+        return (
+            payload_stripped.startswith('SELECTED ') or 
+            payload_stripped.startswith('AUTODRAFT ') or
+            payload_stripped.startswith('CLOCK ') or
+            payload_stripped.startswith('ONTHECLOCK ')
+        )
+        
+    def _extract_from_espn_draft_text(self, payload: str, websocket_url: str,
+                                    message_type: str, timestamp: str) -> List[PlayerIdExtraction]:
+        """
+        Extract player IDs from ESPN draft text protocol.
+        
+        Format discovered from live test:
+        SELECTED [pick_number] [PLAYER_ID] [position_code] [team_guid]
+        Example: "SELECTED 2 4362628 4 {A59C5B68-2A04-4309-857A-9A57A15AFE2B}"
+        """
+        extractions = []
+        payload_stripped = payload.strip()
+        
+        if payload_stripped.startswith('SELECTED '):
+            # Parse SELECTED command
+            # Pattern: SELECTED [pick] [PLAYER_ID] [position] [optional_team_guid]
+            parts = payload_stripped.split()
+            
+            if len(parts) >= 4:  # SELECTED pick_num player_id position [team_guid]
+                try:
+                    pick_number = int(parts[1])
+                    player_id = parts[2]
+                    position_code = int(parts[3])
+                    team_guid = parts[4] if len(parts) > 4 else ""
+                    
+                    if self._is_valid_player_id(player_id):
+                        # Build context with raw position code (API will resolve actual position)
+                        context = {
+                            "pick_number": pick_number,
+                            "position_code": position_code,
+                            "team_guid": team_guid,
+                            "draft_protocol": "espn_text"
+                        }
+                        
+                        extraction = PlayerIdExtraction(
+                            player_id=player_id,
+                            timestamp=timestamp,
+                            message_type="DRAFT_PICK",
+                            websocket_url=websocket_url,
+                            raw_message=payload,
+                            context_fields=context,
+                            confidence=0.95  # High confidence for ESPN text protocol
+                        )
+                        extractions.append(extraction)
+                        
+                except (ValueError, IndexError):
+                    # Invalid format, ignore
+                    pass
                     
         return extractions
         
