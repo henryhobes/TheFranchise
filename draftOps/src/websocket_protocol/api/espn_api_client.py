@@ -53,16 +53,23 @@ class ESPNApiClient:
         self.rate_limit_delay = rate_limit_delay
         self.session: Optional[aiohttp.ClientSession] = None
         
-        # ESPN API configuration based on research
+        # ESPN API configuration - updated endpoints for 2025
         self.base_url = f"https://lm-api-reads.fantasy.espn.com/apis/v3/games/ffl/seasons/{season}"
         self.alt_base_url = f"https://fantasy.espn.com/apis/v3/games/ffl/seasons/{season}"
         
-        # Headers to mimic browser requests
+        # Headers to mimic browser requests with additional required headers
         self.headers = {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
-            'Accept': 'application/json',
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+            'Accept': 'application/json, text/plain, */*',
             'Accept-Language': 'en-US,en;q=0.9',
+            'Accept-Encoding': 'gzip, deflate, br',
             'Referer': 'https://fantasy.espn.com/',
+            'Origin': 'https://fantasy.espn.com',
+            'DNT': '1',
+            'Connection': 'keep-alive',
+            'Sec-Fetch-Dest': 'empty',
+            'Sec-Fetch-Mode': 'cors',
+            'Sec-Fetch-Site': 'same-site',
         }
         
         # Rate limiting
@@ -167,22 +174,33 @@ class ESPNApiClient:
         return None
         
     async def _get_player_from_kona_endpoint(self, player_id: str) -> Optional[ESPNPlayer]:
-        """Try to get player from kona_playercard view."""
+        """Try to get player from kona_player_info view."""
         if not self.session:
             raise RuntimeError("Session not initialized. Use async context manager.")
             
         await self._rate_limit()
         
-        # Use a public league for player data (research shows this works)
-        url = f"{self.base_url}/segments/0/leagues/123456?view=kona_playercard"
+        # Updated endpoint for player information
+        url = f"{self.base_url}/players"
         params = {
-            'playerId': player_id
+            'view': 'kona_player_info'
         }
+        headers = self.headers.copy()
+        headers['X-Fantasy-Filter'] = json.dumps({
+            "players": {
+                "filterIds": [int(player_id)],
+                "limit": 1
+            }
+        })
         
-        async with self.session.get(url, params=params) as response:
+        async with self.session.get(url, params=params, headers=headers) as response:
             if response.status == 200:
-                data = await response.json()
-                return self._parse_player_from_response(data, player_id)
+                try:
+                    data = await response.json()
+                    return self._parse_player_from_response(data, player_id)
+                except Exception as e:
+                    self.logger.warning(f"JSON parsing failed for {player_id}: {e}")
+                    return None
             else:
                 self.logger.debug(f"Kona endpoint returned {response.status} for {player_id}")
                 return None
@@ -208,28 +226,45 @@ class ESPNApiClient:
         
         async with self.session.get(url, params=params, headers=headers) as response:
             if response.status == 200:
-                data = await response.json()
-                return self._parse_player_from_response(data, player_id)
+                try:
+                    data = await response.json()
+                    return self._parse_player_from_response(data, player_id)
+                except Exception as e:
+                    self.logger.warning(f"JSON parsing failed for players endpoint {player_id}: {e}")
+                    return None
             else:
+                self.logger.debug(f"Players endpoint returned {response.status} for {player_id}")
                 return None
                 
     async def _get_player_from_general_search(self, player_id: str) -> Optional[ESPNPlayer]:
-        """Try general search approach."""
+        """Try general search approach with multiple endpoints."""
         if not self.session:
             raise RuntimeError("Session not initialized")
             
         await self._rate_limit()
         
-        # Try alternative base URL
-        url = f"{self.alt_base_url}/players?view=players_wl"
+        # Try multiple general endpoints
+        endpoints = [
+            f"{self.alt_base_url}/players?view=players_wl",
+            f"{self.base_url}/players?view=kona_player_info",
+            f"{self.base_url}/players?view=players_wl&limit=2000"
+        ]
         
-        async with self.session.get(url) as response:
-            if response.status == 200:
-                data = await response.json()
-                # Search through all players for matching ID
-                return self._find_player_in_data(data, player_id)
-            else:
-                return None
+        for url in endpoints:
+            try:
+                async with self.session.get(url) as response:
+                    if response.status == 200:
+                        data = await response.json()
+                        result = self._find_player_in_data(data, player_id)
+                        if result:
+                            return result
+                    else:
+                        self.logger.debug(f"General search endpoint {url} returned {response.status}")
+            except Exception as e:
+                self.logger.debug(f"General search failed for {url}: {e}")
+                continue
+                
+        return None
                 
     def _parse_player_from_response(self, data: Any, target_player_id: str) -> Optional[ESPNPlayer]:
         """Parse ESPN API response to extract player information."""
@@ -433,8 +468,8 @@ async def test_espn_api_client():
     """Test the ESPN API client with known player IDs."""
     print("Testing ESPN API Client...")
     
-    # Test with known player IDs from research
-    test_player_ids = ["4241457", "3916387", "4362628"]
+    # Test with both known and unknown player IDs to test API and fallback
+    test_player_ids = ["4241457", "3916387", "4362628", "4430807", "9999999"]
     
     async with ESPNApiClient() as client:
         print("Testing individual lookups:")
