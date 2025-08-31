@@ -19,3 +19,11 @@
 **Issue**: Array access `reconnect_delays[min(attempt - 1, len(self.reconnect_delays) - 1)]` fails if array is empty  
 **Impact**: IndexError crash during reconnection attempts  
 **Fix**: Add validation that reconnect_delays array is not empty before access  
+
+## Console Application Issues
+
+### Signal Handler Makes CLI Unkillable During Connection (Priority: High)
+**File**: `run_draft_monitor.py:287-294`  
+**Issue**: Custom signal handler only sets `self.running = False` but doesn't interrupt ongoing async operations. When users press Ctrl+C during `await console.initialize()` or `await console.connect_to_draft()`, the process continues running until the async operation completes or times out, making the CLI effectively unkillable during long connection attempts.  
+**Impact**: Poor user experience - users cannot abort hung/slow browser startup or WebSocket connections  
+**Fix**: Signal handler should either raise `KeyboardInterrupt`, cancel running async tasks, or use hybrid approach for immediate interruption during connection phases
