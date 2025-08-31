@@ -24,7 +24,7 @@ class DraftEventProcessor:
     Processes ESPN draft WebSocket messages and updates DraftState.
     
     Based on Sprint 0 protocol discovery:
-    - SELECTED {teamId} {playerId} {overallPick} {memberId}
+    - SELECTED {overallPick} {playerId} {teamId} {memberId}
     - SELECTING {teamId} {timeMs}
     - CLOCK {teamId} {timeRemainingMs} {round?}
     - AUTODRAFT {teamId} {boolean}
@@ -100,7 +100,7 @@ class DraftEventProcessor:
         Parse WebSocket message text into structured data.
         
         Based on Sprint 0 protocol discovery:
-        - SELECTED {teamId} {playerId} {overallPick} {memberId}
+        - SELECTED {overallPick} {playerId} {teamId} {memberId}
         - SELECTING {teamId} {timeMs}
         - CLOCK {teamId} {timeRemainingMs} {round?}
         - AUTODRAFT {teamId} {boolean}
@@ -118,19 +118,22 @@ class DraftEventProcessor:
                 
             command = parts[0].upper()
             
-            if command == "SELECTED" and len(parts) >= 5:
+            if command == "SELECTED" and len(parts) >= 4:
                 try:
-                    overall_pick = int(parts[3])
+                    overall_pick = int(parts[1])
+                    team_id = parts[3] 
+                    # Member ID is optional (some messages don't include it)
+                    member_id = parts[4] if len(parts) >= 5 else ""
                 except (ValueError, IndexError) as e:
                     self.logger.warning(f"Invalid SELECTED message format: {message} - {e}")
                     return {"type": "UNKNOWN", "raw": message}
                     
                 return {
                     "type": "SELECTED",
-                    "team_id": parts[1],
+                    "team_id": team_id,
                     "player_id": parts[2],
                     "overall_pick": overall_pick,
-                    "member_id": parts[4],
+                    "member_id": member_id,
                     "raw": message
                 }
                 
@@ -220,7 +223,7 @@ class DraftEventProcessor:
         """
         Handle SELECTED message (pick made).
         
-        Message: SELECTED {teamId} {playerId} {overallPick} {memberId}
+        Message: SELECTED {overallPick} {playerId} {teamId} {memberId}
         Updates: Add player to drafted list, remove from available, update rosters
         """
         self.stats['selected_messages'] += 1

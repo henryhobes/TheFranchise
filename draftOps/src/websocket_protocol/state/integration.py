@@ -35,7 +35,8 @@ class DraftStateManager:
     
     def __init__(self, league_id: str, team_id: str, 
                  team_count: int = 12, rounds: int = 16,
-                 player_cache_db: Optional[str] = None):
+                 player_cache_db: Optional[str] = None,
+                 headless: bool = True):
         """
         Initialize draft state manager.
         
@@ -45,9 +46,11 @@ class DraftStateManager:
             team_count: Number of teams in draft
             rounds: Number of draft rounds
             player_cache_db: Path to player resolution cache database
+            headless: Run browser in headless mode for testing
         """
         self.league_id = league_id
         self.team_id = team_id
+        self.headless = headless
         
         # Core components
         self.draft_state = DraftState(league_id, team_id, team_count, rounds)
@@ -107,7 +110,7 @@ class DraftStateManager:
                 raise
             
             # Initialize monitor
-            self.monitor = ESPNDraftMonitor(headless=True)
+            self.monitor = ESPNDraftMonitor(headless=self.headless)
             await self.monitor.start_browser()
             
             # Set up event processor callbacks
@@ -142,8 +145,11 @@ class DraftStateManager:
             if not success:
                 return False
                 
-            # Set up WebSocket message handler
-            self.monitor.on_message_received = self._handle_websocket_message
+            # Set up WebSocket message handler (wrap async method in task)
+            def sync_message_handler(direction, websocket, payload):
+                asyncio.create_task(self._handle_websocket_message(direction, websocket, payload))
+            
+            self.monitor.on_message_received = sync_message_handler
             
             # Wait for WebSocket connections
             websocket_ready = await self.monitor.wait_for_websockets(timeout=30)
@@ -217,7 +223,9 @@ class DraftStateManager:
         
         try:
             # Process message through event processor
+            self.logger.debug(f"Processing message: {payload.strip()}")
             success = self.event_processor.process_websocket_message(payload, websocket.url)
+            self.logger.debug(f"Message processing result: {success}")
             
             if success:
                 self.performance_stats['state_updates'] += 1

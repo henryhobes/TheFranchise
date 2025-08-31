@@ -18,10 +18,25 @@ import os
 import signal
 import sys
 from datetime import datetime
+from pathlib import Path
 from typing import Optional
 
 sys.path.insert(0, os.path.dirname(__file__))
 from src.websocket_protocol.state.integration import DraftStateManager
+
+
+class LoggingOutput:
+    """Custom output handler that writes to both console and file."""
+    
+    def __init__(self, log_file):
+        self.log_file = log_file
+        
+    def print(self, message):
+        """Print to console and write to log file."""
+        print(message)
+        with open(self.log_file, 'a', encoding='utf-8') as f:
+            f.write(f"{message}\n")
+            f.flush()
 
 
 class DraftMonitorConsole:
@@ -51,16 +66,27 @@ class DraftMonitorConsole:
         self.pick_count = 0
         self.start_time: Optional[datetime] = None
         
-        # Setup logging to console
-        self.setup_logging()
+        # Setup logging to both console and file
+        self.log_file = self.setup_logging()
+        self.output = LoggingOutput(self.log_file)
         
     def setup_logging(self):
-        """Configure console logging."""
+        """Configure logging to both console and file."""
+        # Create logs directory
+        log_dir = Path("test_logs")
+        log_dir.mkdir(exist_ok=True)
+        
+        # Generate timestamp for unique log file
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        log_file = log_dir / f"draft_monitor_test_{timestamp}.log"
+        
+        # Configure logging with both console and file handlers
         logging.basicConfig(
             level=logging.INFO,
             format='%(asctime)s - %(levelname)s - %(message)s',
             handlers=[
-                logging.StreamHandler(sys.stdout)
+                logging.StreamHandler(sys.stdout),
+                logging.FileHandler(log_file, encoding='utf-8')
             ]
         )
         
@@ -68,17 +94,20 @@ class DraftMonitorConsole:
         logging.getLogger('playwright').setLevel(logging.WARNING)
         logging.getLogger('urllib3').setLevel(logging.WARNING)
         
+        print(f"📝 Logging to file: {log_file}")
+        return log_file
+        
     def print_header(self):
         """Print application header."""
-        print("=" * 60)
-        print("DRAFTOPS DRAFT MONITOR - Sprint 1")
-        print("=" * 60)
-        print(f"League ID: {self.league_id}")
-        print(f"Team ID: {self.team_id}")
-        print(f"Draft Config: {self.team_count} teams, {self.rounds} rounds")
-        print(f"Started: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
-        print("=" * 60)
-        print()
+        self.output.print("=" * 60)
+        self.output.print("DRAFTOPS DRAFT MONITOR - Sprint 1")
+        self.output.print("=" * 60)
+        self.output.print(f"League ID: {self.league_id}")
+        self.output.print(f"Team ID: {self.team_id}")
+        self.output.print(f"Draft Config: {self.team_count} teams, {self.rounds} rounds")
+        self.output.print(f"Started: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+        self.output.print("=" * 60)
+        self.output.print("")
         
     def format_pick_message(self, pick_data: dict) -> str:
         """Format pick data for console output."""
@@ -113,11 +142,11 @@ class DraftMonitorConsole:
             """Handle pick made events."""
             self.pick_count += 1
             message = self.format_pick_message(pick_data)
-            print(f"[PICK] {message}")
+            self.output.print(f"[PICK] {message}")
             
             # Check if it's our team's pick
             if pick_data.get('team_id') == self.team_id:
-                print(f">>> YOUR TEAM drafted {pick_data.get('player_name', 'Unknown Player')} <<<")
+                self.output.print(f">>> YOUR TEAM drafted {pick_data.get('player_name', 'Unknown Player')} <<<")
                 
         def on_state_updated(state_summary: dict):
             """Handle state update events."""
@@ -127,25 +156,25 @@ class DraftMonitorConsole:
             
             # Notify when our team is on the clock
             if on_clock == self.team_id:
-                print(f">>> YOU ARE NOW ON THE CLOCK! <<<")
+                self.output.print(f">>> YOU ARE NOW ON THE CLOCK! <<<")
                 if time_left > 0:
-                    print(f"    Time remaining: {time_left:.0f}s")
+                    self.output.print(f"    Time remaining: {time_left:.0f}s")
                     
         def on_draft_completed():
             """Handle draft completion."""
             self.draft_complete = True
-            print()
-            print("=" * 60)
-            print("DRAFT COMPLETED!")
-            print(f"Total picks logged: {self.pick_count}")
+            self.output.print("")
+            self.output.print("=" * 60)
+            self.output.print("DRAFT COMPLETED!")
+            self.output.print(f"Total picks logged: {self.pick_count}")
             if self.start_time:
                 duration = datetime.now() - self.start_time
-                print(f"Draft duration: {duration}")
-            print("=" * 60)
+                self.output.print(f"Draft duration: {duration}")
+            self.output.print("=" * 60)
             
         def on_error(error_msg: str):
             """Handle errors."""
-            print(f"[ERROR] {error_msg}")
+            self.output.print(f"[ERROR] {error_msg}")
             
         # Set callbacks on manager
         if self.manager:
@@ -161,20 +190,21 @@ class DraftMonitorConsole:
                 league_id=self.league_id,
                 team_id=self.team_id,
                 team_count=self.team_count,
-                rounds=self.rounds
+                rounds=self.rounds,
+                headless=False  # Show browser for manual drafting
             )
             
             success = await self.manager.initialize()
             if success:
                 self.setup_callbacks()
-                print("[SUCCESS] Draft monitor initialized successfully")
+                self.output.print("[SUCCESS] Draft monitor initialized successfully")
                 return True
             else:
-                print("[ERROR] Failed to initialize draft monitor")
+                self.output.print("[ERROR] Failed to initialize draft monitor")
                 return False
                 
         except Exception as e:
-            print(f"[ERROR] Initialization error: {e}")
+            self.output.print(f"[ERROR] Initialization error: {e}")
             return False
             
     async def connect_to_draft(self, draft_url: str) -> bool:
@@ -183,20 +213,20 @@ class DraftMonitorConsole:
             return False
             
         try:
-            print(f"[INFO] Connecting to draft: {draft_url}")
+            self.output.print(f"[INFO] Connecting to draft: {draft_url}")
             success = await self.manager.connect_to_draft(draft_url)
             
             if success:
-                print("[SUCCESS] Connected to draft room")
-                print("📡 Waiting for draft events...")
-                print()
+                self.output.print("[SUCCESS] Connected to draft room")
+                self.output.print("[INFO] Waiting for draft events...")
+                self.output.print("")
                 return True
             else:
-                print("[ERROR] Failed to connect to draft room")
+                self.output.print("[ERROR] Failed to connect to draft room")
                 return False
                 
         except Exception as e:
-            print(f"[ERROR] Connection error: {e}")
+            self.output.print(f"[ERROR] Connection error: {e}")
             return False
             
     async def start_monitoring(self):
@@ -283,7 +313,8 @@ class DraftMonitorConsole:
             await self.manager.close()
             
         self.print_final_summary()
-        print("[SUCCESS] Shutdown complete")
+        self.output.print("[SUCCESS] Shutdown complete")
+        print(f"📝 Complete log saved to: {self.log_file}")
         
     def setup_signal_handlers(self):
         """Setup signal handlers for graceful shutdown."""

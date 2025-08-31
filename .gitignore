@@ -164,3 +164,7 @@ CLAUDE.md
 
 # GitHub Actions temporary files
 @.github\
+
+# Test logs from draft monitor
+test_logs/
+draftOps/test_logs/
