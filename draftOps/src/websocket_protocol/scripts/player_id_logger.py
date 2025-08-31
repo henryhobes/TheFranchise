@@ -17,8 +17,8 @@ from datetime import datetime
 from pathlib import Path
 from typing import Dict, List, Set
 
-from monitor.espn_draft_monitor import ESPNDraftMonitor
-from utils.player_id_extractor import PlayerIdExtractor
+from ..monitor.espn_draft_monitor import ESPNDraftMonitor
+from ..utils.player_id_extractor import PlayerIdExtractor
 
 
 class PlayerIdDraftLogger:

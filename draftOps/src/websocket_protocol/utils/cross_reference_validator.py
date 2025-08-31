@@ -15,8 +15,8 @@ from typing import Dict, List, Set, Optional, Tuple, Any
 from datetime import datetime
 from dataclasses import dataclass, field
 
-from utils.player_id_extractor import PlayerIdExtractor, PlayerIdExtraction
-from api.espn_api_client import ESPNApiClient, ESPNPlayer
+from .player_id_extractor import PlayerIdExtractor, PlayerIdExtraction
+from ..api.espn_api_client import ESPNApiClient, ESPNPlayer
 
 
 @dataclass
@@ -303,7 +303,7 @@ async def test_cross_reference_validator():
     print("Testing Cross-Reference Validator...")
     
     # Create sample extractions (simulating WebSocket data)
-    from utils.player_id_extractor import PlayerIdExtraction
+    from .player_id_extractor import PlayerIdExtraction
     
     test_extractions = [
         PlayerIdExtraction(
