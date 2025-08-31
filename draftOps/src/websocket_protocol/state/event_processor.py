@@ -119,29 +119,48 @@ class DraftEventProcessor:
             command = parts[0].upper()
             
             if command == "SELECTED" and len(parts) >= 5:
+                try:
+                    overall_pick = int(parts[3])
+                except (ValueError, IndexError) as e:
+                    self.logger.warning(f"Invalid SELECTED message format: {message} - {e}")
+                    return {"type": "UNKNOWN", "raw": message}
+                    
                 return {
                     "type": "SELECTED",
                     "team_id": parts[1],
                     "player_id": parts[2],
-                    "overall_pick": int(parts[3]),
+                    "overall_pick": overall_pick,
                     "member_id": parts[4],
                     "raw": message
                 }
                 
             elif command == "SELECTING" and len(parts) >= 3:
+                try:
+                    time_ms = int(parts[2])
+                except (ValueError, IndexError) as e:
+                    self.logger.warning(f"Invalid SELECTING message format: {message} - {e}")
+                    return {"type": "UNKNOWN", "raw": message}
+                    
                 return {
                     "type": "SELECTING", 
                     "team_id": parts[1],
-                    "time_ms": int(parts[2]),
+                    "time_ms": time_ms,
                     "raw": message
                 }
                 
             elif command == "CLOCK" and len(parts) >= 3:
+                try:
+                    time_remaining_ms = int(parts[2])
+                    round_num = int(parts[3]) if len(parts) > 3 and parts[3] else None
+                except (ValueError, IndexError) as e:
+                    self.logger.warning(f"Invalid CLOCK message format: {message} - {e}")
+                    return {"type": "UNKNOWN", "raw": message}
+                    
                 return {
                     "type": "CLOCK",
                     "team_id": parts[1], 
-                    "time_remaining_ms": int(parts[2]),
-                    "round": int(parts[3]) if len(parts) > 3 else None,
+                    "time_remaining_ms": time_remaining_ms,
+                    "round": round_num,
                     "raw": message
                 }
                 
