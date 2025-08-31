@@ -82,15 +82,29 @@ class DraftMonitorConsole:
         
     def format_pick_message(self, pick_data: dict) -> str:
         """Format pick data for console output."""
-        pick_num = pick_data.get('pick_number', '?')
-        round_num = ((pick_num - 1) // self.team_count) + 1 if pick_num != '?' else '?'
-        pick_in_round = ((pick_num - 1) % self.team_count) + 1 if pick_num != '?' else '?'
+        pick_num = pick_data.get('pick_number', 0)
+        
+        try:
+            pick_num = int(pick_num)
+            if pick_num > 0:
+                round_num = ((pick_num - 1) // self.team_count) + 1
+                pick_in_round = ((pick_num - 1) % self.team_count) + 1
+            else:
+                round_num = '?'
+                pick_in_round = '?'
+        except (ValueError, TypeError):
+            round_num = '?'
+            pick_in_round = '?'
         
         team_id = pick_data.get('team_id', 'Unknown')
         player_name = pick_data.get('player_name', f"Player #{pick_data.get('player_id', 'Unknown')}")
         
         # Format: "Pick 1.01: Team A selected Justin Jefferson (WR, MIN)"
-        return f"Pick {round_num}.{pick_in_round:02d}: Team {team_id} selected **{player_name}**"
+        if isinstance(pick_in_round, int):
+            formatted_pick = f"{pick_in_round:02d}"
+        else:
+            formatted_pick = pick_in_round
+        return f"Pick {round_num}.{formatted_pick}: Team {team_id} selected **{player_name}**"
         
     def setup_callbacks(self):
         """Setup event callbacks for draft monitoring."""
