@@ -201,6 +201,7 @@ class DraftMonitorConsole:
             
     async def start_monitoring(self):
         """Start the draft monitoring loop."""
+        resolution_task = None
         try:
             self.running = True
             self.start_time = datetime.now()
@@ -227,15 +228,15 @@ class DraftMonitorConsole:
                         print("\n[INFO] All picks completed!")
                         self.draft_complete = True
                         
-            # Cancel resolution task
-            resolution_task.cancel()
-            
         except asyncio.CancelledError:
             print("\n[INFO] Monitoring stopped by user")
         except Exception as e:
             print(f"\n[ERROR] Monitoring error: {e}")
         finally:
             self.running = False
+            # Always cancel resolution task to prevent resource leaks
+            if resolution_task:
+                resolution_task.cancel()
             
     async def _resolution_loop(self):
         """Background loop for resolving player names."""
