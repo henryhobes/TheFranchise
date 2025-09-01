@@ -305,8 +305,16 @@ Focus on making logical, strategic draft recommendations based on the current co
                 "draft_context": draft_context or {}
             }
             
-            # Invoke graph asynchronously
-            result = await asyncio.get_event_loop().run_in_executor(
+            # Invoke graph asynchronously using thread pool executor
+            # Use get_running_loop() which is safer in async contexts
+            try:
+                loop = asyncio.get_running_loop()
+            except RuntimeError:
+                # No running loop, create one
+                loop = asyncio.new_event_loop()
+                asyncio.set_event_loop(loop)
+            
+            result = await loop.run_in_executor(
                 None, self.graph.invoke, input_state, config
             )
             
