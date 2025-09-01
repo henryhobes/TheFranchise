@@ -44,17 +44,17 @@ class DraftSupervisor:
     Features:
     - LangGraph StateGraph for workflow orchestration
     - InMemorySaver for conversation memory persistence
-    - GPT-5 (gpt-5-2025-08-07) integration for decision making
+    - GPT-5 (gpt-5) integration for decision making
     - Context injection from DraftOps DraftState
     - Streaming support for real-time feedback
     """
     
-    def __init__(self, model_name: str = "gpt-5-2025-08-07", temperature: float = 0.1):
+    def __init__(self, model_name: str = "gpt-5", temperature: float = 0.1):
         """
         Initialize the Draft Supervisor.
         
         Args:
-            model_name: OpenAI model to use (default: gpt-5-2025-08-07)
+            model_name: OpenAI model to use (default: gpt-5)
             temperature: Model temperature for determinism (default: 0.1)
         """
         self.model_name = model_name
@@ -88,7 +88,7 @@ class DraftSupervisor:
                 model=self.model_name,
                 temperature=self.temperature,
                 api_key=self.api_key,
-                max_tokens=2000,
+                max_tokens=10000,
                 timeout=30.0
             )
             self.logger.info(f"LLM initialized: {self.model_name}")

@@ -98,7 +98,7 @@ from draftOps.src.ai.managers.enhanced_draft_state_manager import EnhancedDraftS
 The core LangGraph implementation that provides AI decision making:
 
 - **StateGraph Workflow**: Uses LangGraph's StateGraph with 3 nodes
-- **GPT-5 Integration**: Configured with `gpt-5-2025-08-07` model
+- **GPT-5 Integration**: Configured with `gpt-5` model
 - **InMemorySaver**: Maintains conversation context and state
 - **Context Injection**: Converts DraftState to AI-readable context
 
@@ -137,7 +137,7 @@ python-dotenv>=1.0.0
 ### Model Configuration
 
 Default configuration uses GPT-5:
-- **Model**: `gpt-5-2025-08-07`
+- **Model**: `gpt-5`
 - **Temperature**: `0.1` (for consistent draft decisions)
 - **Max Tokens**: `2000`
 - **Timeout**: `30 seconds`

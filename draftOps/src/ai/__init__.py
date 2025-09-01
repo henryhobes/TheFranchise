@@ -13,10 +13,15 @@ Organized structure:
 """
 
 from .core import DraftSupervisor
-from .managers import EnhancedDraftStateManager, create_enhanced_draft_state_manager
 
-__all__ = [
-    'DraftSupervisor', 
-    'EnhancedDraftStateManager', 
-    'create_enhanced_draft_state_manager'
-]
+# Import managers conditionally to handle import issues gracefully
+try:
+    from .managers import EnhancedDraftStateManager, create_enhanced_draft_state_manager
+    __all__ = [
+        'DraftSupervisor', 
+        'EnhancedDraftStateManager', 
+        'create_enhanced_draft_state_manager'
+    ]
+except ImportError:
+    # Fallback if managers can't be imported due to dependency issues
+    __all__ = ['DraftSupervisor']
