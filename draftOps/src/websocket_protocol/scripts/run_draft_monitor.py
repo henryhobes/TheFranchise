@@ -1,14 +1,10 @@
 #!/usr/bin/env python3
 """
-DraftOps Monitor Console Script - Sprint 1 Deliverable
+Fixed DraftOps Monitor Console Script with proper pick ordering and team calculation.
 
-End-to-end draft monitoring console application that provides real-time pick logging
-and draft state tracking for ESPN fantasy football drafts.
-
-Usage:
-    python run_draft_monitor.py --url https://fantasy.espn.com/draft/...
-    python run_draft_monitor.py --league 12345 --team team_1
-    python run_draft_monitor.py --mock  # Join first available mock draft
+This version fixes:
+1. Out-of-order pick display - buffers picks and displays them in order
+2. Wrong team assignments - calculates correct teams based on pick number and draft order
 """
 
 import argparse
@@ -21,9 +17,8 @@ from datetime import datetime
 from pathlib import Path
 from typing import Optional
 
-sys.path.insert(0, os.path.dirname(__file__))
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', '..', '..'))
 from src.websocket_protocol.state.integration import DraftStateManager
-
 
 class LoggingOutput:
     """Custom output handler that separates console and file logging."""
@@ -51,16 +46,14 @@ class LoggingOutput:
             f.flush()
 
 
-class DraftMonitorConsole:
+class FixedDraftMonitorConsole:
     """
-    Console application for real-time draft monitoring.
+    Console application for real-time draft monitoring with fixed ordering and team calculation.
     
-    Features:
-    - Real-time pick logging with player names
-    - Draft state tracking and validation
-    - On-the-clock notifications
-    - Connection recovery
-    - Graceful shutdown
+    Key improvements:
+    - Displays picks in numerical order regardless of network message order
+    - Calculates correct teams based on pick number and established draft order
+    - Handles snake draft logic properly
     """
     
     def __init__(self, league_id: str = "unknown", team_id: str = "unknown", 
@@ -78,49 +71,45 @@ class DraftMonitorConsole:
         self.pick_count = 0
         self.start_time: Optional[datetime] = None
         
-        # Track player name updates
-        self._displayed_picks: Dict[str, str] = {}  # player_id -> displayed_name
+        # Fixed pick ordering system
+        self._displayed_picks = {}  # player_id -> displayed_name
+        self._pick_buffer = {}  # pick_number -> pick_data (for ordering)
+        self._highest_displayed_pick = 0  # track what we've displayed so far
+        self._pick_to_player = {}  # pick_number -> player_id (for name updates)
+        self._player_to_picks = {}  # player_id -> set of pick_numbers (handles duplicates)
         
-        # Setup logging to both console and file
+        # Setup logging
         self.log_file = self.setup_logging()
         self.output = LoggingOutput(self.log_file)
         
     def setup_logging(self):
-        """Configure separate console and file logging."""
-        # Create logs directory
+        """Configure logging."""
         log_dir = Path("test_logs")
         log_dir.mkdir(exist_ok=True)
         
-        # Generate timestamp for unique log file
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        log_file = log_dir / f"draft_monitor_test_{timestamp}.log"
+        log_file = log_dir / f"draft_monitor_fixed_{timestamp}.log"
         
-        # Create separate formatters
+        # Configure logging
         detailed_formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
         console_formatter = logging.Formatter('%(levelname)s: %(message)s')
         
-        # File handler for detailed logging
         file_handler = logging.FileHandler(log_file, encoding='utf-8')
         file_handler.setLevel(logging.DEBUG)
         file_handler.setFormatter(detailed_formatter)
         
-        # Console handler for critical messages only
         console_handler = logging.StreamHandler(sys.stdout)
-        console_handler.setLevel(logging.ERROR)  # Only show errors on console
+        console_handler.setLevel(logging.ERROR)
         console_handler.setFormatter(console_formatter)
         
-        # Configure root logger
         root_logger = logging.getLogger()
         root_logger.setLevel(logging.DEBUG)
         root_logger.handlers.clear()
         root_logger.addHandler(file_handler)
         root_logger.addHandler(console_handler)
         
-        # Reduce noise from external libraries (in file only)
         logging.getLogger('playwright').setLevel(logging.WARNING)
         logging.getLogger('urllib3').setLevel(logging.WARNING)
-        logging.getLogger('aiohttp').setLevel(logging.WARNING)
-        logging.getLogger('websockets').setLevel(logging.WARNING)
         
         print(f"Detailed logs saved to: {log_file}")
         return log_file
@@ -129,7 +118,7 @@ class DraftMonitorConsole:
         """Print application header."""
         header = f"""
 ==========================================================
-DRAFTOPS DRAFT MONITOR - Live Draft Tracking
+DRAFTOPS DRAFT MONITOR - FIXED VERSION
 ==========================================================
 League: {self.league_id} | Team: {self.team_id} 
 Draft: {self.team_count} teams, {self.rounds} rounds
@@ -137,17 +126,54 @@ Started: {datetime.now().strftime('%H:%M:%S')}
 ==========================================================
 """
         self.output.print_both(header)
-        self.output.log_only(f"Full session started at: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
         
+    def _calculate_team_for_pick(self, pick_number: int) -> str:
+        """Calculate which team should be picking based on pick number and snake draft."""
+        if not self.manager or not hasattr(self.manager, '_draft_order') or not self.manager._draft_order:
+            return None
+            
+        actual_team_count = len(self.manager._draft_order)
+        if actual_team_count == 0:
+            return None
+            
+        # Snake draft calculation
+        round_num = ((pick_number - 1) // actual_team_count)  # 0-based round
+        position_in_round = ((pick_number - 1) % actual_team_count)  # 0-based position
+        
+        if round_num % 2 == 0:  # Even round (0-based): normal order
+            team_index = position_in_round
+        else:  # Odd round (0-based): reverse order
+            team_index = actual_team_count - 1 - position_in_round
+            
+        if 0 <= team_index < len(self.manager._draft_order):
+            return self.manager._draft_order[team_index]
+        
+        return None
+    
+    def _correct_pick_data(self, pick_data: dict) -> dict:
+        """Add display team name to pick data (no corrections needed now)."""
+        if self.manager:
+            team_id = pick_data.get('team_id')
+            if team_id:
+                corrected_data = pick_data.copy()
+                corrected_data['display_team_name'] = self.manager.get_display_team_name(team_id)
+                return corrected_data
+        
+        return pick_data
+
     def format_pick_message(self, pick_data: dict) -> str:
-        """Format pick data for console output."""
+        """Format pick data for console output with correct team count."""
         pick_num = pick_data.get('pick_number', 0)
+        
+        # Use configured team count - draft order builds incrementally and is unreliable
+        actual_team_count = self.team_count
         
         try:
             pick_num = int(pick_num)
             if pick_num > 0:
-                round_num = ((pick_num - 1) // self.team_count) + 1
-                pick_in_round = ((pick_num - 1) % self.team_count) + 1
+                round_num = ((pick_num - 1) // actual_team_count) + 1
+                pick_in_round = ((pick_num - 1) % actual_team_count) + 1
+                self.output.log_only(f"Pick {pick_num} -> Round {round_num}.{pick_in_round:02d} (team_count={actual_team_count})")
             else:
                 round_num = '?'
                 pick_in_round = '?'
@@ -164,31 +190,16 @@ Started: {datetime.now().strftime('%H:%M:%S')}
             formatted_pick = f"{pick_in_round:02d}"
         else:
             formatted_pick = pick_in_round
-        return f"Pick {round_num}.{formatted_pick}: {display_team} → **{player_name}**"
+        return f"Pick {round_num}.{formatted_pick}: {display_team} -> **{player_name}**"
         
-    def setup_callbacks(self):
-        """Setup event callbacks for draft monitoring."""
+    def _display_buffered_picks(self):
+        """Display picks in proper order from buffer."""
+        # Display picks sequentially starting from where we left off
+        next_pick = self._highest_displayed_pick + 1
         
-        def on_pick_processed(pick_data: dict):
-            """Handle pick made events."""
-            player_id = pick_data.get('player_id', '')
-            current_name = pick_data.get('player_name', f"Player #{player_id}")
-            
-            # Check if this is a name update for an existing pick
-            if player_id in self._displayed_picks:
-                previous_name = self._displayed_picks[player_id]
-                if previous_name != current_name and not current_name.startswith("Player #"):
-                    # This is a name resolution update
-                    message = self.format_pick_message(pick_data)
-                    self.output.print_console_only(f"   ↳ Name resolved: {message}")
-                    self.output.log_only(f"NAME_UPDATE: {player_id} -> {current_name}")
-                    self._displayed_picks[player_id] = current_name
-                    return
-            
-            # This is a new pick
-            self.pick_count += 1
+        while next_pick in self._pick_buffer:
+            pick_data = self._pick_buffer[next_pick]
             message = self.format_pick_message(pick_data)
-            self._displayed_picks[player_id] = current_name
             
             # Check if it's our team's pick - show prominently
             if pick_data.get('team_id') == self.team_id:
@@ -197,9 +208,93 @@ Started: {datetime.now().strftime('%H:%M:%S')}
             else:
                 # Other teams' picks - console only
                 self.output.print_console_only(f"   {message}")
+            
+            self.pick_count += 1
+            self._highest_displayed_pick = next_pick
+            next_pick += 1
+        
+    def setup_callbacks(self):
+        """Setup event callbacks for draft monitoring."""
+        
+        def on_pick_processed(pick_data: dict):
+            """Handle pick made events with proper ordering."""
+            player_id = pick_data.get('player_id', '')
+            current_name = pick_data.get('player_name', f"Player #{player_id}")
+            pick_number = pick_data.get('pick_number', 0)
+            
+            # If pick_number is provided, this is the authoritative pick
+            if pick_number > 0:
+                # Log the incoming pick for debugging
+                self.output.log_only(f"INCOMING_PICK: pick_number={pick_number}, player_id={player_id}, team_id={pick_data.get('team_id')}, name={current_name}")
                 
-            # Always log detailed pick info to file
-            self.output.log_only(f"PICK_DETAIL: {pick_data}")
+                # Check if this pick slot already has a different player
+                existing_player_id = self._pick_to_player.get(pick_number)
+                if existing_player_id and existing_player_id != player_id:
+                    self.output.log_only(f"WARNING: Pick {pick_number} player ID changed from {existing_player_id} to {player_id}")
+                    # Clean up old player mapping
+                    if existing_player_id in self._player_to_picks:
+                        self._player_to_picks[existing_player_id].discard(pick_number)
+                        self.output.log_only(f"Removed player {existing_player_id} from pick {pick_number}")
+                
+                # Check if this player already has other picks (shouldn't happen in a normal draft)
+                if player_id in self._player_to_picks and len(self._player_to_picks[player_id]) > 0:
+                    existing_picks = self._player_to_picks[player_id]
+                    self.output.log_only(f"WARNING: Player {player_id} already has picks: {existing_picks}, adding pick {pick_number}")
+                
+                # This is either a new pick or an update to an existing pick
+                corrected_pick_data = self._correct_pick_data(pick_data)
+                self._pick_buffer[pick_number] = corrected_pick_data
+                self._pick_to_player[pick_number] = player_id
+                
+                # Track player -> pick mappings (handle multiple picks per player)
+                if player_id not in self._player_to_picks:
+                    self._player_to_picks[player_id] = set()
+                self._player_to_picks[player_id].add(pick_number)
+                
+                self.output.log_only(f"STORED: pick {pick_number} -> player {player_id}, player now has picks: {self._player_to_picks[player_id]}")
+                
+                # Check if this is a name resolution update
+                previous_name = self._displayed_picks.get(player_id, "")
+                is_name_update = (previous_name.startswith("Player #") and not current_name.startswith("Player #"))
+                
+                if is_name_update:
+                    message = self.format_pick_message(corrected_pick_data)
+                    self.output.print_console_only(f"   ↳ Name resolved: {message}")
+                    self.output.log_only(f"NAME_UPDATE: Pick {pick_number}, {player_id} -> {current_name}")
+                else:
+                    # Display picks in order (will only show new ones)
+                    self._display_buffered_picks()
+                
+                self._displayed_picks[player_id] = current_name
+                
+                # Always log detailed pick info to file
+                self.output.log_only(f"PICK_DETAIL: {corrected_pick_data}")
+            else:
+                # No pick number - this might be a delayed name update
+                self.output.log_only(f"WARNING: Received pick data without pick_number: {pick_data}")
+                
+                # Try to find ALL picks by this player_id
+                if player_id in self._player_to_picks:
+                    pick_numbers = sorted(self._player_to_picks[player_id])
+                    self.output.log_only(f"Player {player_id} has picks: {pick_numbers}")
+                    
+                    for pick_num in pick_numbers:
+                        if pick_num in self._pick_buffer:
+                            # Update this specific pick with the new name
+                            old_name = self._pick_buffer[pick_num].get('player_name', '')
+                            
+                            # Only update if name is actually changing to avoid duplicate messages
+                            if old_name != current_name:
+                                self._pick_buffer[pick_num]['player_name'] = current_name
+                                corrected_pick_data = self._correct_pick_data(self._pick_buffer[pick_num])
+                                
+                                # Only show update if it's a real name resolution (not Player #xxx)
+                                if not current_name.startswith("Player #") and old_name.startswith("Player #"):
+                                    message = self.format_pick_message(corrected_pick_data)
+                                    self.output.print_console_only(f"   ↳ Name resolved: {message}")
+                                    self.output.log_only(f"NAME_UPDATE_DELAYED: Pick {pick_num}, {player_id} -> {current_name}")
+                            
+                            self._displayed_picks[player_id] = current_name
                 
         def on_state_updated(state_summary: dict):
             """Handle state update events."""
@@ -231,9 +326,7 @@ Total picks: {self.pick_count}"""
             
         def on_error(error_msg: str):
             """Handle errors."""
-            # Errors go to both console and file
             self.output.print_both(f"ERROR: {error_msg}")
-            self.output.log_only(f"ERROR_DETAIL: {error_msg}")
             
         # Set callbacks on manager
         if self.manager:
@@ -250,21 +343,20 @@ Total picks: {self.pick_count}"""
                 team_id=self.team_id,
                 team_count=self.team_count,
                 rounds=self.rounds,
-                headless=False  # Show browser for manual drafting
+                headless=False
             )
             
             success = await self.manager.initialize()
             if success:
                 self.setup_callbacks()
                 self.output.print_console_only("Draft monitor initialized")
-                self.output.log_only("[SUCCESS] Draft monitor initialized successfully")
                 return True
             else:
                 self.output.print_both("Failed to initialize draft monitor")
                 return False
                 
         except Exception as e:
-            self.output.print(f"[ERROR] Initialization error: {e}")
+            self.output.print_both(f"Initialization error: {e}")
             return False
             
     async def connect_to_draft(self, draft_url: str) -> bool:
@@ -273,15 +365,12 @@ Total picks: {self.pick_count}"""
             return False
             
         try:
-            self.output.log_only(f"[INFO] Connecting to draft: {draft_url}")
             self.output.print_console_only("Connecting to draft...")
-            
             success = await self.manager.connect_to_draft(draft_url)
             
             if success:
                 self.output.print_both("Connected to draft room")
                 self.output.print_console_only("Monitoring draft picks...\n")
-                self.output.log_only("[SUCCESS] Connected to draft room and began monitoring")
                 return True
             else:
                 self.output.print_both("Failed to connect to draft room")
@@ -289,7 +378,6 @@ Total picks: {self.pick_count}"""
                 
         except Exception as e:
             self.output.print_both(f"Connection error: {e}")
-            self.output.log_only(f"[ERROR] Connection error details: {e}")
             return False
             
     async def start_monitoring(self):
@@ -300,8 +388,7 @@ Total picks: {self.pick_count}"""
             self.start_time = datetime.now()
             
             self.output.print_console_only("Press Ctrl+C to stop monitoring")
-            self.output.print_console_only("" + "-" * 50)
-            self.output.log_only("[INFO] Started draft monitoring loop")
+            self.output.print_console_only("-" * 50)
             
             # Create background task for player resolution
             resolution_task = asyncio.create_task(self._resolution_loop())
@@ -310,26 +397,12 @@ Total picks: {self.pick_count}"""
             while self.running and not self.draft_complete:
                 await asyncio.sleep(1)
                 
-                # Check if draft is still active (simple check for now)
-                if self.manager:
-                    state_summary = self.manager.get_state_summary()
-                    total_picks = state_summary.get('total_picks', 0)
-                    expected_picks = self.team_count * self.rounds
-                    
-                    if total_picks >= expected_picks:
-                        self.output.print_both("\nAll picks completed!")
-                        self.output.log_only(f"[INFO] Draft completed - {total_picks}/{expected_picks} picks")
-                        self.draft_complete = True
-                        
         except asyncio.CancelledError:
             self.output.print_console_only("\nMonitoring stopped")
-            self.output.log_only("[INFO] Monitoring stopped by user (CancelledError)")
         except Exception as e:
             self.output.print_both(f"\nMonitoring error: {e}")
-            self.output.log_only(f"[ERROR] Monitoring error details: {e}")
         finally:
             self.running = False
-            # Always cancel resolution task to prevent resource leaks
             if resolution_task:
                 resolution_task.cancel()
             
@@ -340,63 +413,31 @@ Total picks: {self.pick_count}"""
                 if self.manager:
                     resolved = await self.manager.resolve_queued_players()
                     if resolved > 0:
-                        self.output.log_only(f"[INFO] Resolved {resolved} player names")
-                        # Only show on console if many players resolved at once
-                        if resolved > 5:
-                            self.output.print_console_only(f"Resolved {resolved} player names")
+                        self.output.log_only(f"Resolved {resolved} player names")
                         
-                await asyncio.sleep(2)  # Resolve every 2 seconds
+                await asyncio.sleep(2)
                 
         except asyncio.CancelledError:
             pass
         except Exception as e:
-            self.output.log_only(f"[ERROR] Player resolution error: {e}")
-            # Only show on console if it's a critical resolution error
-            if "critical" in str(e).lower() or "timeout" in str(e).lower():
-                self.output.print_console_only(f"WARNING: Player resolution issue - check logs")
-            
-    def print_final_summary(self):
-        """Print final monitoring summary."""
-        if not self.manager:
-            return
-            
-        state_summary = self.manager.get_state_summary()
-        performance = state_summary.get('performance', {})
-        
-        summary = f"""
-SESSION SUMMARY
-{'-' * 30}
-Picks logged: {self.pick_count}
-Messages processed: {performance.get('messages_processed', 0)}
-Players resolved: {performance.get('player_resolutions', 0)}
-Avg processing time: {performance.get('avg_processing_time_ms', 0):.1f}ms"""
-        
-        if performance.get('errors', 0) > 0:
-            summary += f"\nErrors: {performance['errors']}"
-            
-        self.output.print_both(summary)
+            self.output.log_only(f"Player resolution error: {e}")
             
     async def shutdown(self):
         """Graceful shutdown."""
         self.output.print_console_only("\nShutting down...")
-        self.output.log_only("[INFO] Graceful shutdown initiated")
-        
         self.running = False
         
         if self.manager:
             await self.manager.close()
             
-        self.print_final_summary()
         self.output.print_console_only("Shutdown complete")
         self.output.print_console_only(f"Complete log: {self.log_file}")
-        self.output.log_only("[SUCCESS] Shutdown completed successfully")
         
     def setup_signal_handlers(self):
         """Setup signal handlers for graceful shutdown."""
         def signal_handler(signum, frame):
             print("\n[WARNING] Interrupt received, shutting down...")
             self.running = False
-            # Raise KeyboardInterrupt to properly interrupt async operations
             raise KeyboardInterrupt()
             
         signal.signal(signal.SIGINT, signal_handler)
@@ -405,30 +446,16 @@ Avg processing time: {performance.get('avg_processing_time_ms', 0):.1f}ms"""
 
 async def main():
     """Main entry point."""
-    parser = argparse.ArgumentParser(
-        description="DraftOps Draft Monitor - Real-time ESPN draft tracking",
-        formatter_class=argparse.RawDescriptionHelpFormatter,
-        epilog="""
-Examples:
-  python run_draft_monitor.py --url https://fantasy.espn.com/draft/123
-  python run_draft_monitor.py --league 12345 --team team_1 --teams 10
-  python run_draft_monitor.py --mock --teams 12 --rounds 15
-        """
-    )
+    parser = argparse.ArgumentParser(description="Fixed DraftOps Draft Monitor")
     
-    # Connection options
     connection_group = parser.add_mutually_exclusive_group(required=True)
     connection_group.add_argument('--url', help='Direct ESPN draft room URL')
     connection_group.add_argument('--league', help='ESPN league ID')
-    connection_group.add_argument('--mock', action='store_true', 
-                                help='Join first available mock draft')
+    connection_group.add_argument('--mock', action='store_true', help='Join first available mock draft')
     
-    # Draft configuration
     parser.add_argument('--team', default='team_1', help='Your team ID (default: team_1)')
     parser.add_argument('--teams', type=int, default=12, help='Number of teams (default: 12)')
     parser.add_argument('--rounds', type=int, default=16, help='Number of rounds (default: 16)')
-    
-    # Options
     parser.add_argument('--verbose', '-v', action='store_true', help='Enable verbose logging')
     
     args = parser.parse_args()
@@ -442,7 +469,6 @@ Examples:
     
     if args.url:
         draft_url = args.url
-        # Try to extract league ID from URL
         if '/leagues/' in args.url:
             try:
                 league_id = args.url.split('/leagues/')[1].split('/')[0]
@@ -452,12 +478,11 @@ Examples:
         league_id = args.league
         draft_url = f"https://fantasy.espn.com/football/draft?leagueId={args.league}"
     elif args.mock:
-        # For mock drafts, use a placeholder URL - user will need to navigate
         league_id = "mock_draft"
         draft_url = "https://fantasy.espn.com/football/draft"
         
     # Create console application
-    console = DraftMonitorConsole(
+    console = FixedDraftMonitorConsole(
         league_id=league_id,
         team_id=args.team,
         team_count=args.teams,
@@ -479,18 +504,15 @@ Examples:
             sys.exit(1)
             
         if args.mock:
-            console.output.print_console_only("NOTE: For mock drafts, manually join a draft room in the browser")
-            console.output.print_console_only("")
+            console.output.print_console_only("NOTE: For mock drafts, manually join a draft room in the browser\n")
             
         # Start monitoring
         await console.start_monitoring()
         
     except KeyboardInterrupt:
         console.output.print_console_only("\nInterrupted by user")
-        console.output.log_only("[INFO] Application interrupted by user (KeyboardInterrupt)")
     except Exception as e:
         console.output.print_both(f"\nUnexpected error: {e}")
-        console.output.log_only(f"[ERROR] Unexpected error details: {e}")
         sys.exit(1)
     finally:
         await console.shutdown()
