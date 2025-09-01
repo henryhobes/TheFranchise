@@ -245,25 +245,171 @@ The LangGraph Supervisor Framework Integration is **production ready** and provi
 
 ---
 
-## Sub-Sprint 2.3: [Future]
+## Sub-Sprint 2.3: Draft Strategist Node Implementation
 
-*Additional Sprint 2 components - To be determined based on Sprint 3 testing results*
+**Specification**: [draftOps/docs/Specifications/sprint-2/draft-specialist-node.md](../Specifications/sprint-2/draft-specialist-node.md)
+
+**Status**: ✅ **COMPLETED**  
+**Branch**: `draft-strategist-node`  
+**PR**: #13
+
+### Implementation Summary
+
+Successfully implemented the Draft Strategist node as specified for Sprint 2, delivering position-count allocation and strategic rationale for Scout/GM node consumption in future sub-sprints. This component provides the strategic intelligence layer that determines how many candidates to pull from each position based on draft context analysis.
+
+### Core Deliverables ✅
+
+**1. 5-Signal Scoring System**
+- **RosterNeed**: Analyzes deficit vs ideal starters + bench plan (normalized [0,1])
+- **TierUrgency**: Detects risk of tier cliff before next pick using ADP gap analysis
+- **ValueGap**: Identifies falling players with ADP value vs expected slot timing  
+- **RunPressure**: Detects recent pick concentration at positions (last 5 picks)
+- **Scarcity**: Structural position scarcity factors (TE high, K/DST low, etc.)
+- All signals return normalized [0,1] values for consistent weighted scoring
+
+**2. Configurable Budget Allocation**
+- **Selection Budget**: Configurable candidate count (default: 15)
+- **Weighted Scoring**: Configurable signal weights (RosterNeed: 40%, TierUrgency: 25%, ValueGap: 20%, RunPressure: 10%, Scarcity: 5%)
+- **Proportional Distribution**: Score-based allocation with deterministic remainder handling
+- **Budget Constraints**: Exact sum enforcement with rebalancing algorithms
+
+**3. Late-Draft Intelligence**
+- **DST/K Withholding**: Automatically withholds defense and kicker allocations until final 2-3 rounds
+- **Emergency Allocation**: Forces minimum DST/K counts in final rounds if roster gaps exist
+- **Configurable Override**: `allow_dst_k_early` option for non-standard strategies
+- **Smart Redistribution**: Reallocates withheld counts to skill positions proportionally
+
+**4. Contract-Compliant Output**
+- **Exact JSON Format**: `{"player_lookup": {"QB": 0, "RB": 3, "WR": 10, "TE": 2, "DST": 0, "K": 0}, "pick_strategy": "rationale"}`
+- **Position Coverage**: All 6 required positions (QB, RB, WR, TE, DST, K) with non-negative integers
+- **Strategy Rationale**: 1-3 sentences citing specific signal drivers (need/tier/value/run/scarcity)
+- **Deterministic Behavior**: Identical inputs produce identical outputs for testing reliability
+
+### Technical Architecture
+
+**Core Implementation** (`DraftStrategist` class):
+- Signal calculation methods for each of the 5 factors
+- Weighted scoring with configurable coefficient support  
+- Proportional budget allocation with remainder distribution
+- Late-draft rule application and constraint handling
+- Strategy generation based on dominant signals and context
+
+**Configuration System** (`StrategistConfig`):
+- Selection budget customization (5-25+ candidates)
+- Signal weight adjustment for different draft philosophies
+- Min/max position constraints for specialized strategies
+- Secondary sort preferences and late-draft timing controls
+
+**Integration Ready**:
+- Compatible with existing `DraftState` and `Player` data structures
+- Fallback import handling for testing and standalone operation
+- Clean error handling with safe fallback allocation
+- Exported through AI core module for downstream consumption
+
+### Validation & Testing
+
+**Contract Compliance Tests**:
+- ✅ JSON structure validation (required fields, data types)
+- ✅ Budget constraint enforcement (sum equals selection budget)
+- ✅ Position coverage verification (all 6 positions present)
+- ✅ Strategy format validation (1-3 sentences with signal citations)
+
+**Functional Testing**:
+- ✅ Deterministic output verification across multiple runs
+- ✅ Different budget configurations (5, 10, 15, 20, 25 candidates)
+- ✅ Signal calculation range validation (all values in [0,1])
+- ✅ Late-draft rule behavior (DST/K withholding until final rounds)
+- ✅ Edge case handling (empty player pools, extreme scenarios)
+
+**Integration Scenarios**:
+- ✅ Early draft allocation (focus on skill positions, withhold DST/K)
+- ✅ Mid-draft balance (mixed position priorities based on roster gaps)
+- ✅ Late-draft completion (include DST/K, fill remaining needs)
+
+### Example Output Scenarios
+
+**Early Draft** (Round 2):
+```json
+{
+  "player_lookup": {"QB": 0, "RB": 3, "WR": 10, "TE": 2, "DST": 0, "K": 0},
+  "pick_strategy": "WR tiers are deep and match roster gaps; keep small RB/TE slices for potential tier breaks."
+}
+```
+
+**Mid Draft** (Round 7): 
+```json
+{
+  "player_lookup": {"QB": 1, "RB": 6, "WR": 7, "TE": 1, "DST": 0, "K": 0},
+  "pick_strategy": "RB tier thinning and you're light there; maintain WR coverage; small QB/TE for opportunistic value."
+}
+```
+
+**Late Draft** (Round 13):
+```json
+{
+  "player_lookup": {"QB": 1, "RB": 4, "WR": 6, "TE": 2, "DST": 1, "K": 1},
+  "pick_strategy": "Starters set; balance RB/WR depth and begin shortlisting DST/K so you're not scraping at the end."
+}
+```
+
+### Key Success Metrics
+
+- ✅ **Contract Compliance**: 100% specification adherence with exact JSON format
+- ✅ **Budget Accuracy**: Perfect sum constraint enforcement across all test configurations  
+- ✅ **Signal Validity**: All calculations return normalized [0,1] values consistently
+- ✅ **Deterministic Behavior**: Identical inputs produce identical outputs reliably
+- ✅ **Late-Draft Logic**: DST/K withholding until appropriate draft timing
+- ✅ **Strategy Quality**: Contextual rationale citing appropriate signal drivers
+- ✅ **Integration Ready**: Clean imports and data structure compatibility
+
+### Files Created
+
+**Core Implementation**:
+- `draftOps/src/ai/core/draft_strategist.py` - Main DraftStrategist class and logic
+- `draftOps/src/ai/tests/test_draft_strategist.py` - Comprehensive test suite  
+- `draftOps/src/ai/examples/draft_strategist_demo.py` - Usage demonstration
+
+**Updated Files**:
+- `draftOps/src/ai/core/__init__.py` - Added exports for DraftStrategist and StrategistConfig
+- `draftOps/docs/stuff-to-clean.md` - Documented false positive feedback issues
+
+### Future Integration Points
+
+**Scout Node Consumption** (Next Sub-Sprint):
+- Scout will use `player_lookup` counts to filter available players by position
+- For each position with count > 0, Scout selects top candidates by ADP ranking  
+- Merged candidate pool of exactly `SELECTION_BUDGET` players for GM evaluation
+- Strategy rationale provides context for GM decision weighting
+
+**GM Node Integration** (After Scout):
+- Receives Scout's curated candidate list based on Strategist allocation
+- Uses strategy rationale to understand allocation reasoning 
+- Makes final pick selection from Strategist-sized, Scout-filtered candidate pool
+
+### Sprint 2.3 Conclusion
+
+The Draft Strategist node implementation is **production ready** and delivers the exact contract specified for Scout/GM consumption. The component successfully bridges strategic draft analysis with candidate selection, providing the intelligence layer that determines optimal position focus based on real-time draft context.
+
+**Key Achievement**: Established the strategic allocation engine that guides candidate selection, ensuring Scout and GM nodes focus effort on the most strategically relevant positions at each draft moment.
+
+**Ready for**: Scout node implementation in next sub-sprint, which will consume Strategist allocations to build curated candidate lists for GM evaluation.
 
 ---
 
 ## Overall Sprint 2 Progress
 
-**Completed**: 2/2 core sub-sprints  
+**Completed**: 3/3 sub-sprints  
 **Status**: ✅ **COMPLETED**  
-**Achievement**: Full AI integration foundation established with player data and LangGraph orchestration
+**Achievement**: Complete AI-driven draft decision pipeline established with data, orchestration, and strategic intelligence
 
 ### Sprint 2 Summary
 
 Sprint 2 successfully established the complete foundation for AI-driven draft decision making:
 
 1. **Sub-Sprint 2.1** provided rich player data context (300 players, 90.3% projection coverage)
-2. **Sub-Sprint 2.2** implemented the AI orchestration layer with LangGraph + GPT-5
+2. **Sub-Sprint 2.2** implemented the AI orchestration layer with LangGraph + GPT-5  
+3. **Sub-Sprint 2.3** delivered the Draft Strategist for position allocation and strategic analysis
 
-The system now has both the data intelligence (player rankings, projections, ADP) and the AI reasoning capability (LangGraph Supervisor with context awareness) needed for sophisticated draft strategy.
+The system now has the complete decision pipeline: data intelligence (player rankings, projections, ADP), AI reasoning capability (LangGraph Supervisor with context awareness), and strategic allocation logic (Draft Strategist with 5-signal analysis) needed for sophisticated draft strategy and candidate selection.
 
 **Next Phase**: Sprint 3 - Mock draft testing, prompt refinement, and AI performance optimization
