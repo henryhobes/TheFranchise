@@ -88,7 +88,7 @@ class DraftSupervisor:
                 model=self.model_name,
                 temperature=self.temperature,
                 api_key=self.api_key,
-                max_tokens=2000,
+                max_tokens=10000,
                 timeout=30.0
             )
             self.logger.info(f"LLM initialized: {self.model_name}")

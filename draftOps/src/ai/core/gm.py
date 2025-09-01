@@ -40,7 +40,7 @@ class GM:
     final decision aggregation.
     """
     
-    def __init__(self, model_name: str = "gpt-5-2025-08-07", temperature: float = 0.8):
+    def __init__(self, model_name: str = "gpt-5", temperature: float = 0.8):
         """
         Initialize GM agent.
         
@@ -71,7 +71,7 @@ class GM:
                 model=self.model_name,
                 temperature=self.temperature,
                 api_key=self.api_key,
-                max_tokens=120,  # Keep responses concise per spec
+                max_tokens=10000,  # Large limit for GPT-5 reasoning tokens
                 timeout=30.0
             )
             self.logger.debug(f"GM LLM initialized: {self.model_name}")
@@ -122,7 +122,7 @@ class GM:
         
         system_prompt = """You are the GENERAL MANAGER (GM). From the 10 candidate recommendations and the given strategy and state, choose exactly ONE player to draft.
 
-Use context (roster needs, strategy, tier runs, ADP, etc.) to justify the pick in ≤2 sentences. Consider:
+Use context (roster needs, strategy, tier runs, ADP, etc.) to justify the pick in 2 sentences or less. Consider:
 - Roster need gaps
 - Best value/ADP opportunities  
 - Position scarcity and urgency
@@ -136,7 +136,7 @@ Return ONLY valid JSON matching this schema:
   "selected_player_id": "<player_id>",
   "selected_player_name": "<player_name>",
   "position": "<position>",
-  "reason": "<concise justification (≤2 sentences)>",
+  "reason": "<concise justification (2 sentences or less)>",
   "score_hint": 0.0
 }"""
 
@@ -157,14 +157,27 @@ DRAFT_STATE: {draft_state_json}"""
     def _parse_response(self, response_text: str, scout_recommendations: List[Dict[str, Any]]) -> GMDecision:
         """Parse and validate the JSON response from GPT-5."""
         try:
-            # Extract JSON from response (handle any extra text)
-            json_start = response_text.find('{')
-            json_end = response_text.rfind('}') + 1
-            
-            if json_start == -1 or json_end == 0:
-                raise ValueError("No JSON found in response")
+            # Handle markdown code blocks if present
+            if '```json' in response_text:
+                start_marker = response_text.find('```json') + 7
+                end_marker = response_text.find('```', start_marker)
+                if end_marker != -1:
+                    json_text = response_text[start_marker:end_marker].strip()
+                else:
+                    # Fallback to finding JSON braces
+                    json_start = response_text.find('{', start_marker)
+                    json_end = response_text.rfind('}') + 1
+                    json_text = response_text[json_start:json_end]
+            else:
+                # Extract JSON from response (handle any extra text)
+                json_start = response_text.find('{')
+                json_end = response_text.rfind('}') + 1
                 
-            json_text = response_text[json_start:json_end]
+                if json_start == -1 or json_end == 0:
+                    raise ValueError("No JSON found in response")
+                    
+                json_text = response_text[json_start:json_end]
+                
             data = json.loads(json_text)
             
             # Validate required fields
@@ -180,7 +193,7 @@ DRAFT_STATE: {draft_state_json}"""
             if selected_id not in valid_ids:
                 raise ValueError(f"Selected player {selected_id} not in Scout recommendations")
                 
-            # Validate reason length (≤2 sentences approximately)
+            # Validate reason length (2 sentences or less approximately)
             reason = data['reason'].strip()
             if len(reason) == 0:
                 raise ValueError("Empty reason provided")

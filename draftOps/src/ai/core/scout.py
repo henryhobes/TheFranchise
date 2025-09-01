@@ -72,7 +72,7 @@ class Scout:
                 model=self.model_name,
                 temperature=self.temperature,
                 api_key=self.api_key,
-                max_tokens=120,  # Keep responses concise per spec
+                max_tokens=10000,  # Large limit for GPT-5 reasoning tokens
                 timeout=30.0
             )
             self.logger.debug(f"Scout LLM initialized: {self.model_name}")
@@ -109,7 +109,7 @@ class Scout:
                     model=self.model_name,
                     temperature=self.temperature,
                     api_key=self.api_key,
-                    max_tokens=120,
+                    max_tokens=10000,
                     timeout=30.0,
                     model_kwargs={"seed": seed}
                 )
