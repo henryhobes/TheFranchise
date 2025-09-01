@@ -2,7 +2,7 @@
 
 ## Overview
 
-This implementation plan divides DraftOps development into focused sprints that minimize risk, enable early testing, and build confidence incrementally. Each sprint delivers a working system that can be tested with real ESPN drafts.
+This implementation plan focuses on building a pure AI-driven draft assistant that tests AI's capability to conduct fantasy football drafts. The system is designed specifically for snake draft formats in 8, 10, or 12-team leagues. The plan emphasizes simplicity and direct AI decision-making without complex mathematical models or hybrid approaches.
 
 ## Sprint Structure
 
@@ -89,9 +89,10 @@ Build the foundation infrastructure that can maintain connection through an enti
        available_players: list[Player]
        my_roster: dict[str, list[Player]]
        current_pick: int
-       picks_until_next: int
+       picks_until_next: int  # Snake draft calculation for 8/10/12 teams
        time_remaining: float
        on_the_clock: str  # team/user ID
+       league_size: int  # 8, 10, or 12 only
    ```
 
 3. **Player Resolution System**
@@ -113,7 +114,7 @@ Build the foundation infrastructure that can maintain connection through an enti
 
 #### Testing Strategy
 - Run against multiple ESPN mock drafts
-- Test with different league sizes (10, 12, 14 teams)
+- Test with supported league sizes (8, 10, 12 teams)
 - Verify state accuracy at every pick
 - Test connection recovery scenarios
 
@@ -131,242 +132,88 @@ Build the foundation infrastructure that can maintain connection through an enti
 
 ---
 
-### Sprint 2: Deterministic Brain (4 days)
-**Goal: Make useful recommendations without AI**
+### Sprint 2: Data Preparation & AI Integration
+**Goal: Set up player data and AI decision-making**
 
-#### Objective
-Build the mathematical foundation that provides valuable pick recommendations based purely on projections and opportunity cost.
+#### Focus Areas
 
-#### Value Engine Components
+**Data Management**
+- Load pre-draft player data (rankings, ADP, positions)
+- Prepare data in format suitable for AI context
+- Handle league-specific scoring settings
 
-1. **Projection Data Management**
-   ```python
-   class ProjectionEngine:
-       def load_projections(self, sources: list[str])
-       def calculate_consensus(self, player: Player) -> float
-       def adjust_for_scoring(self, projection: float, scoring: ScoringSettings) -> float
-   ```
+**LangGraph Integration**
+- Set up supervisor framework for orchestration
+- Implement state management throughout draft
+- Enable streaming for real-time feedback
 
-2. **Value Over Baseline Calculator**
-   ```python
-   def calculate_vob(player: Player, position_baselines: dict) -> float:
-       # Determine replacement level for position
-       # Calculate value above replacement
-       # Adjust for positional scarcity
-   ```
+**AI Decision Making**
+- Integrate GPT-5 for draft recommendations
+- Design initial prompt strategies
+- Handle AI responses and reasoning
 
-3. **Opportunity Cost Model**
-   ```python
-   def model_opportunity_cost(
-       candidates: list[Player], 
-       picks_until_next: int,
-       available_pool: list[Player]
-   ) -> dict[Player, float]:
-       # Model likelihood each candidate is available later
-       # Calculate expected value drop-off by position
-       # Factor in positional runs and draft tendencies
-   ```
-
-4. **Roster Need Analysis**
-   ```python
-   def analyze_roster_needs(
-       current_roster: dict[str, list[Player]], 
-       league_settings: LeagueSettings
-   ) -> dict[str, float]:
-       # Calculate positional requirements remaining
-       # Factor in bye week coverage
-       # Weight by scarcity and drop-off rates
-   ```
-
-#### Static Data Sources
-- FantasyPros consensus projections
-- Multiple expert rankings (Berry, Yates, etc.)
-- ADP data from multiple platforms
-- Historical positional value curves
-- Bye week schedules
-
-#### Decision Algorithm
-```python
-def generate_recommendations(state: DraftState) -> list[Recommendation]:
-    candidates = get_top_available_players(state.available_pool, n=20)
-    
-    for player in candidates:
-        vob_score = calculate_vob(player, position_baselines)
-        opportunity_cost = model_opportunity_cost([player], state.picks_until_next, state.available_pool)
-        roster_fit = calculate_roster_fit(player, state.my_roster)
-        
-        total_score = vob_score - opportunity_cost + roster_fit
-        
-    return sorted(recommendations, key=lambda x: x.score, reverse=True)[:3]
-```
-
-#### Deliverable
-- Recommendation engine that suggests top 3 picks
-- Clear numeric reasoning for each suggestion
-- Console UI showing VOB scores and opportunity costs
-- Recommendations update in real-time as picks are made
-
-#### Success Criteria
-- Recommendations align with expert consensus 80%+ of the time
-- Opportunity cost model shows measurable predictive value
-- System runs fast enough for real-time use (<200ms per update)
-- Recommendations improve measurably over ADP-only strategy
+#### Flexible Implementation
+The specific implementation details will emerge during development based on:
+- Data availability and format
+- AI response quality with different prompt approaches
+- Performance characteristics observed during testing
+- Integration challenges discovered along the way
 
 ---
 
-### Sprint 3: Intelligence Layer (4 days)
-**Goal: Add AI reasoning and decision streaming**
+### Sprint 3: Testing and Refinement
+**Goal: Evaluate and improve AI performance**
 
-#### Objective
-Integrate GPT-5 to enhance deterministic recommendations with contextual reasoning, while maintaining reliability through time-based scaling.
+#### Testing Approach
 
-#### LangGraph Supervisor Setup
+**Mock Draft Testing**
+- Run system through multiple ESPN mock drafts
+- Test various draft positions in 8, 10, and 12-team leagues
+- Document AI decision patterns and quality
+- Identify strengths and weaknesses
 
-1. **Agent Architecture**
-   ```python
-   class DraftSupervisor:
-       tools = {
-           'vob_calculator': calculate_vob,
-           'opportunity_modeler': model_opportunity_cost,
-           'roster_analyzer': analyze_roster_needs,
-           'news_checker': check_recent_news
-       }
-   ```
+**Areas for Refinement**
+- Prompt optimization based on results
+- Context presentation adjustments
+- Response handling improvements
+- Edge case management
 
-2. **Time-Based Decision Scaling**
-   ```python
-   async def generate_enhanced_recommendation(state: DraftState, time_limit: float):
-       # Always run deterministic core
-       base_recommendations = generate_deterministic_picks(state)
-       
-       if time_limit > 3.0:  # Safe to enhance
-           enhanced = await supervisor.enhance_recommendations(
-               base_recommendations, 
-               state,
-               timeout=time_limit - 1.0
-           )
-           return enhanced
-       
-       return base_recommendations
-   ```
-
-3. **GPT-5 Integration**
-   - Configure GPT-5 API with model-adapter interface (gpt-5-nano/mini/standard)
-   - Design prompts for draft-specific reasoning
-   - Implement streaming for real-time feedback
-   - Handle timeout and fallback scenarios with hard timeouts
-   - Account for 95th percentile response times (1.8s standard, 3.2s complex)
-
-4. **Reasoning Transparency**
-   ```python
-   class RecommendationWithReasoning:
-       player: Player
-       score: float
-       deterministic_factors: dict  # VOB, opportunity cost, roster fit
-       ai_adjustments: dict  # Context, news, strategy considerations
-       confidence: float
-       reasoning: str  # Human-readable explanation
-   ```
-
-#### AI Enhancement Areas
-- **Roster Construction Strategy**: "Need RB depth before bye weeks cluster"
-- **News Integration**: "CMC questionable, handcuff value increased"
-- **Draft Flow Analysis**: "WR run likely starting, consider jumping ahead"
-- **League-Specific Adjustments**: "Superflex league, QB scarcity premium"
-
-#### Deliverable
-- AI-enhanced recommendations with visible reasoning
-- Streaming output showing agent thought process
-- Time-based scaling that never compromises reliability
-- A/B testing framework to compare AI vs deterministic picks
-
-#### Success Criteria
-- AI recommendations show measurable improvement over deterministic alone
-- System gracefully degrades under time pressure
-- User can follow the reasoning for each recommendation
-- No picks missed due to AI processing delays
+#### Iterative Improvement
+Refine the system based on observations:
+- What types of decisions does AI handle well?
+- Where does it struggle?
+- How can prompts be improved?
+- What additional context helps?
 
 ---
 
-### Sprint 4: Production Hardening (5 days)
-**Goal: Never miss a pick, ever**
+### Sprint 4: Production Hardening
+**Goal: Ensure reliability for real drafts**
 
-#### Objective
-Implement comprehensive reliability features and error handling to ensure the system works flawlessly during actual draft pressure.
+#### Core Requirements
 
-#### Reliability Features
+**Connection Reliability**
+- Handle WebSocket disconnections gracefully
+- Implement reconnection logic
+- Maintain state consistency through interruptions
 
-1. **Connection Failure Recovery**
-   ```python
-   class ConnectionManager:
-       async def handle_websocket_close(self, code: int, reason: str)
-       async def exponential_backoff_reconnect(self, max_attempts: int = 5)
-       async def validate_connection_health(self)
-       async def fallback_to_api_polling(self)
-   ```
+**Error Handling**
+- Manage time pressure scenarios
+- Handle unexpected data or responses
+- Implement appropriate fallback strategies
+- Ensure no missed picks
 
-2. **State Persistence and Resume**
-   ```python
-   class StatePersistence:
-       def checkpoint_state(self, state: DraftState)
-       def restore_from_checkpoint(self) -> DraftState
-       def validate_state_consistency(self, espn_state: dict) -> bool
-       def reconcile_missed_picks(self, current_state: dict)
-   ```
+**System Stability**
+- Test under various failure conditions
+- Implement logging and monitoring
+- Optimize performance where needed
 
-3. **Panic Mode Implementation**
-   ```python
-   def panic_mode_recommendation(state: DraftState, time_remaining: float) -> Recommendation:
-       if time_remaining < 5.0:  # Panic threshold
-           # Skip AI enhancement
-           # Use cached VOB calculations
-           # Return top available player immediately
-           return get_best_available_by_vob(state.available_pool)
-   ```
-
-4. **Comprehensive Monitoring**
-   ```python
-   class SystemMonitor:
-       def track_response_times(self)
-       def monitor_connection_stability(self)
-       def log_recommendation_accuracy(self)
-       def alert_on_system_degradation(self)
-   ```
-
-#### Error Handling Scenarios
-- **WebSocket Disconnection**: Auto-reconnect with state recovery
-- **API Rate Limiting**: Exponential backoff with local cache fallback  
-- **Invalid Player Data**: Fuzzy matching with manual override capability
-- **Time Pressure**: Graceful degradation to deterministic mode
-- **Memory Issues**: Automatic cleanup of completed draft data
-- **Network Partitions**: Local mode with cached data
-
-#### Testing Framework
-```python
-class DraftSimulator:
-    def simulate_connection_failures(self)
-    def test_rapid_fire_picks(self)
-    def validate_state_consistency(self)
-    def measure_performance_under_load(self)
-```
-
-#### Performance Optimization
-- **Caching Strategy**: Pre-compute VOB scores for top 200 players
-- **Memory Management**: Cleanup old draft threads automatically
-- **Network Optimization**: Connection pooling and keep-alive
-- **CPU Efficiency**: Async processing for all I/O operations
-
-#### Deliverable
-- Production-ready system that survives all failure modes
-- Comprehensive error logging and monitoring
-- Performance metrics dashboard
-- Automated testing suite for reliability scenarios
-
-#### Success Criteria
-- System maintains 99.9% uptime during draft windows
-- Recovery from any failure mode within 10 seconds
-- Zero missed picks across 100+ test scenarios
-- Performance remains stable under maximum load
+#### Production Readiness
+The system should:
+- Complete drafts without critical failures
+- Recover from common error scenarios
+- Provide clear feedback when issues occur
+- Maintain reasonable performance throughout
 
 ---
 
@@ -374,48 +221,36 @@ class DraftSimulator:
 
 ### Sequential Dependencies
 1. **Sprint 0 → Sprint 1**: Protocol understanding enables connection management
-2. **Sprint 1 → Sprint 2**: State tracking enables recommendation engine
-3. **Sprint 2 → Sprint 3**: Deterministic foundation enables AI enhancement
-4. **Sprint 3 → Sprint 4**: Working system enables reliability testing
+2. **Sprint 1 → Sprint 2**: State tracking enables AI integration
+3. **Sprint 2 → Sprint 3**: Working AI system enables testing and refinement
+4. **Sprint 3 → Sprint 4**: Tested system ready for production hardening
 
-### Parallel Work Opportunities
+### Development Flexibility
 
-**Within Sprint 1:**
-- Connection logic development
-- DraftState class implementation  
-- Player ID mapping research
+Each sprint can adapt based on discoveries and challenges:
 
-**Within Sprint 2:**
-- VOB calculation algorithms
-- Data source integration
-- Opportunity cost modeling
-
-**Within Sprint 3:**
-- LangGraph supervisor setup
-- GPT-5 API integration
-- Prompt engineering and testing
-
-**Within Sprint 4:**
-- Error handling implementation
-- Performance optimization
-- Comprehensive testing
+**Sprint Evolution**
+- Sprints may overlap or extend based on findings
+- Features can be moved between sprints as priorities emerge
+- Implementation details will be determined during development
+- Testing and refinement happen continuously, not just in Sprint 3
 
 ## Risk Management Strategy
 
-### Highest Risk Items (Address First)
-1. **ESPN WebSocket Reliability** - Could invalidate entire approach
-2. **Protocol Drift** - ESPN changes message formats without warning (April 2024 precedent)
-3. **Player ID Consistency** - Wrong IDs = wrong recommendations  
-4. **Time Management** - Slow decisions defeat the purpose
-5. **Connection Recovery** - ESPN infrastructure will fail mid-draft
-6. **Legal Compliance** - ToS risk exists but no documented enforcement for read-only monitoring
+### Key Risk Areas
+1. **ESPN WebSocket Reliability** - Foundation of the entire system
+2. **Protocol Changes** - ESPN may modify message formats
+3. **Player Identification** - Accurate player matching is critical
+4. **AI Response Time** - Must work within draft time constraints
+5. **Connection Stability** - Network issues during drafts
+6. **Legal Considerations** - ToS compliance for monitoring
 
 ### Risk Mitigation Tactics
 - **Legal Protection**: Read-only monitoring, single session, HAR file fallback mode
 - **Multiple Fallback Options**: WebSocket → API (lm-api-reads.fantasy.espn.com) → DOM scraping
 - **Protocol Versioning**: Schema mappers with golden-file replay testing
 - **Comprehensive Testing**: Every mock draft is a test case
-- **Performance Budgets**: Hard limits on processing time with model-adapter failover
+- **Simple Fallbacks**: Highest-ranked available player in emergencies
 - **State Validation**: Cross-check with ESPN UI continuously
 
 ### Go/No-Go Decision Points
@@ -423,57 +258,58 @@ class DraftSimulator:
 **After Sprint 0:**
 - Can we read ESPN WebSocket reliably? (90% success rate minimum)
 - Do we understand their protocol well enough to build on?
+- Can we handle snake draft logic for 8/10/12 team leagues?
 
 **After Sprint 1:**  
 - Can we track a full draft without state corruption?
 - Does connection recovery work in realistic scenarios?
 
 **After Sprint 2:**
-- Do our recommendations align with expert consensus?
+- Does AI make reasonable draft recommendations?
 - Is performance acceptable for real-time use?
 
 **After Sprint 3:**
-- Does AI enhancement provide measurable value?
-- Can we maintain reliability with added complexity?
+- Is AI performance consistent and reliable?
+- Have we identified clear patterns in AI decision-making?
 
-## Testing Strategy
+## Testing Philosophy
 
-### Continuous Validation
-- **Mock Draft Testing**: Join ESPN mocks during every development session
-- **Recorded Traffic Replay**: Capture WebSocket streams for regression testing
-- **Performance Profiling**: Time every operation with realistic network conditions
-- **State Validation**: Compare our state to ESPN UI continuously
+### Iterative Testing
+- Use ESPN mock drafts throughout development
+- Capture and replay WebSocket traffic for debugging
+- Continuously validate state accuracy
+- Refine based on observed behavior
 
-### Pre-Production Testing
-- **Load Testing**: Simulate peak draft season traffic
-- **Chaos Engineering**: Intentionally break connections and validate recovery
-- **A/B Testing**: Compare recommendations against expert picks and outcomes
-- **User Acceptance**: Test with real fantasy football players
+### Flexible Validation
+- Test what matters most as it emerges
+- Adapt testing approach based on findings
+- Focus on real-world scenarios
+- Learn from each mock draft session
 
-## Success Metrics
+## Success Indicators
 
-### Technical Metrics
-- **Latency**: WebSocket event → recommendation displayed (target: <1000ms)
-- **Accuracy**: State consistency with ESPN UI (target: 100%)
-- **Reliability**: Uptime during draft windows (target: 99.9%)
-- **Recovery**: Time to restore from disconnection (target: <10 seconds)
+### System Performance
+- Maintains accurate draft state throughout
+- Provides recommendations in reasonable time
+- Handles disconnections and recovers
+- Completes drafts without missing picks
 
-### Product Metrics
-- **Recommendation Quality**: Alignment with expert consensus (target: 80%+)
-- **User Override Rate**: How often users reject recommendations (target: <30%)
-- **Draft Performance**: Retrospective value vs. ADP expectations
-- **User Satisfaction**: Perceived value and ease of use
+### AI Performance
+- Makes logical draft decisions
+- Provides clear reasoning for picks
+- Adapts to draft flow and context
+- Builds balanced, competitive teams
 
 ## Execution Philosophy
 
 **Build Vertically**: Each sprint delivers something testable end-to-end
 **Test Early and Often**: Every mock draft is validation
 **Fail Fast**: Identify blocking issues immediately  
-**Reliability First**: Working deterministic > broken AI-enhanced
+**Simplicity First**: Focus on AI capability rather than system complexity
 **Data-Driven**: Measure everything, assume nothing
 
 ## Conclusion
 
-This implementation plan prioritizes de-risking the core technical assumptions first, then builds reliable value incrementally. By the end of Sprint 2, we have a useful tool that provides better recommendations than ADP alone. Sprints 3 and 4 enhance and harden the system without compromising the fundamental reliability.
+This implementation plan focuses on testing AI's ability to conduct snake draft fantasy football drafts in 8, 10, or 12-team leagues without algorithmic assistance. By removing mathematical models and deterministic approaches, we create a pure test of AI capability in a measurable, time-constrained environment.
 
-The key insight: in a time-sensitive domain like fantasy drafts, "good enough and reliable" beats "perfect but fragile" every single time. This plan ensures we never sacrifice reliability for features.
+The goal is not to build the most sophisticated draft tool, but to understand how well modern AI can handle strategic decision-making in the specific context of snake drafts when given appropriate context and data. Success is measured not by perfection, but by demonstrating that AI can make reasonable, explainable draft decisions consistently.
