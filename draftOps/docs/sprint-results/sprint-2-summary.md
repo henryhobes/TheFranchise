@@ -528,21 +528,77 @@ The Scout Node implementation is **production ready** and delivers exactly the A
 
 ---
 
+## Sub-Sprint 2.5: GM Node Implementation
+
+**Specification**: TBD
+
+**Status**: 🔄 **PLANNED**  
+**Branch**: TBD  
+**Commit**: TBD
+
+### Implementation Goals
+
+The GM (General Manager) Node will serve as the final decision-making component in the AI draft pipeline, aggregating multiple Scout recommendations and making the ultimate pick selection.
+
+**Planned Deliverables**:
+- GM Node class that receives 10 diverse Scout recommendations
+- Decision aggregation logic with confidence weighting
+- Final pick selection with reasoning synthesis
+- Integration with LangGraph Supervisor workflow
+- Error handling and fallback to highest-confidence Scout pick
+
+**Integration Flow**:
+1. **Input**: Receives 10 Scout recommendations from parallel Scout executions
+2. **Analysis**: Evaluates recommendation diversity, confidence scores, and reasoning patterns
+3. **Decision**: Selects final pick based on aggregation logic (consensus, confidence, strategic fit)
+4. **Output**: Returns final pick selection with synthesized reasoning
+
+---
+
+## Sub-Sprint 2.6: Complete AI Pipeline Integration & Testing
+
+**Specification**: TBD
+
+**Status**: 🔄 **PLANNED**  
+**Branch**: TBD  
+**Commit**: TBD
+
+### Integration Goals
+
+Final sub-sprint to integrate all Sprint 2 components into a complete AI-driven draft decision pipeline and validate end-to-end functionality.
+
+**Planned Deliverables**:
+- Complete AI pipeline integration (Data → Strategist → Scout → GM)
+- LangGraph workflow orchestration of all AI nodes
+- End-to-end integration testing with mock draft scenarios  
+- Performance optimization and error handling validation
+- Documentation and usage examples for complete system
+
+**Testing Focus**:
+- Full draft decision pipeline from player data to final pick selection
+- LangGraph Supervisor coordination of all AI agents
+- Real-time performance validation for draft environment compatibility
+- Edge case handling and system reliability under various scenarios
+
+---
+
 ## Overall Sprint 2 Progress
 
-**Completed**: 4/4 sub-sprints  
-**Status**: ✅ **COMPLETED**  
-**Achievement**: Complete AI-driven draft decision pipeline established with data, orchestration, strategic intelligence, and AI recommendations
+**Completed**: 4/6 sub-sprints  
+**Status**: 🔄 **IN PROGRESS**  
+**Achievement**: AI recommendation pipeline established (data, orchestration, strategic intelligence, and AI recommendations complete)
 
 ### Sprint 2 Summary
 
-Sprint 2 successfully established the complete foundation for AI-driven draft decision making:
+Sprint 2 is establishing the complete AI-driven draft decision pipeline with 6 sub-sprints:
 
-1. **Sub-Sprint 2.1** provided rich player data context (300 players, 90.3% projection coverage)
-2. **Sub-Sprint 2.2** implemented the AI orchestration layer with LangGraph + GPT-5  
-3. **Sub-Sprint 2.3** delivered the Draft Strategist for position allocation and strategic analysis
-4. **Sub-Sprint 2.4** implemented the Scout Node for AI-driven pick recommendations
+1. **Sub-Sprint 2.1** ✅ provided rich player data context (300 players, 90.3% projection coverage)
+2. **Sub-Sprint 2.2** ✅ implemented the AI orchestration layer with LangGraph + GPT-5  
+3. **Sub-Sprint 2.3** ✅ delivered the Draft Strategist for position allocation and strategic analysis
+4. **Sub-Sprint 2.4** ✅ implemented the Scout Node for AI-driven pick recommendations
+5. **Sub-Sprint 2.5** 🔄 GM Node implementation for final pick selection and recommendation aggregation
+6. **Sub-Sprint 2.6** 🔄 Complete AI pipeline integration and end-to-end testing
 
-The system now has the complete decision pipeline: data intelligence (player rankings, projections, ADP), AI reasoning capability (LangGraph Supervisor with context awareness), strategic allocation logic (Draft Strategist with 5-signal analysis), and AI recommendation generation (Scout Node with GPT-5 pick selection) needed for sophisticated draft strategy and candidate selection.
+**Current Status**: Core AI components complete (data, orchestration, strategy, recommendations). Remaining work focuses on final decision-making (GM Node) and complete system integration.
 
-**Next Phase**: Sprint 3 - GM Node implementation, mock draft testing, and AI performance optimization
+**Next Phase**: Complete Sprint 2 with GM Node and integration testing, then Sprint 3 - Mock draft validation and performance optimization
