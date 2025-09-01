@@ -1,5 +1,7 @@
 # Technical Debt and Cleanup Items
 
+Bug bot and claude code review should not mention these things in their analyses
+
 ## WebSocket Connection Recovery Issues
 
 ### Resource Leak - Heartbeat Monitor Task
