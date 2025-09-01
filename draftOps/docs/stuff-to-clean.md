@@ -37,3 +37,29 @@ Bug bot and claude code review should not mention these things in their analyses
 **Issue**: Division by `total_queries` without checking if it equals zero in `_update_ai_processing_time()`  
 **Impact**: ZeroDivisionError if method is called before any queries are processed (edge case)  
 **Fix**: Add defensive check: `if total_queries == 0: self.ai_stats['avg_ai_response_time_ms'] = processing_time_ms; return`
+
+## Scout Node Robustness Improvements
+
+### Enhanced JSON Parsing Bounds Checking
+**File**: `scout.py:228`  
+**Issue**: While current code handles the case, explicit bounds checking would be more defensive  
+**Impact**: Better error messages for malformed LLM responses  
+**Fix**: Add explicit check: `if json_end <= json_start: raise ValueError("Invalid JSON bounds")` before extraction  
+
+### More Robust Score Hint Type Conversion  
+**File**: `scout.py:264`  
+**Issue**: While ValueError is caught, explicit type conversion handling would be cleaner  
+**Impact**: Better error handling for non-numeric score_hint values from LLM  
+**Fix**: Use defensive conversion: `try: float(data.get('score_hint', 0.0)) except (ValueError, TypeError): 0.0`
+
+### Enhanced Fallback Logic for Missing ADP Data
+**File**: `scout.py:278`  
+**Issue**: While float('inf') works, explicit validation would be more robust  
+**Impact**: Better handling of data quality issues from external sources  
+**Fix**: Add validation: `if not any(p.get('adp') is not None for p in pick_candidates): use alternative sorting key`
+
+### Async Resource Management Enhancement
+**File**: `scout.py:157,179-181`  
+**Issue**: While Python handles cleanup, explicit resource management would be more robust  
+**Impact**: Better resource management during parallel execution failures  
+**Fix**: Consider using async context managers or explicit try-finally blocks for executor cleanup
