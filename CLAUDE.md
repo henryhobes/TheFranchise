@@ -19,6 +19,7 @@ This is a newly initialized Python project (thefranchise) with MIT license. The 
 - **Code style**: Simple and clean over complexity - choose the most straightforward solution
 - **Comments**: Only when absolutely necessary - write self-documenting code instead
 - **Emojis**: Never use emojis in code, commit messages, or any technical content
+- **Unicode**: Avoid Unicode characters (checkmarks, X marks, etc.) in print statements - use plain ASCII text like "[PASS]", "[FAIL]", "SUCCESS:", "ERROR:" instead
 - **GPU optimization**: Leverage CUDA/GPU acceleration where beneficial (PyTorch, CuPy, RAPIDS, etc.)
 - **Web search**: Perform web searches proactively when needed without asking permission
 
@@ -60,6 +61,19 @@ thefranchise/
 ├── requirements.txt
 └── README.md
 ```
+
+## Common Issues to Avoid
+
+### Unicode Encoding Problems
+- Windows command prompt uses CP1252 encoding which doesn't support many Unicode characters
+- Always use plain ASCII characters in print statements and output
+- Examples of what NOT to use: ✓, ✗, 🎉, ❌
+- Examples of what TO use: "[PASS]", "[FAIL]", "SUCCESS:", "ERROR:", "*", "-", "+"
+
+### Testing and Output
+- Use descriptive ASCII text for test results instead of Unicode symbols
+- Format test output with clear, readable ASCII text
+- Avoid fancy Unicode box drawing characters - use simple dashes and equals signs
 
 ## Notes
 
