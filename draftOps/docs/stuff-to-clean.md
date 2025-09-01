@@ -70,3 +70,10 @@ Bug bot and claude code review should not mention these things in their analyses
 **Impact**: Test mocking failures if this test file is used, causing tests to make real API calls instead of using mocks  
 **Fix**: Update patch decorators to match actual import path: `@patch('core.scout.ChatOpenAI')` or remove unused test file  
 **Note**: `test_scout_simple.py` is the active working test file with correct patch paths
+
+### Incorrect Mock Paths in GM Test File
+**File**: `test_gm.py:147,161,178,203,278`  
+**Issue**: All `@patch('ai.core.gm.ChatOpenAI')` decorators use wrong module path, should be `'core.gm.ChatOpenAI'`  
+**Impact**: Test mocking failures causing tests to make real API calls instead of using mocks, leading to 401 errors and fallback behavior in tests  
+**Fix**: Update patch decorators to match actual import path: `@patch('core.gm.ChatOpenAI')` since GM is imported via `from core.gm import GM`  
+**Evidence**: Test failure shows "Error code: 401 - Incorrect API key provided: test-key" proving real API calls are being made despite mocking attempts

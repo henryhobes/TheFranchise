@@ -136,7 +136,7 @@ Successfully implemented the LangGraph Supervisor Framework integration for AI-d
 
 **1. LangGraph Dependency & Configuration**
 - Installed LangGraph (`langgraph>=0.6.6`) and LangChain OpenAI integration (`langchain-openai>=0.3.32`)
-- Configured GPT-5 model `gpt-5-2025-08-07` with OpenAI API key from `.env`
+- Configured GPT-5 model `gpt-5` with OpenAI API key from `.env`
 - Established proper dependency management with version constraints
 - Verified connectivity and model routing functionality
 
@@ -216,7 +216,7 @@ Successfully implemented the LangGraph Supervisor Framework integration for AI-d
 - ✅ **Memory Persistence**: Context maintained across draft rounds
 - ✅ **Performance Maintained**: <200ms non-AI operations preserved
 - ✅ **Test Coverage**: 9 comprehensive integration tests passing
-- ✅ **AI Connectivity**: Verified GPT-5 model `gpt-5-2025-08-07` functionality
+- ✅ **AI Connectivity**: Verified GPT-5 model `gpt-5` functionality
 - ✅ **Context Injection**: DraftState successfully converted to AI-readable format
 - ✅ **Non-Blocking Design**: WebSocket monitoring unaffected by AI processing
 
@@ -412,7 +412,7 @@ Successfully implemented the Scout Node per Sprint 2 specification requirements.
 
 **1. AI-Driven Pick Selection**
 - Created `Scout` class that selects exactly one player from Strategist shortlist candidates
-- Uses GPT-5 (gpt-5-2025-08-07) with high temperature (1.0) for diverse recommendations
+- Uses GPT-5 (gpt-5) with high temperature (1.0) for diverse recommendations
 - Implements parallel execution support for 10 concurrent calls with different seeds (101-110)
 - Returns structured JSON output with player ID, name, position, reasoning, and confidence score
 

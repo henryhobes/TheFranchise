@@ -45,7 +45,7 @@ class GM:
         Initialize GM agent.
         
         Args:
-            model_name: OpenAI model to use (default: gpt-5-2025-08-07)
+            model_name: OpenAI model to use (default: gpt-5)
             temperature: Moderate temperature for consistency (default: 0.8)
         """
         self.model_name = model_name

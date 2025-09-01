@@ -41,12 +41,12 @@ class Scout:
     with different seeds for diverse recommendations.
     """
     
-    def __init__(self, model_name: str = "gpt-5-2025-08-07", temperature: float = 1.0):
+    def __init__(self, model_name: str = "gpt-5", temperature: float = 1.0):
         """
         Initialize Scout agent.
         
         Args:
-            model_name: OpenAI model to use (default: gpt-5-2025-08-07)
+            model_name: OpenAI model to use (default: gpt-5)
             temperature: High temperature for diversity (default: 1.0)
         """
         self.model_name = model_name

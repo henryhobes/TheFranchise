@@ -126,7 +126,7 @@ class TestGM:
         """Test GM agent initializes correctly."""
         gm = GM()
         
-        assert gm.model_name == "gpt-5-2025-08-07"
+        assert gm.model_name == "gpt-5"
         assert gm.temperature == 0.8
         assert gm.api_key == "test-key"
         
