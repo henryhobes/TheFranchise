@@ -2,11 +2,11 @@
 
 ## Executive Summary
 
-DraftOps is an intelligent draft assistant for ESPN Fantasy Football that provides real-time pick recommendations during live drafts. It combines deterministic value calculations with AI-enhanced decision-making to deliver optimal draft strategies within the time constraints of each pick.
+DraftOps is an AI-powered draft assistant for ESPN Fantasy Football that provides real-time pick recommendations during live drafts. It tests the capability of modern AI to conduct fantasy football drafts using contextual reasoning and pre-loaded player data, without relying on complex mathematical models or deterministic algorithms.
 
 ## Core Concept
 
-An agentic system that monitors your ESPN fantasy draft in real-time through network interception, analyzes available players using multiple data sources, and recommends the optimal pick based on value projections, roster construction, and opportunity cost modeling.
+An AI-driven system that monitors your ESPN fantasy draft in real-time through network interception and makes pick recommendations based on AI reasoning using pre-loaded player rankings, ADP data, and contextual understanding of draft dynamics. The system is designed specifically for snake draft formats and supports 8, 10, or 12-team leagues.
 
 ## Technical Architecture
 
@@ -29,7 +29,7 @@ An agentic system that monitors your ESPN fantasy draft in real-time through net
 - `drafted_players`: Set of ESPN player IDs already selected
 - `available_pool`: Remaining players (canonical list minus drafted)
 - `my_roster`: Current team composition with positional counts
-- `picks_until_next`: Snake draft position calculator
+- `picks_until_next`: Snake draft position calculator (8/10/12 team leagues)
 - `time_left`: Countdown timer for current pick
 - `pick_history`: Full draft sequence for pattern analysis
 
@@ -40,27 +40,24 @@ An agentic system that monitors your ESPN fantasy draft in real-time through net
 
 ### Decision Engine
 
-**Three-Layer Architecture:**
+**AI-Driven Architecture:**
 
-1. **Deterministic Core (Always Runs)**
-   - Value Over Baseline (VOB) calculations per position
-   - Opportunity cost modeling based on pick gap to next turn
-   - ADP-based availability projections
-   - Positional scarcity analysis
-   - Execution time: <200ms
+1. **LangGraph Supervisor Framework**
+   - Orchestrates the AI decision-making process
+   - Maintains draft state and context throughout the draft
+   - Handles the flow between data retrieval and recommendation generation
+   - Provides streaming feedback for visibility into the decision process
 
-2. **AI Enhancement Layer (Time-Permitting)**
-   - GPT-5 with intelligent routing (nano/mini/standard based on complexity)
-   - Roster construction analysis and bye week optimization
-   - Contextual adjustments for league-specific strategies
-   - Only engages when clock time > 3 seconds
-   - Target latency: 230-800ms depending on routing
+2. **GPT-5 Decision Making**
+   - Leverages GPT-5's intelligent routing (nano/mini/standard)
+   - Makes draft decisions based on pre-loaded player data
+   - Considers roster construction, positional needs, and draft flow
+   - No reliance on mathematical models or algorithms
 
-3. **Supervisor Orchestration**
-   - LangGraph supervisor pattern coordinates specialized agents
-   - Tools include: VOB calculator, opportunity modeler, roster analyzer
-   - Handles tool failures gracefully with fallback to deterministic picks
-   - Provides streaming feedback for user visibility
+3. **Context and Data Management**
+   - Pre-loaded player rankings and ADP data
+   - Real-time draft state from WebSocket monitoring
+   - Simple fallback to highest-ranked player in emergencies
 
 ### Intelligence Model
 
@@ -78,6 +75,14 @@ An agentic system that monitors your ESPN fantasy draft in real-time through net
 - Model-adapter interface allows swapping/downshifting based on performance needs
 
 ## Key Design Decisions
+
+### Snake Draft Focus
+
+**Supported Format:**
+- Snake draft only (no auction support)
+- 8, 10, or 12-team leagues exclusively
+- Standard roster sizes for each league format
+- Pick order reverses each round as expected in snake drafts
 
 ### LangGraph Over Direct Implementation
 
@@ -101,49 +106,30 @@ An agentic system that monitors your ESPN fantasy draft in real-time through net
 - Reduces complexity and potential failure modes
 - Click-to-confirm provides safety valve for system errors
 
-### Deterministic First, AI Second
+### AI-First Philosophy
 
-**Philosophy:**
-- Mathematical foundation ensures baseline competence
-- AI adds nuance only when time permits
-- Hard timeout guarantees no missed picks
-- Panic fallback to best VOB if all systems fail
+**Approach:**
+- Pure AI reasoning for all draft decisions
+- Test AI's genuine understanding of fantasy football
+- No algorithmic safety nets or mathematical models
+- Emergency fallback only for extreme time pressure
 
 ## Data Sources
 
-### Static Inputs (Cached Locally)
-- Player projections from multiple sources
-- Consensus rankings and tier breaks
-- ADP distributions by platform and scoring
-- Positional baseline calculations
-- League settings and scoring rules
+### Pre-Draft Data (Loaded Before Draft)
+- Fantasy football rankings (PPR, 6pt PaTD specific)
+- ADP data from various platforms
+- Position rankings
+- Player and team information
+- League scoring settings
 
-### Dynamic Signals
-- Real-time pick announcements via WebSocket
-- Current roster composition and needs
-- Remaining time on pick clock
-- Pick distance to next selection
-- Draft position tendencies (reaches, runs)
+### Real-Time Draft Data
+- Live pick updates via WebSocket
+- Current roster state
+- Available player pool
+- Time remaining on clock
+- Draft position and order
 
-### Optional Enhancements
-- Targeted injury/news checks for final candidates
-- Recent transaction data from ESPN
-- Weather data for outdoor games (when relevant)
-
-## Performance Requirements
-
-### Latency Targets
-- Network event to state update: <50ms
-- Deterministic calculation: <200ms
-- AI enhancement (when safe): <800ms
-- Total decision time: <1000ms optimal, <2000ms acceptable
-- Panic mode activation: >85% of clock expired
-
-### Reliability Metrics
-- Zero missed picks across all drafts
-- Successful reconnection within 5 seconds
-- State recovery from any point in draft
-- Graceful degradation under time pressure
 
 ## Risk Mitigation
 
@@ -179,13 +165,13 @@ An agentic system that monitors your ESPN fantasy draft in real-time through net
 - Clock utilization (time used vs. time available)
 - Recovery speed (disconnection to operational)
 
-## Competitive Advantages
+## Project Goals
 
-1. **True Real-Time**: WebSocket interception provides instant updates vs. polling delays
-2. **Intelligent Time Management**: Scales decision complexity to available clock
-3. **Resilient Architecture**: Survives disconnections and ESPN infrastructure issues
-4. **GPT-5 Enhancement**: Latest AI capabilities when time permits
-5. **Transparent Reasoning**: Streaming feedback shows decision process
+1. **Test AI Capability**: Evaluate how well AI can draft without algorithmic assistance
+2. **Real-Time Performance**: Maintain reliable performance under draft time constraints
+3. **Strategic Understanding**: Assess AI's grasp of draft strategy and team building
+4. **Transparent Process**: Clear visibility into AI reasoning through LangGraph
+5. **Simple Architecture**: Focus on AI performance rather than system complexity
 
 ## Future Considerations
 
@@ -204,6 +190,6 @@ An agentic system that monitors your ESPN fantasy draft in real-time through net
 
 ## Conclusion
 
-DraftOps represents a pragmatic approach to fantasy draft assistance - sophisticated enough to provide genuine value, simple enough to work reliably under pressure. By combining deterministic calculations with optional AI enhancement, monitoring the actual data stream instead of the UI, and accepting reasonable trade-offs around automation and complexity, we create a tool that materially improves draft outcomes without the brittleness of over-engineered solutions.
+DraftOps is an experiment in pure AI-driven fantasy football drafting for snake draft formats in 8, 10, or 12-team leagues. By removing deterministic models and complex calculations, we're testing whether modern AI can successfully navigate a fantasy draft using only contextual reasoning and pre-loaded data. The LangGraph supervisor framework provides the orchestration layer while keeping decision-making purely AI-driven.
 
-The system acknowledges that perfect information is impossible in a draft environment, but good-enough information delivered instantly is invaluable. Every architectural decision flows from this principle: be fast, be reliable, and when you can't be both, choose reliable.
+This approach prioritizes understanding AI's true capabilities in a measurable, time-constrained environment over building a hybrid system that might mask AI's actual performance with algorithmic safety nets.
