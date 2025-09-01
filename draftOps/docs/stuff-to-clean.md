@@ -29,3 +29,11 @@ Bug bot and claude code review should not mention these things in their analyses
 **Issue**: ~~Custom signal handler only sets `self.running = False` but doesn't interrupt ongoing async operations~~  
 **Status**: **FIXED** - Signal handler now raises `KeyboardInterrupt()` to properly interrupt async operations  
 **Fix Applied**: Modified signal handler to raise `KeyboardInterrupt()` after setting `self.running = False`, enabling immediate interruption during connection phases
+
+## AI Integration Issues
+
+### Potential Division by Zero - AI Processing Time Stats
+**File**: `enhanced_draft_state_manager.py:364`  
+**Issue**: Division by `total_queries` without checking if it equals zero in `_update_ai_processing_time()`  
+**Impact**: ZeroDivisionError if method is called before any queries are processed (edge case)  
+**Fix**: Add defensive check: `if total_queries == 0: self.ai_stats['avg_ai_response_time_ms'] = processing_time_ms; return`
