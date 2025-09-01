@@ -85,7 +85,7 @@ class TestScout:
         """Test Scout agent initializes correctly."""
         scout = Scout()
         
-        assert scout.model_name == "gpt-5-2025-08-07"
+        assert scout.model_name == "gpt-5"
         assert scout.temperature == 1.0
         assert scout.api_key == "test-key"
         

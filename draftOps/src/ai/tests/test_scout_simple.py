@@ -71,7 +71,7 @@ def test_scout_basic_functionality():
         
         # Test Scout initialization
         scout = Scout()
-        assert scout.model_name == "gpt-5-2025-08-07"
+        assert scout.model_name == "gpt-5"
         assert scout.temperature == 1.0
         
         # Test input validation
