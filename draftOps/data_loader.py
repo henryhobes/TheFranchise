@@ -45,7 +45,7 @@ ESPN_TO_ADP_DEFENSE = {
     'IND DST': 'Indianapolis Colts',
     'JAX DST': 'Jacksonville Jaguars',
     'KC DST': 'Kansas City Chiefs',
-    'LAS DST': 'Las Vegas Raiders',
+    'LV DST': 'Las Vegas Raiders',
     'LAC DST': 'Los Angeles Chargers',
     'LAR DST': 'Los Angeles Rams',
     'MIA DST': 'Miami Dolphins',
