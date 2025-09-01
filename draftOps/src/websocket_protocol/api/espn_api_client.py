@@ -53,16 +53,23 @@ class ESPNApiClient:
         self.rate_limit_delay = rate_limit_delay
         self.session: Optional[aiohttp.ClientSession] = None
         
-        # ESPN API configuration based on research
-        self.base_url = f"https://lm-api-reads.fantasy.espn.com/apis/v3/games/ffl/seasons/{season}"
-        self.alt_base_url = f"https://fantasy.espn.com/apis/v3/games/ffl/seasons/{season}"
+        # ESPN API configuration - using working NFL athletes API
+        self.base_url = "https://sports.core.api.espn.com/v2/sports/football/leagues/nfl/athletes"
+        self.alt_base_url = "https://sports.core.api.espn.com/v2/sports/football/leagues/nfl/athletes"
         
-        # Headers to mimic browser requests
+        # Headers to mimic browser requests with additional required headers
         self.headers = {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
-            'Accept': 'application/json',
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+            'Accept': 'application/json, text/plain, */*',
             'Accept-Language': 'en-US,en;q=0.9',
+            'Accept-Encoding': 'gzip, deflate, br',
             'Referer': 'https://fantasy.espn.com/',
+            'Origin': 'https://fantasy.espn.com',
+            'DNT': '1',
+            'Connection': 'keep-alive',
+            'Sec-Fetch-Dest': 'empty',
+            'Sec-Fetch-Mode': 'cors',
+            'Sec-Fetch-Site': 'same-site',
         }
         
         # Rate limiting
@@ -73,22 +80,6 @@ class ESPNApiClient:
         self.player_cache: Dict[str, ESPNPlayer] = {}
         self.cache_expiry = timedelta(hours=1)  # Cache for 1 hour
         
-        # Known player mappings for testing (updated with live test data)
-        self.known_players = {
-            "4241457": {"name": "Najee Harris", "pos": "RB", "team": "PIT"},
-            "3916387": {"name": "Josh Allen", "pos": "QB", "team": "BUF"},
-            "4362628": {"name": "Justin Jefferson", "pos": "WR", "team": "MIN"},
-            # Real player IDs captured from live test
-            "4430807": {"name": "Player_4430807", "pos": "RB", "team": "TBD"},  # Pick 1
-            "3929630": {"name": "Player_3929630", "pos": "RB", "team": "TBD"},  # Pick 3
-            "3117251": {"name": "Player_3117251", "pos": "RB", "team": "TBD"},  # Pick 4
-            "4241389": {"name": "Player_4241389", "pos": "WR", "team": "TBD"},  # Pick 5
-            "4262921": {"name": "Player_4262921", "pos": "WR", "team": "TBD"},  # Pick 6
-            "4890973": {"name": "Player_4890973", "pos": "RB", "team": "TBD"},  # Pick 7
-            "4429795": {"name": "Player_4429795", "pos": "RB", "team": "TBD"},  # Pick 8
-            "4595348": {"name": "Player_4595348", "pos": "WR", "team": "TBD"},  # Pick 9
-            "4426515": {"name": "Player_4426515", "pos": "WR", "team": "TBD"},  # Pick 10
-        }
         
         self.logger = logging.getLogger(__name__)
         
@@ -132,24 +123,21 @@ class ESPNApiClient:
             if cache_age < self.cache_expiry:
                 self.logger.debug(f"Returning cached player: {player_id}")
                 return cached_player
+        
+        # Handle DST (negative player IDs)
+        if player_id.startswith('-'):
+            try:
+                player = self._create_dst_player(player_id)
+                if player:
+                    self.player_cache[player_id] = player
+                    self.logger.info(f"Successfully resolved DST {player_id}: {player.full_name}")
+                    return player
+            except Exception as e:
+                self.logger.warning(f"DST resolution failed for {player_id}: {e}")
                 
-        # Check known test players first
-        if player_id in self.known_players:
-            known = self.known_players[player_id]
-            player = ESPNPlayer(
-                player_id=player_id,
-                full_name=known["name"],
-                position=known["pos"],
-                nfl_team=known["team"]
-            )
-            self.player_cache[player_id] = player
-            return player
-            
-        # Try different API endpoints
+        # Try working NFL API endpoint for regular players
         endpoints_to_try = [
-            self._get_player_from_kona_endpoint,
-            self._get_player_from_players_endpoint,
-            self._get_player_from_general_search
+            self._get_player_from_nfl_api
         ]
         
         for endpoint_func in endpoints_to_try:
@@ -166,70 +154,68 @@ class ESPNApiClient:
         self.logger.warning(f"Could not find player with ID: {player_id}")
         return None
         
-    async def _get_player_from_kona_endpoint(self, player_id: str) -> Optional[ESPNPlayer]:
-        """Try to get player from kona_playercard view."""
+    async def _get_player_from_nfl_api(self, player_id: str) -> Optional[ESPNPlayer]:
+        """Get player from working NFL athletes API."""
         if not self.session:
             raise RuntimeError("Session not initialized. Use async context manager.")
             
         await self._rate_limit()
         
-        # Use a public league for player data (research shows this works)
-        url = f"{self.base_url}/segments/0/leagues/123456?view=kona_playercard"
-        params = {
-            'playerId': player_id
-        }
-        
-        async with self.session.get(url, params=params) as response:
-            if response.status == 200:
-                data = await response.json()
-                return self._parse_player_from_response(data, player_id)
-            else:
-                self.logger.debug(f"Kona endpoint returned {response.status} for {player_id}")
-                return None
-                
-    async def _get_player_from_players_endpoint(self, player_id: str) -> Optional[ESPNPlayer]:
-        """Try to get player from players view endpoint."""
-        if not self.session:
-            raise RuntimeError("Session not initialized")
-            
-        await self._rate_limit()
-        
-        url = f"{self.base_url}/players"
-        params = {
-            'view': 'players_wl'
-        }
-        headers = self.headers.copy()
-        headers['X-Fantasy-Filter'] = json.dumps({
-            "players": {
-                "filterIds": [int(player_id)],
-                "limit": 1
-            }
-        })
-        
-        async with self.session.get(url, params=params, headers=headers) as response:
-            if response.status == 200:
-                data = await response.json()
-                return self._parse_player_from_response(data, player_id)
-            else:
-                return None
-                
-    async def _get_player_from_general_search(self, player_id: str) -> Optional[ESPNPlayer]:
-        """Try general search approach."""
-        if not self.session:
-            raise RuntimeError("Session not initialized")
-            
-        await self._rate_limit()
-        
-        # Try alternative base URL
-        url = f"{self.alt_base_url}/players?view=players_wl"
+        # Use working NFL athletes endpoint
+        url = f"{self.base_url}/{player_id}"
         
         async with self.session.get(url) as response:
             if response.status == 200:
-                data = await response.json()
-                # Search through all players for matching ID
-                return self._find_player_in_data(data, player_id)
+                try:
+                    data = await response.json()
+                    return self._create_player_from_nfl_data(data, player_id)
+                except Exception as e:
+                    self.logger.warning(f"JSON parsing failed for NFL API {player_id}: {e}")
+                    return None
             else:
+                self.logger.debug(f"NFL API returned {response.status} for {player_id}")
                 return None
+                
+    def _create_player_from_nfl_data(self, data: Dict[str, Any], player_id: str) -> ESPNPlayer:
+        """Create ESPNPlayer object from NFL API response data."""
+        # Extract name information
+        full_name = data.get('displayName', '')
+        first_name = data.get('firstName', '')
+        last_name = data.get('lastName', '')
+        
+        if not full_name:
+            full_name = f"{first_name} {last_name}".strip()
+            
+        # Extract position information
+        position = ""
+        position_data = data.get('position', {})
+        if isinstance(position_data, dict):
+            position = position_data.get('abbreviation', '')
+        
+        # Extract team information (may need separate API call)
+        nfl_team = ""
+        team_data = data.get('team', {})
+        if isinstance(team_data, dict):
+            nfl_team = team_data.get('abbreviation', '')
+            
+        # Extract other details
+        jersey_number = data.get('jersey', None)
+        if isinstance(jersey_number, str) and jersey_number.isdigit():
+            jersey_number = int(jersey_number)
+            
+        status = "ACTIVE" if data.get('active', True) else "INACTIVE"
+        
+        return ESPNPlayer(
+            player_id=player_id,
+            full_name=full_name,
+            first_name=first_name,
+            last_name=last_name,
+            position=position,
+            nfl_team=nfl_team,
+            jersey_number=jersey_number,
+            status=status,
+            source_api="NFL Athletes API"
+        )
                 
     def _parse_player_from_response(self, data: Any, target_player_id: str) -> Optional[ESPNPlayer]:
         """Parse ESPN API response to extract player information."""
@@ -387,6 +373,57 @@ class ESPNApiClient:
         }
         return team_map.get(team_id, f"TEAM_{team_id}")
         
+    def _create_dst_player(self, player_id: str) -> ESPNPlayer:
+        """Create ESPNPlayer object for DST (Defense/Special Teams) with negative player ID."""
+        # Parse DST player ID format: typically -(16000 + team_id) or similar pattern
+        try:
+            numeric_id = int(player_id)
+            abs_id = abs(numeric_id)
+            
+            # Try different DST ID patterns
+            team_id = None
+            if abs_id > 16000:
+                # Pattern: -(16000 + team_id)
+                team_id = abs_id - 16000
+            elif abs_id < 100:
+                # Pattern: -team_id (simple negative)
+                team_id = abs_id
+            else:
+                # Pattern: -16xxx where xxx is team_id
+                team_id = abs_id % 1000
+            
+            # Get team abbreviation
+            team_abbr = self._pro_team_id_to_string(team_id)
+            
+            # Create full team name for DST
+            full_name = f"{team_abbr} DST"
+            
+            return ESPNPlayer(
+                player_id=player_id,
+                full_name=full_name,
+                first_name="",
+                last_name="DST",
+                position="DST",
+                position_id=16,  # DST position ID in ESPN
+                nfl_team=team_abbr,
+                status="ACTIVE",
+                source_api="DST Mapping"
+            )
+            
+        except (ValueError, TypeError) as e:
+            # Fallback for unknown DST format
+            return ESPNPlayer(
+                player_id=player_id,
+                full_name=f"DST {player_id}",
+                first_name="",
+                last_name="DST",
+                position="DST",
+                position_id=16,
+                nfl_team="UNK",
+                status="ACTIVE",
+                source_api="DST Fallback"
+            )
+        
     async def batch_get_players(self, player_ids: List[str], 
                               max_concurrent: int = 5) -> Dict[str, Optional[ESPNPlayer]]:
         """
@@ -433,8 +470,8 @@ async def test_espn_api_client():
     """Test the ESPN API client with known player IDs."""
     print("Testing ESPN API Client...")
     
-    # Test with known player IDs from research
-    test_player_ids = ["4241457", "3916387", "4362628"]
+    # Test with both known and unknown player IDs to test API and fallback
+    test_player_ids = ["4241457", "3916387", "4362628", "4430807", "9999999"]
     
     async with ESPNApiClient() as client:
         print("Testing individual lookups:")
