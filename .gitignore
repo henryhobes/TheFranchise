@@ -168,3 +168,6 @@ CLAUDE.md
 # Test logs from draft monitor
 test_logs/
 draftOps/test_logs/
+
+# Draft operations player data
+draftOps/playerData/
