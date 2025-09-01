@@ -356,7 +356,8 @@ class EnhancedDraftStateManager(DraftStateManager):
         current_avg = self.ai_stats['avg_ai_response_time_ms']
         total_queries = self.ai_stats['queries_processed'] + self.ai_stats['recommendations_generated']
         
-        if total_queries == 1:
+        if total_queries <= 1:
+            # First query or single query - use the processing time directly
             self.ai_stats['avg_ai_response_time_ms'] = processing_time_ms
         else:
             # Running average
