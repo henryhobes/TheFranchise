@@ -37,16 +37,16 @@ class Scout:
     Scout node for AI-driven pick recommendations.
     
     Takes a shortlist of candidates from the Strategist and selects exactly one player
-    using GPT-5 with draft context and strategy. Designed to run multiple times
+    using GPT-5-mini with draft context and strategy. Designed to run multiple times
     with different seeds for diverse recommendations.
     """
     
-    def __init__(self, model_name: str = "gpt-5", temperature: float = 1.0):
+    def __init__(self, model_name: str = "gpt-5-mini", temperature: float = 1.0):
         """
         Initialize Scout agent.
         
         Args:
-            model_name: OpenAI model to use (default: gpt-5)
+            model_name: OpenAI model to use (default: gpt-5-mini)
             temperature: High temperature for diversity (default: 1.0)
         """
         self.model_name = model_name
