@@ -19,6 +19,87 @@ from typing import Dict, List, Optional, Set
 import re
 
 
+def normalize_player_name(name: str) -> str:
+    """Normalize player name for consistent matching."""
+    name = name.replace(' Jr.', '').replace(' Sr.', '')
+    name = name.replace(' III', '').replace(' II', '')
+    name = name.replace('DJ ', 'D.J. ')
+    return name.strip()
+
+
+# ESPN format -> ADP CSV format
+ESPN_TO_ADP_DEFENSE = {
+    'ARI DST': 'Arizona Cardinals',
+    'ATL DST': 'Atlanta Falcons', 
+    'BAL DST': 'Baltimore Ravens',
+    'BUF DST': 'Buffalo Bills',
+    'CAR DST': 'Carolina Panthers',
+    'CHI DST': 'Chicago Bears',
+    'CIN DST': 'Cincinnati Bengals',
+    'CLE DST': 'Cleveland Browns',
+    'DAL DST': 'Dallas Cowboys',
+    'DEN DST': 'Denver Broncos',
+    'DET DST': 'Detroit Lions',
+    'GB DST': 'Green Bay Packers',
+    'HOU DST': 'Houston Texans',
+    'IND DST': 'Indianapolis Colts',
+    'JAX DST': 'Jacksonville Jaguars',
+    'KC DST': 'Kansas City Chiefs',
+    'LAS DST': 'Las Vegas Raiders',
+    'LAC DST': 'Los Angeles Chargers',
+    'LAR DST': 'Los Angeles Rams',
+    'MIA DST': 'Miami Dolphins',
+    'MIN DST': 'Minnesota Vikings',
+    'NE DST': 'New England Patriots',
+    'NO DST': 'New Orleans Saints',
+    'NYG DST': 'New York Giants',
+    'NYJ DST': 'New York Jets',
+    'PHI DST': 'Philadelphia Eagles',
+    'PIT DST': 'Pittsburgh Steelers',
+    'SEA DST': 'Seattle Seahawks',
+    'SF DST': 'San Francisco 49ers',
+    'TB DST': 'Tampa Bay Buccaneers',
+    'TEN DST': 'Tennessee Titans',
+    'WAS DST': 'Washington Commanders'
+}
+
+# ESPN format -> DEF Stats CSV format  
+ESPN_TO_DEF_STATS = {
+    'ARI DST': 'Cardinals',
+    'ATL DST': 'Falcons', 
+    'BAL DST': 'Ravens',
+    'BUF DST': 'Bills',
+    'CAR DST': 'Panthers',
+    'CHI DST': 'Bears',
+    'CIN DST': 'Bengals',
+    'CLE DST': 'Browns',
+    'DAL DST': 'Cowboys',
+    'DEN DST': 'Broncos',
+    'DET DST': 'Lions',
+    'GB DST': 'Packers',
+    'HOU DST': 'Texans',
+    'IND DST': 'Colts',
+    'JAX DST': 'Jaguars',
+    'KC DST': 'Chiefs',
+    'LAS DST': 'Raiders',
+    'LAC DST': 'Chargers',
+    'LAR DST': 'Rams',
+    'MIA DST': 'Dolphins',
+    'MIN DST': 'Vikings',
+    'NE DST': 'Patriots',
+    'NO DST': 'Saints',
+    'NYG DST': 'Giants',
+    'NYJ DST': 'Jets',
+    'PHI DST': 'Eagles',
+    'PIT DST': 'Steelers',
+    'SEA DST': 'Seahawks',
+    'SF DST': '49ers',
+    'TB DST': 'Buccaneers',
+    'TEN DST': 'Titans',
+    'WAS DST': 'Commanders'
+}
+
+
 @dataclass
 class Player:
     """Represents a draftable player with all relevant data."""
@@ -219,6 +300,7 @@ class PlayerDataLoader:
                     
             else:
                 # Match offensive player by name
+                matched = False
                 if name in offense_stats:
                     stats = offense_stats[name]
                     player.pid = stats['pid']
@@ -230,7 +312,25 @@ class PlayerDataLoader:
                     player.receptions = stats['receptions']
                     player.rec_yds = stats['rec_yds']
                     player.rec_td = stats['rec_td']
+                    matched = True
                 else:
+                    # Try normalized name matching
+                    normalized_name = normalize_player_name(name)
+                    for stats_name, stats in offense_stats.items():
+                        if normalize_player_name(stats_name) == normalized_name:
+                            player.pid = stats['pid']
+                            player.fantasy_points = stats['fantasy_points']
+                            player.pass_yds = stats['pass_yds']
+                            player.pass_td = stats['pass_td']
+                            player.rush_yds = stats['rush_yds']
+                            player.rush_td = stats['rush_td']
+                            player.receptions = stats['receptions']
+                            player.rec_yds = stats['rec_yds']
+                            player.rec_td = stats['rec_td']
+                            matched = True
+                            break
+                
+                if not matched:
                     unmatched_names.add(f"Offense: {name}")
             
             players.append(player)
@@ -242,7 +342,13 @@ class PlayerDataLoader:
         
     def _is_defense_match(self, adp_name: str, def_name: str, team_code: str) -> bool:
         """Check if ADP defense name matches stats defense name."""
-        # Simple matching - could be improved with fuzzy matching
+        # First try ESPN defense mappings
+        if adp_name in ESPN_TO_DEF_STATS:
+            mapped_name = ESPN_TO_DEF_STATS[adp_name]
+            if mapped_name == def_name:
+                return True
+        
+        # Fallback to original matching logic
         adp_lower = adp_name.lower()
         def_lower = def_name.lower()
         
