@@ -16,8 +16,8 @@ import logging
 from typing import Dict, Any, Optional, Callable, List
 from datetime import datetime
 
-from ..websocket_protocol.state.integration import DraftStateManager
-from .draft_supervisor import DraftSupervisor
+from ...websocket_protocol.state.integration import DraftStateManager
+from ..core.draft_supervisor import DraftSupervisor
 
 
 class EnhancedDraftStateManager(DraftStateManager):

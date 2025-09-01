@@ -13,10 +13,10 @@ import os
 from pathlib import Path
 
 # Add project root to path
-project_root = Path(__file__).parent.parent.parent.parent
+project_root = Path(__file__).parent.parent.parent.parent.parent
 sys.path.insert(0, str(project_root))
 
-from draftOps.src.ai.draft_supervisor import DraftSupervisor
+from draftOps.src.ai.core.draft_supervisor import DraftSupervisor
 
 
 async def demo_basic_ai_functionality():
