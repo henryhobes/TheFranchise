@@ -11,10 +11,17 @@ immutable state updates and comprehensive validation.
 
 import logging
 from dataclasses import dataclass, field, asdict
-from typing import Dict, List, Set, Optional, Any, Tuple
+from typing import Dict, List, Set, Optional, Any, Tuple, Union
 from datetime import datetime
 from enum import Enum
 import copy
+
+# Import Player class from data loader
+try:
+    from ...data_loader import Player
+except ImportError:
+    # Fallback for when data_loader isn't available
+    Player = None
 
 
 class DraftStatus(Enum):
@@ -95,8 +102,12 @@ class DraftState:
         self.rounds = rounds
         
         # Core state - mutable for performance, immutable updates via methods
-        self._drafted_players: Set[str] = set()
-        self._available_players: List[str] = []
+        self._drafted_players: Set[str] = set()  # ESPN player IDs
+        self._available_players: List[str] = []  # ESPN player IDs
+        
+        # Player data lookup (separate from ESPN draft tracking)
+        self._player_database: List['Player'] = []  # All Player objects from CSV data
+        self._player_lookup: Dict[str, 'Player'] = {}  # Name -> Player lookup
         self._my_roster: Dict[str, List[str]] = {
             'QB': [], 'RB': [], 'WR': [], 'TE': [], 'K': [], 'DST': [], 'FLEX': [], 'BENCH': []
         }
@@ -175,13 +186,125 @@ class DraftState:
         
     def initialize_player_pool(self, player_ids: List[str]) -> None:
         """
-        Initialize available player pool.
+        Initialize available player pool with ESPN player IDs.
         
         Args:
-            player_ids: List of all draftable player IDs
+            player_ids: List of ESPN player IDs
         """
         self._available_players = player_ids.copy()
-        self.logger.info(f"Initialized player pool with {len(player_ids)} players")
+        self.logger.info(f"Initialized player pool with {len(player_ids)} ESPN player IDs")
+        
+    def load_player_database(self, players: List['Player']) -> None:
+        """
+        Load player database from CSV data.
+        
+        Args:
+            players: List of Player objects from CSV files
+        """
+        self._player_database = players.copy()
+        
+        # Build name lookup table
+        self._player_lookup = {}
+        for player in players:
+            # Store by exact name
+            self._player_lookup[player.name] = player
+            # Also store by normalized name (lowercased, no punctuation)
+            normalized_name = self._normalize_player_name(player.name)
+            self._player_lookup[normalized_name] = player
+            
+        self.logger.info(f"Loaded player database with {len(players)} players")
+        
+    def get_player(self, name: str) -> Optional['Player']:
+        """
+        Get Player object by name (fuzzy matching supported).
+        
+        Args:
+            name: Player name
+            
+        Returns:
+            Player object or None if not found
+        """
+        # Try exact match first
+        if name in self._player_lookup:
+            return self._player_lookup[name]
+            
+        # Try normalized match
+        normalized = self._normalize_player_name(name)
+        return self._player_lookup.get(normalized)
+        
+    def _normalize_player_name(self, name: str) -> str:
+        """Normalize player name for fuzzy matching."""
+        import re
+        # Convert to lowercase and remove punctuation/spaces
+        normalized = re.sub(r"[^\w\s]", "", name.lower())
+        normalized = re.sub(r"\s+", " ", normalized).strip()
+        return normalized
+        
+    def get_available_players_by_position(self, position: str) -> List['Player']:
+        """
+        Get available players filtered by position.
+        
+        Args:
+            position: Position code (QB, RB, WR, TE, K, DST)
+            
+        Returns:
+            List of available Player objects for the position
+        """
+        available = []
+        for player in self._player_database:
+            if player.position == position:
+                # Check if player is not drafted (need ESPN ID to check this)
+                # For now, just return all players by position since we don't have ESPN->name mapping
+                available.append(player)
+                
+        # Sort by ADP rank
+        available.sort(key=lambda p: p.adp_rank)
+        return available
+        
+    def get_top_available_players(self, limit: int = 10) -> List['Player']:
+        """
+        Get top available players by ADP rank.
+        
+        Args:
+            limit: Maximum number of players to return
+            
+        Returns:
+            List of top available Player objects
+        """
+        # Return all players from database sorted by ADP
+        # TODO: Filter out drafted players when we have ESPN ID -> name mapping
+        available = self._player_database.copy()
+        available.sort(key=lambda p: p.adp_rank)
+        return available[:limit]
+        
+    def is_player_drafted(self, player_name: str) -> bool:
+        """
+        Check if a player has been drafted (by name).
+        
+        Args:
+            player_name: Player name to check
+            
+        Returns:
+            True if player appears to be drafted
+        """
+        # This is a best-effort check since we don't have ESPN ID mappings
+        # In practice, this would need a player name resolver from ESPN data
+        return False  # For now, assume no players are drafted
+        
+    def mark_player_drafted_by_name(self, player_name: str) -> bool:
+        """
+        Mark a player as drafted by name (for testing/demo purposes).
+        
+        Args:
+            player_name: Name of drafted player
+            
+        Returns:
+            True if marked successfully
+        """
+        # Add a pseudo ESPN ID based on name for testing
+        pseudo_id = f"name:{player_name}"
+        self._drafted_players.add(pseudo_id)
+        return True
         
     def set_draft_order(self, draft_order: List[str]) -> None:
         """
@@ -240,6 +363,8 @@ class DraftState:
             
             # Update state
             self._drafted_players.add(player_id)
+            
+            # Remove ESPN player ID from available pool if present
             if player_id in self._available_players:
                 self._available_players.remove(player_id)
                 
