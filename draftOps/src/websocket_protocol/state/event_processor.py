@@ -43,7 +43,11 @@ class DraftEventProcessor:
         self.logger = logging.getLogger(__name__)
         
         # Independent pick tracking (ESPN sends team position, not pick number)
-        self.actual_pick_number = 0
+        # Initialize from current draft state to handle reconnections
+        self.actual_pick_number = draft_state.current_pick
+        
+        # Track last selecting message to prevent duplicate processing
+        self._last_selecting_team = None
         
         # Message processing callbacks
         self.on_pick_made: Optional[Callable] = None
@@ -285,8 +289,10 @@ class DraftEventProcessor:
         time_limit_ms = parsed['time_ms']
         time_limit_seconds = time_limit_ms / 1000.0
         
-        # Increment our pick counter - this is the actual pick number
-        self.actual_pick_number += 1
+        # Only increment if this is a new selection (not a replay)
+        if self._last_selecting_team != team_id:
+            self.actual_pick_number += 1
+            self._last_selecting_team = team_id
         
         self.logger.info(f"Team {team_id} now selecting (pick {self.actual_pick_number}, {time_limit_seconds}s)")
         
