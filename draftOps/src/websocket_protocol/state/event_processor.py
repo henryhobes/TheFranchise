@@ -24,8 +24,9 @@ class DraftEventProcessor:
     Processes ESPN draft WebSocket messages and updates DraftState.
     
     Based on Sprint 0 protocol discovery:
-    - SELECTED {overallPick} {playerId} {teamId} {memberId}
-    - SELECTING {teamId} {timeMs}
+    - SELECTED {teamDraftPosition} {playerId} {teamId} {memberId}
+      NOTE: First field is team's draft position (1-10), NOT overall pick number
+    - SELECTING {teamId} {timeMs}  ← Used to track actual pick sequence
     - CLOCK {teamId} {timeRemainingMs} {round?}
     - AUTODRAFT {teamId} {boolean}
     - Plus session management (TOKEN, JOINED, PING/PONG)
@@ -40,6 +41,9 @@ class DraftEventProcessor:
         """
         self.draft_state = draft_state
         self.logger = logging.getLogger(__name__)
+        
+        # Independent pick tracking (ESPN sends team position, not pick number)
+        self.actual_pick_number = 0
         
         # Message processing callbacks
         self.on_pick_made: Optional[Callable] = None
@@ -100,8 +104,9 @@ class DraftEventProcessor:
         Parse WebSocket message text into structured data.
         
         Based on Sprint 0 protocol discovery:
-        - SELECTED {overallPick} {playerId} {teamId} {memberId}
-        - SELECTING {teamId} {timeMs}
+        - SELECTED {teamDraftPosition} {playerId} {teamId} {memberId}
+          NOTE: First field is team's draft position (1-10), NOT overall pick number!
+        - SELECTING {teamId} {timeMs}  ← Used to track actual pick sequence
         - CLOCK {teamId} {timeRemainingMs} {round?}
         - AUTODRAFT {teamId} {boolean}
         
@@ -120,10 +125,14 @@ class DraftEventProcessor:
             
             if command == "SELECTED" and len(parts) >= 4:
                 try:
-                    overall_pick = int(parts[1])
+                    team_draft_position = int(parts[1])  # This is NOT the overall pick number!
                     team_id = parts[3] 
                     # Member ID is optional (some messages don't include it)
                     member_id = parts[4] if len(parts) >= 5 else ""
+                    
+                    # LOG THE RAW MESSAGE TO SEE WHAT ESPN IS ACTUALLY SENDING
+                    self.logger.info(f"SELECTED MESSAGE PARSED: raw='{message}' -> team_draft_position={team_draft_position}, player_id={parts[2]}, team_id={team_id}")
+                    
                 except (ValueError, IndexError) as e:
                     self.logger.warning(f"Invalid SELECTED message format: {message} - {e}")
                     return {"type": "UNKNOWN", "raw": message}
@@ -132,7 +141,7 @@ class DraftEventProcessor:
                     "type": "SELECTED",
                     "team_id": team_id,
                     "player_id": parts[2],
-                    "overall_pick": overall_pick,
+                    "team_draft_position": team_draft_position,
                     "member_id": member_id,
                     "raw": message
                 }
@@ -223,16 +232,22 @@ class DraftEventProcessor:
         """
         Handle SELECTED message (pick made).
         
-        Message: SELECTED {overallPick} {playerId} {teamId} {memberId}
+        Message: SELECTED {teamDraftPosition} {playerId} {teamId} {memberId}
+        NOTE: First field is team's draft position (1-10), NOT the overall pick number!
+        The actual pick number is tracked independently via SELECTING messages.
         Updates: Add player to drafted list, remove from available, update rosters
         """
         self.stats['selected_messages'] += 1
         
         team_id = parsed['team_id']
         player_id = parsed['player_id'] 
-        pick_number = parsed['overall_pick']
+        team_draft_position = parsed['team_draft_position']  # Team's draft position (1-10), NOT pick number
+        
+        # Use our independent pick counter (the real pick number)
+        pick_number = self.actual_pick_number
         
         self.logger.info(f"Processing pick: Team {team_id} selected player {player_id} (pick {pick_number})")
+        self.logger.info(f"Team draft position: {team_draft_position} (not the actual pick number)")
         
         # Apply pick to draft state with position detection
         position = self._resolve_position(player_id)
@@ -270,14 +285,14 @@ class DraftEventProcessor:
         time_limit_ms = parsed['time_ms']
         time_limit_seconds = time_limit_ms / 1000.0
         
-        # Calculate next pick number (current pick + 1)
-        next_pick = self.draft_state.current_pick + 1
+        # Increment our pick counter - this is the actual pick number
+        self.actual_pick_number += 1
         
-        self.logger.info(f"Team {team_id} now selecting (pick {next_pick}, {time_limit_seconds}s)")
+        self.logger.info(f"Team {team_id} now selecting (pick {self.actual_pick_number}, {time_limit_seconds}s)")
         
         # Update draft state
         success = self.draft_state.start_new_pick(
-            pick_number=next_pick,
+            pick_number=self.actual_pick_number,
             team_id=team_id,
             time_limit=time_limit_seconds
         )
@@ -287,7 +302,7 @@ class DraftEventProcessor:
             try:
                 self.on_team_selecting({
                     'team_id': team_id,
-                    'pick_number': next_pick,
+                    'pick_number': self.actual_pick_number,
                     'time_limit': time_limit_seconds
                 })
             except Exception as e:

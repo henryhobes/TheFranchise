@@ -74,7 +74,7 @@ class TestDraftStateIntegration:
         assert parsed['type'] == 'SELECTED'
         assert parsed['team_id'] == 1
         assert parsed['player_id'] == '4362628'
-        assert parsed['overall_pick'] == 1
+        assert parsed['team_draft_position'] == 1  # This is team draft position, not overall pick!
         assert parsed['member_id'] == '{856970E3-67E6-42D4-8198-28B1FB3BCA26}'
         
         # Test SELECTING message  
