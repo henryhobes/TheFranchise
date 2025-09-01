@@ -63,3 +63,10 @@ Bug bot and claude code review should not mention these things in their analyses
 **Issue**: While Python handles cleanup, explicit resource management would be more robust  
 **Impact**: Better resource management during parallel execution failures  
 **Fix**: Consider using async context managers or explicit try-finally blocks for executor cleanup
+
+### Incorrect Mock Path in Unused Test File
+**File**: `test_scout.py:106,134,159,178,203,278`  
+**Issue**: All `@patch('ai.core.scout.ChatOpenAI')` decorators use wrong module path - should be `'core.scout.ChatOpenAI'`  
+**Impact**: Test mocking failures if this test file is used, causing tests to make real API calls instead of using mocks  
+**Fix**: Update patch decorators to match actual import path: `@patch('core.scout.ChatOpenAI')` or remove unused test file  
+**Note**: `test_scout_simple.py` is the active working test file with correct patch paths
