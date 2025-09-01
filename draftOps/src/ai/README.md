@@ -32,6 +32,65 @@ The AI integration uses LangGraph's StateGraph with GPT-5 to create a Supervisor
 └─────────────────────────────────────────┘
 ```
 
+## Module Structure
+
+```
+draftOps/src/ai/
+├── __init__.py                    # Main module exports
+├── README.md                      # This documentation file
+├── core/                          # Core AI components
+│   ├── __init__.py
+│   └── draft_supervisor.py        # LangGraph StateGraph implementation
+├── managers/                      # State management integration
+│   ├── __init__.py
+│   └── enhanced_draft_state_manager.py  # AI-enhanced state management
+├── tests/                         # Test suites
+│   ├── __init__.py
+│   ├── test_supervisor_integration.py    # Core LangGraph tests
+│   └── test_enhanced_integration.py      # System integration tests
+└── examples/                      # Demo scripts and examples
+    ├── __init__.py
+    └── demo.py                    # Interactive AI demonstration
+```
+
+### Directory Organization
+
+#### `/core/` - Core AI Components
+Contains the fundamental AI building blocks:
+- **`draft_supervisor.py`**: LangGraph StateGraph implementation with GPT-5 integration
+
+#### `/managers/` - State Management Integration
+Contains AI-enhanced state managers:
+- **`enhanced_draft_state_manager.py`**: Extended DraftStateManager with AI capabilities
+
+#### `/tests/` - Test Suites
+Comprehensive testing infrastructure:
+- **`test_supervisor_integration.py`**: Core LangGraph functionality tests
+- **`test_enhanced_integration.py`**: System-level integration tests
+
+#### `/examples/` - Demonstration Scripts
+Interactive examples and demos:
+- **`demo.py`**: Comprehensive AI capabilities demonstration
+
+### Import Structure
+
+**Main Module Exports:**
+```python
+from draftOps.src.ai import DraftSupervisor, EnhancedDraftStateManager
+```
+
+**Direct Submodule Access:**
+```python
+from draftOps.src.ai.core import DraftSupervisor
+from draftOps.src.ai.managers import EnhancedDraftStateManager
+```
+
+**Full Path Access:**
+```python
+from draftOps.src.ai.core.draft_supervisor import DraftSupervisor
+from draftOps.src.ai.managers.enhanced_draft_state_manager import EnhancedDraftStateManager
+```
+
 ## Key Components
 
 ### 1. DraftSupervisor (`draft_supervisor.py`)
