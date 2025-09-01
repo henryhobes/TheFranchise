@@ -16,12 +16,22 @@ from datetime import datetime
 from enum import Enum
 import copy
 
-# Import Player class from data loader
+# Import Player class and utilities from data loader
 try:
-    from ...data_loader import Player
+    from ...data_loader import Player, normalize_player_name, ESPN_TO_ADP_DEFENSE, ESPN_TO_DEF_STATS
 except ImportError:
-    # Fallback for when data_loader isn't available
-    Player = None
+    try:
+        # Try absolute import
+        import sys
+        import os
+        sys.path.append(os.path.join(os.path.dirname(__file__), '../../..'))
+        from data_loader import Player, normalize_player_name, ESPN_TO_ADP_DEFENSE, ESPN_TO_DEF_STATS
+    except ImportError:
+        # Final fallback
+        Player = None
+        normalize_player_name = None
+        ESPN_TO_ADP_DEFENSE = {}
+        ESPN_TO_DEF_STATS = {}
 
 
 class DraftStatus(Enum):
@@ -203,42 +213,59 @@ class DraftState:
         """
         self._player_database = players.copy()
         
-        # Build name lookup table
+        # Build comprehensive name lookup table
         self._player_lookup = {}
         for player in players:
             # Store by exact name
             self._player_lookup[player.name] = player
-            # Also store by normalized name (lowercased, no punctuation)
-            normalized_name = self._normalize_player_name(player.name)
-            self._player_lookup[normalized_name] = player
+            # Store by normalized name for better matching
+            if normalize_player_name:
+                normalized_name = normalize_player_name(player.name)
+                if normalized_name != player.name:
+                    self._player_lookup[normalized_name] = player
             
         self.logger.info(f"Loaded player database with {len(players)} players")
         
     def get_player(self, name: str) -> Optional['Player']:
         """
-        Get Player object by name (fuzzy matching supported).
+        Get Player object by name with layered matching strategy.
+        
+        Uses three-layer approach:
+        1. Exact name match
+        2. Normalized name match  
+        3. Defense team mapping (if applicable)
         
         Args:
-            name: Player name
+            name: Player name (ESPN format)
             
         Returns:
             Player object or None if not found
         """
-        # Try exact match first
+        # Layer 1: Try exact match first
         if name in self._player_lookup:
             return self._player_lookup[name]
             
-        # Try normalized match
-        normalized = self._normalize_player_name(name)
-        return self._player_lookup.get(normalized)
+        # Layer 2: Try normalized name match
+        if normalize_player_name:
+            normalized = normalize_player_name(name)
+            if normalized in self._player_lookup:
+                return self._player_lookup[normalized]
         
-    def _normalize_player_name(self, name: str) -> str:
-        """Normalize player name for fuzzy matching."""
-        import re
-        # Convert to lowercase and remove punctuation/spaces
-        normalized = re.sub(r"[^\w\s]", "", name.lower())
-        normalized = re.sub(r"\s+", " ", normalized).strip()
-        return normalized
+        # Layer 3: If defense team, try mapping dictionaries
+        if name.endswith(' DST'):
+            # Try ADP defense mapping
+            if name in ESPN_TO_ADP_DEFENSE:
+                adp_name = ESPN_TO_ADP_DEFENSE[name]
+                if adp_name in self._player_lookup:
+                    return self._player_lookup[adp_name]
+            
+            # Try DEF stats mapping  
+            if name in ESPN_TO_DEF_STATS:
+                def_name = ESPN_TO_DEF_STATS[name]
+                if def_name in self._player_lookup:
+                    return self._player_lookup[def_name]
+        
+        return None
         
     def get_available_players_by_position(self, position: str) -> List['Player']:
         """
