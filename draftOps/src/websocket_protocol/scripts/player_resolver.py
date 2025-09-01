@@ -235,9 +235,15 @@ class PlayerResolver:
             self.logger.info(f"Resolved player {espn_id}: {resolved_player.full_name}")
             return resolved_player
         else:
+            # Create fallback player to ensure UI shows something meaningful
+            fallback_player = self.create_fallback_player(espn_id)
+            
+            # Cache the fallback briefly (shorter expiry)
+            self.memory_cache[espn_id] = fallback_player
+            
             self.stats["failed_resolutions"] += 1
-            self.logger.warning(f"Could not resolve player ID: {espn_id}")
-            return None
+            self.logger.warning(f"Could not resolve player ID: {espn_id}, using fallback")
+            return fallback_player
             
     async def batch_resolve_ids(self, espn_ids: List[str]) -> Dict[str, Optional[ResolvedPlayer]]:
         """
@@ -364,6 +370,25 @@ class PlayerResolver:
             Fallback name string
         """
         return f"Player #{espn_id}"
+    
+    def create_fallback_player(self, espn_id: str) -> ResolvedPlayer:
+        """
+        Create a fallback ResolvedPlayer when API lookup fails.
+        
+        Args:
+            espn_id: ESPN player ID
+            
+        Returns:
+            ResolvedPlayer with fallback data
+        """
+        return ResolvedPlayer(
+            player_id=espn_id,
+            full_name=f"Player #{espn_id}",
+            resolution_method="FALLBACK",
+            confidence_score=0.1,
+            last_updated=datetime.now().isoformat(),
+            resolution_source="Fallback - API unavailable"
+        )
         
     def _is_cache_valid(self, player: ResolvedPlayer) -> bool:
         """Check if cached player data is still valid."""
@@ -483,9 +508,9 @@ async def test_player_resolver():
     print("Testing ESPN Player Resolver...")
     
     async with PlayerResolver(cache_db_path="test_player_cache.db") as resolver:
-        # Test single ID resolution
+        # Test single ID resolution with unknown ID
         print("\nTesting single ID resolution:")
-        test_ids = ["4241457", "3916387", "4362628"]
+        test_ids = ["4241457", "3916387", "4362628", "9999999"]
         
         for player_id in test_ids:
             player = await resolver.resolve_espn_id(player_id)

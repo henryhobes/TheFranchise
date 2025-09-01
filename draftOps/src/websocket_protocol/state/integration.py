@@ -50,6 +50,7 @@ class DraftStateManager:
         """
         self.league_id = league_id
         self.team_id = team_id
+        self.team_count = team_count
         self.headless = headless
         
         # Core components
@@ -66,6 +67,14 @@ class DraftStateManager:
         self._player_names: Dict[str, str] = {}
         self._player_positions: Dict[str, str] = {}
         self._resolution_queue: List[str] = []
+        
+        # Draft order tracking for proper team numbering
+        self._draft_order: List[str] = []  # ESPN team IDs in draft order
+        self._espn_team_to_position: Dict[str, int] = {}  # ESPN ID -> draft position (1-based)
+        self._draft_order_established = False
+        
+        # Pending picks for name resolution updates
+        self._pending_picks: List[Dict[str, Any]] = []
         
         # Event callbacks
         self.on_pick_processed: Optional[Callable] = None
@@ -246,23 +255,63 @@ class DraftStateManager:
                 self.on_error(f"WebSocket message processing error: {e}")
                 
     def _handle_pick_made(self, pick_data: Dict[str, Any]):
-        """Handle pick made event."""
+        """Handle pick made event with enhanced user experience."""
         player_id = pick_data['player_id']
+        team_id = pick_data['team_id']
         
-        # Queue player for name resolution
+        # Create enriched pick data with user-friendly team name
+        enriched_pick = {
+            **pick_data,
+            'display_team_name': self.get_display_team_name(team_id),
+            'player_name': self._player_names.get(player_id, f"Player #{player_id}")
+        }
+        
+        # Queue player for name resolution if not already resolved
         if player_id not in self._player_names:
             self._resolution_queue.append(player_id)
+            # Store pick for potential name update callback later
+            self._pending_picks.append(enriched_pick)
             
-        # Trigger callback
+        # Trigger callback with current data
         if self.on_pick_processed:
-            self.on_pick_processed({
-                **pick_data,
-                'player_name': self._player_names.get(player_id, f"Player #{player_id}")
-            })
+            self.on_pick_processed(enriched_pick)
             
     def _handle_team_selecting(self, selection_data: Dict[str, Any]):
-        """Handle team selecting event."""
-        self.logger.info(f"Team {selection_data['team_id']} now selecting (pick {selection_data['pick_number']})")
+        """Handle team selecting event and track draft order."""
+        team_id = selection_data['team_id']
+        pick_number = selection_data['pick_number']
+        
+        # Track draft order from first round SELECTING messages
+        self._update_draft_order(team_id, pick_number)
+        
+        self.logger.info(f"Team {team_id} now selecting (pick {pick_number})")
+        
+    def _update_draft_order(self, team_id: str, pick_number: int):
+        """
+        Update draft order tracking based on SELECTING messages.
+        
+        Args:
+            team_id: ESPN team ID
+            pick_number: Overall pick number (1, 2, 3, ...)
+        """
+        # Only track first round picks to establish draft order
+        if pick_number <= self.team_count and not self._draft_order_established:
+            if team_id not in self._draft_order:
+                self._draft_order.append(team_id)
+                # Map ESPN team ID to draft position (1-based)
+                self._espn_team_to_position[team_id] = len(self._draft_order)
+                
+                self.logger.debug(f"Draft order updated: {team_id} -> position {len(self._draft_order)}")
+                
+                # Mark draft order as established after first round
+                if len(self._draft_order) >= self.team_count:
+                    self._draft_order_established = True
+                    # Auto-correct team count if needed
+                    actual_team_count = len(self._draft_order)
+                    if actual_team_count != self.team_count:
+                        self.logger.warning(f"Team count mismatch: configured {self.team_count}, actual {actual_team_count}")
+                        self.team_count = actual_team_count
+                    self.logger.info(f"Draft order established: {self._draft_order} ({self.team_count} teams)")
         
     def _handle_clock_update(self, clock_data: Dict[str, Any]):
         """Handle clock update event."""
@@ -314,11 +363,18 @@ class DraftStateManager:
             
             # Cache resolved names and positions
             resolved_count = 0
+            newly_resolved = []
+            
             for player_id, player in resolved_players.items():
                 if player:
                     self._player_names[player_id] = player.full_name
                     self._player_positions[player_id] = player.position or "BENCH"
                     resolved_count += 1
+                    newly_resolved.append(player_id)
+                    
+            # Trigger name updates for pending picks with newly resolved players
+            if newly_resolved and self.on_pick_processed:
+                self._update_pending_pick_names(newly_resolved)
                     
             self.performance_stats['player_resolutions'] += resolved_count
             self.logger.debug(f"Resolved {resolved_count} player names and positions")
@@ -339,6 +395,55 @@ class DraftStateManager:
             Player name or fallback
         """
         return self._player_names.get(player_id, f"Player #{player_id}")
+        
+    def get_display_team_name(self, espn_team_id: str) -> str:
+        """
+        Get user-friendly team name based on draft order position.
+        
+        Args:
+            espn_team_id: ESPN's internal team ID
+            
+        Returns:
+            Team name like "Team 1", "Team 2", etc. based on draft order
+        """
+        if espn_team_id in self._espn_team_to_position:
+            # Use proper draft order position
+            position = self._espn_team_to_position[espn_team_id]
+            return f"Team {position}"
+        else:
+            # Fallback for teams not yet in draft order (shouldn't happen in normal flow)
+            return f"Team {espn_team_id}"
+    
+    def _update_pending_pick_names(self, newly_resolved: List[str]):
+        """
+        Update pending picks with newly resolved player names.
+        
+        Args:
+            newly_resolved: List of player IDs that were just resolved
+        """
+        updated_picks = []
+        remaining_picks = []
+        
+        for pick in self._pending_picks:
+            player_id = pick['player_id']
+            if player_id in newly_resolved:
+                # Update pick with resolved name
+                updated_pick = {
+                    **pick,
+                    'player_name': self._player_names.get(player_id, f"Player #{player_id}")
+                }
+                updated_picks.append(updated_pick)
+            else:
+                # Keep pick in pending list
+                remaining_picks.append(pick)
+        
+        # Update pending picks list
+        self._pending_picks = remaining_picks
+        
+        # Trigger callbacks for updated picks
+        for pick in updated_picks:
+            if self.on_pick_processed:
+                self.on_pick_processed(pick)
         
     def get_enriched_roster(self) -> Dict[str, List[Dict[str, Any]]]:
         """
@@ -381,6 +486,7 @@ class DraftStateManager:
         
         return {
             **base_summary,
+            'actual_team_count': self.team_count,
             'performance': self.performance_stats,
             'resolved_players': len(self._player_names),
             'resolution_queue_size': len(self._resolution_queue),

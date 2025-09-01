@@ -187,6 +187,9 @@ DraftMonitorConsole       # End-to-end console application
 | Zero missed picks during recovery | 0 missed | ✅ Zero data loss validated | ACHIEVED |
 
 ### Additional Achievements Beyond Scope
+- **ESPN Protocol Fix**: Discovered and corrected fundamental misunderstanding of ESPN's WebSocket protocol
+- **Independent Pick Tracking**: Implemented robust pick sequence tracking independent of ESPN's confusing data
+- **Snake Draft Round Display**: Fixed critical round numbering bug that showed Pick 11 as "1.10" instead of "2.01"
 - **Immutable State Architecture**: Snapshot-based state with rollback capability
 - **Professional CLI**: Command-line interface with multiple connection modes  
 - **Comprehensive Testing**: 33 test cases with 100% pass rate
@@ -216,8 +219,8 @@ draftOps/src/websocket_protocol/
 
 ### Console Application
 ```
-draftOps/
-└── run_draft_monitor.py           # Main console application (393 lines)
+draftOps/src/websocket_protocol/scripts/
+└── run_draft_monitor.py           # Main console application (522 lines)
 ```
 
 ### Test Suite
@@ -277,18 +280,23 @@ Based on Sprint 1 achievements, Sprint 2 should:
 
 ## Key Insights for Future Development
 
-### 1. State Management Architecture Success
+### 1. ESPN Protocol Discovery - Critical Fix
+**Major Finding**: ESPN's WebSocket SELECTED messages send team draft position (1-10) as the first field, NOT the overall pick number (1-160). This fundamental misunderstanding caused snake draft round calculations to display Pick 11 as "Round 1.10" instead of "Round 2.01". 
+
+**Solution**: Implemented independent pick tracking via SELECTING message sequence, completely resolving the round numbering issue. This fix ensures accurate draft round display for all snake draft formats.
+
+### 2. State Management Architecture Success
 The immutable snapshot architecture proved highly effective for both performance and reliability. The rollback capability provides excellent foundation for AI/ML recommendation systems that may need to explore hypothetical scenarios.
 
-### 2. Connection Recovery Robustness  
+### 3. Connection Recovery Robustness  
 The exponential backoff strategy with state preservation exceeded expectations. Zero data loss during recovery ensures recommendation systems can maintain accuracy even during network issues.
 
-### 3. Performance Optimization Opportunities
+### 4. Performance Optimization Opportunities
 - State updates averaging 150ms leave substantial headroom for recommendation processing
 - Player resolution caching provides 95%+ hit rates for faster lookups
 - Background processing model enables CPU-intensive recommendation algorithms
 
-### 4. Console Application Foundation
+### 5. Console Application Foundation
 The CLI framework provides excellent foundation for recommendation display. The callback system enables real-time recommendation updates without blocking draft monitoring.
 
 ---
