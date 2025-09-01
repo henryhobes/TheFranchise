@@ -16,3 +16,7 @@ colorama>=0.4.6
 pytest>=7.4.0
 pytest-asyncio>=0.21.0
 pytest-cov>=4.1.0
+
+# LangGraph AI integration
+langgraph>=0.6.6
+langchain-openai>=0.3.32
