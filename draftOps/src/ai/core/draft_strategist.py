@@ -17,38 +17,9 @@ from dataclasses import dataclass
 from datetime import datetime
 import math
 
-# Import DraftState for context and Player for data analysis
-try:
-    from ....websocket_protocol.state.draft_state import DraftState
-    from ....data_loader import Player
-except ImportError:
-    # Fallback for direct execution or testing
-    try:
-        from state.draft_state import DraftState
-        from data_loader import Player
-    except ImportError:
-        # Define minimal classes for testing
-        class DraftState:
-            def __init__(self, league_id, team_id, team_count=12, rounds=16):
-                self.league_id = league_id
-                self.team_id = team_id
-                self.team_count = team_count
-                self.rounds = rounds
-                self.current_pick = 0
-                self.picks_until_next = 0
-                self.my_roster = {'QB': [], 'RB': [], 'WR': [], 'TE': [], 'DST': [], 'K': []}
-                self.pick_history = []
-        
-        class Player:
-            def __init__(self, name, team, position, adp_rank, position_rank, adp_avg, adp_std, fantasy_points):
-                self.name = name
-                self.team = team
-                self.position = position
-                self.adp_rank = adp_rank
-                self.position_rank = position_rank
-                self.adp_avg = adp_avg
-                self.adp_std = adp_std
-                self.fantasy_points = fantasy_points
+# DraftState (context) and Player (data model) both live in the source root.
+from websocket_protocol.state.draft_state import DraftState
+from data_loader import Player
 
 
 @dataclass

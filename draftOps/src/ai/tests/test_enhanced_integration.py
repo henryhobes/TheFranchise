@@ -12,10 +12,8 @@ import os
 from pathlib import Path
 
 # Add project root to path
-project_root = Path(__file__).parent.parent.parent.parent.parent
-sys.path.insert(0, str(project_root))
 
-from draftOps.src.ai.managers.enhanced_draft_state_manager import EnhancedDraftStateManager
+from ai.managers.enhanced_draft_state_manager import EnhancedDraftStateManager
 
 
 async def test_enhanced_manager_initialization():

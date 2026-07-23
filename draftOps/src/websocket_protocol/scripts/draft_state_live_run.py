@@ -17,6 +17,7 @@ from typing import Dict, Any, Optional
 # Add parent directory to path for imports
 sys.path.append(str(Path(__file__).parent.parent))
 
+from config import DEFAULT_LEAGUE_ID, DEFAULT_TEAM_ID
 from state.integration import create_draft_state_manager
 from state.draft_state import DraftStatus
 
@@ -333,8 +334,8 @@ async def main():
     )
     
     # Test configuration
-    LEAGUE_ID = "262233108"  # From Sprint 0
-    TEAM_ID = "1"
+    LEAGUE_ID = DEFAULT_LEAGUE_ID  # From Sprint 0
+    TEAM_ID = DEFAULT_TEAM_ID
     
     # Get draft URL from command line or use default
     if len(sys.argv) > 1:

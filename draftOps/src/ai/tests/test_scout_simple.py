@@ -5,6 +5,7 @@ Simple integration test for Scout Node
 Tests basic functionality without complex imports that cause issues.
 """
 
+import pytest
 import os
 import sys
 import json
@@ -12,14 +13,14 @@ from unittest.mock import Mock, patch
 
 # Add the parent directory to path to import scout
 current_dir = os.path.dirname(os.path.abspath(__file__))
-parent_dir = os.path.join(current_dir, '..')
-sys.path.insert(0, parent_dir)
 
 # Set up mock environment
 os.environ['OPENAI_API_KEY'] = 'test-key'
 
 # Import after setting up environment
-from core.scout import Scout, ScoutRecommendation
+from ai.core.scout import Scout, ScoutRecommendation
+
+pytestmark = pytest.mark.liveapi  # hits live OpenAI API; needs OPENAI_API_KEY
 
 
 def test_scout_basic_functionality():

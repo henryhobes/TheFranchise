@@ -10,10 +10,9 @@ import sys
 from pathlib import Path
 
 # Add modules to path for demo
-sys.path.insert(0, str(Path(__file__).parent.parent.parent.parent))
 
 from draftOps.src.ai.core.draft_strategist import DraftStrategist, StrategistConfig
-from draftOps.data_loader import Player
+from data_loader import Player
 
 
 def create_sample_draft_state():

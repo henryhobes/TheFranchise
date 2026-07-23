@@ -16,10 +16,10 @@ from typing import List, Dict, Any
 
 import sys
 import os
-sys.path.append(os.path.dirname(__file__))
-sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 
-from core.gm import GM, GMDecision
+from ai.core.gm import GM, GMDecision
+
+pytestmark = pytest.mark.liveapi  # hits live OpenAI API; needs OPENAI_API_KEY
 
 
 class TestGM:

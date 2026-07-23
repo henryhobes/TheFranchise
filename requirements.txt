@@ -1,22 +1,17 @@
-# Core dependencies for DraftOps WebSocket Protocol
-aiohttp>=3.8.0
-playwright>=1.40.0
-websockets>=11.0
-asyncio-mqtt>=0.16.0
+# DraftOps runtime + test dependencies.
+# Convenience install list (`pip install -r requirements.txt`); the packaged
+# metadata lives in pyproject.toml.
 
-# Data processing
-pandas>=2.0.0
-numpy>=1.24.0
+# WebSocket capture and ESPN API access
+playwright>=1.40.0        # headless browser used to capture the draft WebSocket
+aiohttp>=3.8.0            # async client for ESPN's player API
+python-dotenv>=1.0.0      # loads OPENAI_API_KEY / config from .env
 
-# Logging and utilities
-python-dotenv>=1.0.0
-colorama>=0.4.6
+# LangGraph multi-agent "front office" (Scout / GM / Strategist / Supervisor)
+langgraph>=0.6.6
+langchain-openai>=0.3.32
 
-# Testing dependencies
+# Testing
 pytest>=7.4.0
 pytest-asyncio>=0.21.0
 pytest-cov>=4.1.0
-
-# LangGraph AI integration
-langgraph>=0.6.6
-langchain-openai>=0.3.32

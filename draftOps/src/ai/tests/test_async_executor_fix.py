@@ -11,10 +11,8 @@ import sys
 from pathlib import Path
 
 # Add project root to path
-project_root = Path(__file__).parent.parent.parent.parent.parent
-sys.path.insert(0, str(project_root))
 
-from draftOps.src.ai.core.draft_supervisor import DraftSupervisor
+from ai.core.draft_supervisor import DraftSupervisor
 
 
 async def test_invoke_async_in_running_loop():

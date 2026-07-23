@@ -13,6 +13,7 @@ from pathlib import Path
 # Add parent directory to path
 sys.path.append(str(Path(__file__).parent.parent))
 
+from config import DEFAULT_LEAGUE_ID
 from state.draft_state import DraftState, DraftStatus
 from state.event_processor import DraftEventProcessor
 from state.state_handlers import StateUpdateHandlers
@@ -29,8 +30,8 @@ def demonstrate_draft_state_system():
     # Create the complete system
     print("1. Initializing Draft State Management System")
     draft_state = DraftState(
-        league_id="262233108",
-        team_id="1", 
+        league_id=DEFAULT_LEAGUE_ID,
+        team_id="1",
         team_count=12,
         rounds=16
     )

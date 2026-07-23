@@ -16,22 +16,8 @@ from datetime import datetime
 from enum import Enum
 import copy
 
-# Import Player class and utilities from data loader
-try:
-    from ...data_loader import Player, normalize_player_name, ESPN_TO_ADP_DEFENSE, ESPN_TO_DEF_STATS
-except ImportError:
-    try:
-        # Try absolute import
-        import sys
-        import os
-        sys.path.append(os.path.join(os.path.dirname(__file__), '../../..'))
-        from data_loader import Player, normalize_player_name, ESPN_TO_ADP_DEFENSE, ESPN_TO_DEF_STATS
-    except ImportError:
-        # Final fallback
-        Player = None
-        normalize_player_name = None
-        ESPN_TO_ADP_DEFENSE = {}
-        ESPN_TO_DEF_STATS = {}
+# Player data model + name-normalization tables (source-root module).
+from data_loader import Player, normalize_player_name, ESPN_TO_ADP_DEFENSE, ESPN_TO_DEF_STATS
 
 
 class DraftStatus(Enum):

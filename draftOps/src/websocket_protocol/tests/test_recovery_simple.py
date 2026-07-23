@@ -14,9 +14,8 @@ from datetime import datetime, timedelta
 # Adjust import to work with the current project structure
 import sys
 import os
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
-from monitor.espn_draft_monitor import ESPNDraftMonitor, ConnectionState
+from ..monitor.espn_draft_monitor import ESPNDraftMonitor, ConnectionState
 
 
 @pytest.mark.asyncio
