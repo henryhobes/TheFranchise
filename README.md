@@ -6,8 +6,7 @@ multi-agent LLM "front office" that tells you who to take next.**
 
 > Archived weekend project (Labor Day weekend, 2025). The goal was to build the
 > whole thing in one weekend and use it live in my own draft. I came up just
-> short - draft day arrived, the assistant didn't. Retired with the seams
-> honestly documented below.
+> short.
 
 ---
 
@@ -56,7 +55,7 @@ A LangGraph "front office" turns live draft state into a single recommendation:
 
 Both halves work on their own. The wiring that fuses them into one always-on
 loop is where the weekend ran out. I drafted the old-fashioned way, then
-archived the project, because the parts I actually wanted to build were done.
+archived the project.
 
 ## Architecture
 
@@ -121,7 +120,7 @@ works-on-my-machine-during-one-specific-weekend kind of program.
 
 ## How this was built
 
-The other half of the experiment: the whole thing was written with **Claude
+The workflow was an experiment too. The whole thing was written with **Claude
 Code**, and every pull request was reviewed by two GitHub Actions bots I ran on
 my own PRs (both still in `.github/workflows/`):
 
@@ -150,9 +149,9 @@ much as any fantasy football outcome.
 - **Test suite:** the protocol/state/recovery tests run under `pytest`; a
   handful of recovery-integration tests are known-failing and tracked in
   `draftOps/docs/stuff-to-clean.md`.
-- **No benchmarks, on purpose.** It never ran in a real draft, so there is no
-  win rate to report. The number I trust is "the decode cross-validated against
-  ESPN's API," and that's the only claim this README makes.
+- **No benchmarks.** It never ran in a real draft, so there is no win rate to
+  report. The part I can stand behind is the protocol decode, because it was
+  cross-validated against ESPN's API.
 
 ## Layout
 
