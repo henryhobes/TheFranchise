@@ -1,30 +1,19 @@
+# Automated first-principles code review on every PR. Posts an APPROVE /
+# REQUEST CHANGES comment. Ran on this project's own PRs during development.
 name: Claude Code Review
 
 on:
   pull_request:
     types: [opened, synchronize]
-    # Optional: Only run on specific file changes
-    # paths:
-    #   - "src/**/*.ts"
-    #   - "src/**/*.tsx"
-    #   - "src/**/*.js"
-    #   - "src/**/*.jsx"
 
 jobs:
   claude-review:
-    # Optional: Filter by PR author
-    # if: |
-    #   github.event.pull_request.user.login == 'external-contributor' ||
-    #   github.event.pull_request.user.login == 'new-developer' ||
-    #   github.event.pull_request.author_association == 'FIRST_TIME_CONTRIBUTOR'
-    
     runs-on: ubuntu-latest
     permissions:
       contents: read
       pull-requests: read
       issues: read
       id-token: write
-    
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -38,45 +27,23 @@ jobs:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           prompt: |
             # First Principles PR Review
-            
-            Perform a comprehensive first principles analysis of this Pull Request, evaluating code quality, implementation elegance, and overall design decisions.
-            
-            ## Review Process:
-            
-            1. **Extract PR Goal**: First understand what this PR is trying to achieve by examining:
-               - PR title and description
-               - The actual changes made
-               - The problem it's solving
-            
-            2. **First Principles Analysis**: Evaluate whether the solution:
-               - Solves the problem in the most straightforward way
-               - Follows clean code principles (DRY, SOLID, KISS)
-               - Maintains or improves codebase quality
-               - Is maintainable and extensible
-               - Avoids unnecessary complexity
-            
-            3. **Implementation Review**: Analyze the code for:
-               - Cleanliness and readability
-               - Elegance and simplicity
-               - Adherence to best practices
-               - Architecture and design decisions
-               - Whether there's a simpler, cleaner way to achieve the same goal
-            
-            4. **Decision & Feedback**: Based on your analysis, determine:
-               - **APPROVE**: If the implementation is clean, elegant, and achieves the goal in the simplest reasonable way
-               - **REQUEST CHANGES**: If there are simpler or cleaner approaches that would better achieve the stated goals
-            
-            ## Important Guidelines:
-            - Focus on substantial improvements over nitpicking
-            - Consider the repository's CLAUDE.md for style preferences
-            - Emphasize code quality, simplicity, and maintainability
-            - If requesting changes, provide specific examples of how to simplify or improve
-            - Remember: Simple and clean beats clever and complex
-            
-            Use `gh pr comment` with your Bash tool to leave your detailed review as a comment on the PR.
-            Your review should clearly state whether you APPROVE or REQUEST CHANGES with justification.
-          
-          # See https://github.com/anthropics/claude-code-action/blob/main/docs/usage.md
-          # or https://docs.anthropic.com/en/docs/claude-code/sdk#command-line for available options
-          claude_args: '--allowed-tools "Bash(gh issue view:*),Bash(gh search:*),Bash(gh issue list:*),Bash(gh pr comment:*),Bash(gh pr diff:*),Bash(gh pr view:*),Bash(gh pr list:*)"'
 
+            Analyze this Pull Request for code quality, implementation elegance,
+            and design decisions.
+
+            1. Extract the PR goal from its title, description, and diff.
+            2. First-principles analysis: does the solution solve the problem in
+               the most straightforward way? Does it follow DRY, SOLID, KISS?
+               Is it maintainable and free of unnecessary complexity?
+            3. Implementation review: readability, simplicity, best practices,
+               architecture, and whether a cleaner approach exists.
+            4. Decide APPROVE (clean and elegant) or REQUEST CHANGES (a simpler
+               or cleaner approach would better achieve the goal).
+
+            Guidelines: focus on substantial improvements over nitpicking, honor
+            the style preferences in CLAUDE.md, and give specific examples when
+            requesting changes. Simple and clean beats clever and complex.
+
+            Use `gh pr comment` (Bash) to post the review, clearly stating
+            APPROVE or REQUEST CHANGES with justification.
+          claude_args: '--allowed-tools "Bash(gh issue view:*),Bash(gh search:*),Bash(gh issue list:*),Bash(gh pr comment:*),Bash(gh pr diff:*),Bash(gh pr view:*),Bash(gh pr list:*)"'

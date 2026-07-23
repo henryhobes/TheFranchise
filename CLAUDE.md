@@ -1,82 +1,55 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+Guidance for Claude Code (claude.ai/code) when working in this repository.
 
-## Project Overview
+## Project overview
 
-This is a newly initialized Python project (thefranchise) with MIT license. The repository is currently empty except for basic Git configuration files.
+DraftOps is a retired weekend project (Aug-Sep 2025) that automated an ESPN
+fantasy football draft. It has two halves:
 
-## Development Environment
+1. **WebSocket protocol layer** (`draftOps/src/websocket_protocol/`) -
+   reverse-engineered ESPN's undocumented draft WebSocket protocol, captures
+   live draft events with Playwright, parses them, and cross-validates player
+   IDs against ESPN's public API.
+2. **LangGraph "front office"** (`draftOps/src/ai/`) - a multi-agent draft
+   assistant (Draft Strategist, Scout, GM, Supervisor) that recommends picks
+   in real time.
 
-### Hardware
-- NVIDIA RTX 4070 GPU (use CUDA when applicable)
-- Intel Core i7-12700K (8P+4E cores, up to 5.0 GHz)
-- MSI PRO Z790-P WiFi DDR5 motherboard
-- 32 GB RAM
+The project is archived. Changes should preserve behavior and keep the code
+readable rather than add features.
 
-### Development Preferences
-- **Language**: Python exclusively
-- **Code style**: Simple and clean over complexity - choose the most straightforward solution
-- **Comments**: Only when absolutely necessary - write self-documenting code instead
-- **Emojis**: Never use emojis in code, commit messages, or any technical content
-- **Unicode**: Avoid Unicode characters (checkmarks, X marks, etc.) in print statements - use plain ASCII text like "[PASS]", "[FAIL]", "SUCCESS:", "ERROR:" instead
-- **GPU optimization**: Leverage CUDA/GPU acceleration where beneficial (PyTorch, CuPy, RAPIDS, etc.)
-- **Web search**: Perform web searches proactively when needed without asking permission
+## Layout
 
-## Development Setup
+- `draftOps/src/` is the import root. The two top-level packages are `ai` and
+  `websocket_protocol`; `data_loader.py` is a top-level module.
+- `draftOps/src/ai/core/` - the agents: `draft_strategist.py` (rules-based),
+  `scout.py` and `gm.py` (LLM), `draft_supervisor.py` (LangGraph graph).
+- `draftOps/src/websocket_protocol/{monitor,state,api,utils,scripts}/` - capture,
+  parsing, ESPN API client, ID extraction/validation, and runnable scripts.
+- `draftOps/docs/` - sprint specifications and the protocol analysis.
 
-Since this is a fresh Python project with no code yet, consider these standard Python development practices:
+## Commands
 
-### Common Python Commands
-- `python -m venv venv` - Create virtual environment
-- `venv\Scripts\activate` (Windows) or `source venv/bin/activate` (Unix) - Activate virtual environment
-- `pip install -r requirements.txt` - Install dependencies (once requirements.txt exists)
-- `python -m pytest` - Run tests (once tests are added)
-- `python -m black .` - Format code (if using Black formatter)
-- `python -m flake8` - Lint code (if using flake8)
-- `python -m mypy .` - Type check (if using mypy)
+```bash
+python -m venv .venv && source .venv/bin/activate
+pip install -r requirements.txt
+playwright install chromium          # only needed to run the live monitor
 
-## Project Structure Recommendations
-
-Since the project is empty, consider organizing it based on the project's purpose:
-
-For a Python package:
-```
-thefranchise/
-├── src/
-│   └── thefranchise/
-│       └── __init__.py
-├── tests/
-├── requirements.txt
-├── setup.py or pyproject.toml
-└── README.md
+pytest                               # runs the suite; live-API tests deselected
+pytest -m liveapi                    # agent tests that call OpenAI (needs OPENAI_API_KEY)
 ```
 
-For a Python application:
-```
-thefranchise/
-├── app/
-│   └── main.py
-├── tests/
-├── requirements.txt
-└── README.md
-```
+Pytest config lives in `pyproject.toml` (`pythonpath`, `testpaths`, markers).
 
-## Common Issues to Avoid
+## Conventions
 
-### Unicode Encoding Problems
-- Windows command prompt uses CP1252 encoding which doesn't support many Unicode characters
-- Always use plain ASCII characters in print statements and output
-- Examples of what NOT to use: ✓, ✗, 🎉, ❌
-- Examples of what TO use: "[PASS]", "[FAIL]", "SUCCESS:", "ERROR:", "*", "-", "+"
-
-### Testing and Output
-- Use descriptive ASCII text for test results instead of Unicode symbols
-- Format test output with clear, readable ASCII text
-- Avoid fancy Unicode box drawing characters - use simple dashes and equals signs
+- Python only. Prefer the simplest solution; let code be self-documenting.
+- No emojis anywhere. Keep console output plain ASCII (`[PASS]`, `[FAIL]`,
+  `SUCCESS:`, `ERROR:`) - the codebase was developed on Windows (CP1252).
 
 ## Notes
 
-- The .gitignore is configured for Python projects
-- No existing code architecture to document yet
-- No build or test commands configured yet
+- Player data (`draftOps/playerData/*.csv`) and `.har` captures are gitignored
+  and absent; the loader and live scripts need them locally to run.
+- The LLM agents need `OPENAI_API_KEY` (loaded from `.env`).
+- Known limitations are tracked in `draftOps/docs/stuff-to-clean.md`.

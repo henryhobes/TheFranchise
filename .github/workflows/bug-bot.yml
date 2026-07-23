@@ -1,29 +1,20 @@
+# Bug Bot: a second automated PR reviewer scoped to critical runtime bugs only
+# (crashes, data corruption, resource leaks, security). Ran alongside the
+# first-principles reviewer on this project's PRs.
 name: Bug Bot - Automated Bug Detection
 
 on:
   pull_request:
     types: [opened, synchronize]
-    # Optional: Only run on code file changes
-    # paths:
-    #   - "**/*.py"
-    #   - "**/*.js"
-    #   - "**/*.ts"
-    #   - "**/*.tsx"
-    #   - "**/*.jsx"
 
 jobs:
   bug-detection:
-    # Optional: Filter by PR size or author
-    # if: |
-    #   github.event.pull_request.additions + github.event.pull_request.deletions > 50
-    
     runs-on: ubuntu-latest
     permissions:
       contents: read
       pull-requests: read
       issues: read
       id-token: write
-    
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -37,82 +28,42 @@ jobs:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           prompt: |
             # Bug Bot - Critical Runtime Bug Detection
-            
-            You are Bug Bot, a specialized analyzer focused EXCLUSIVELY on critical runtime bugs that will cause crashes, data corruption, or security vulnerabilities in production.
-            
-            ## ONLY Flag These Critical Issues:
-            
-            ### **Runtime Crash Bugs (CRITICAL)**:
-            - Division by zero (guaranteed crash)
-            - Null pointer dereferences (crash)
-            - Array index out of bounds (crash)
-            - Unhandled exceptions that propagate to top level
-            - Type conversion errors on external input (e.g., `int()` without try-catch)
-            - Missing await on required async operations causing deadlock
-            - Stack overflow from infinite recursion
-            
-            ### **Data Corruption Bugs (CRITICAL)**:
-            - Race conditions in shared state modification
-            - Incorrect bounds checking leading to buffer overflows
-            - State mutations that break immutability contracts
-            - Off-by-one errors in critical calculations
-            - Incorrect async/sync patterns causing data inconsistency
-            
-            ### **Resource Leak Bugs (CRITICAL)**:
-            - Database connections not closed in error paths
-            - File handles leaked in exception scenarios
-            - Memory leaks from circular references
-            - Async context managers not properly cleaned up
-            
-            ### **Security Vulnerabilities (CRITICAL)**:
-            - SQL injection from unsanitized input
-            - Command injection risks
-            - Path traversal vulnerabilities
-            - Hardcoded secrets or credentials
-            - XSS from unescaped user input
-            
-            ## **DO NOT Flag These**:
-            - Style issues, formatting, naming conventions
-            - Performance optimizations or suggestions
-            - Missing error logging or warnings
-            - Code organization or architecture suggestions
-            - Best practices that don't cause runtime failures
-            - Potential edge cases that are unlikely or handled elsewhere
-            - Missing documentation or comments
-            - Timeout configurations unless guaranteed to cause deadlock
-            
-            ## Review Criteria:
-            
-            **Only report bugs that meet ALL criteria:**
-            1. ✅ **Will definitely cause a runtime error/crash in realistic usage**
-            2. ✅ **Cannot be caught by normal testing (edge cases, external input, race conditions)**
-            3. ✅ **Has clear, direct impact on production stability**
-            4. ✅ **Fix is specific and actionable**
-            
-            ## Output Format:
-            
-            ### 🚨 Critical Bug Report
-            
-            **Summary**: Found X critical runtime bugs that require immediate fixes.
-            
-            #### Critical Bugs (Must Fix Before Merge):
-            
+
+            You are Bug Bot. Flag ONLY critical runtime bugs that will cause
+            crashes, data corruption, resource leaks, or security holes in
+            production. Ignore everything else.
+
+            Flag only:
+            - Crashes: division by zero, null dereference, index out of bounds,
+              unhandled exceptions, unchecked type conversion on external input,
+              missing await causing deadlock, infinite recursion.
+            - Data corruption: race conditions on shared state, bad bounds
+              checks, broken immutability, off-by-one in critical math.
+            - Resource leaks: connections/file handles/async contexts not closed
+              on error paths, memory leaks from circular references.
+            - Security: SQL/command injection, path traversal, hardcoded
+              secrets, XSS from unescaped input.
+
+            Do NOT flag: style, formatting, naming, performance, missing logs,
+            architecture opinions, unlikely edge cases, or missing docs.
+
+            Report a bug only if it meets ALL of: (1) will definitely fail in
+            realistic usage, (2) is hard to catch with normal testing, (3) has
+            direct production impact, (4) has a specific, actionable fix.
+
+            Output format:
+
+            ## Critical Bug Report
+            Summary: found X critical runtime bugs.
+
             For each bug:
-            **1. [Bug Type] - [Location]**
-            - **Issue**: [Specific problem that will cause runtime failure]
-            - **Impact**: [Exact failure mode - crash, data corruption, etc.]
-            - **Fix**: [Specific code change needed]
-            
-            If no critical bugs: "✅ No critical runtime bugs detected"
-            
-            ## Instructions:
-            - Be extremely selective - only flag bugs that WILL cause production failures
-            - Provide exact line numbers and specific failure scenarios
-            - Focus on external input handling, async patterns, and resource management
-            - Ignore anything that's not a guaranteed runtime problem
-            
-            Use `gh pr comment` with your Bash tool to post the bug detection report as a comment on the PR.
-          
-          # See https://github.com/anthropics/claude-code-action/blob/main/docs/usage.md
-          # or https://docs.anthropic.com/en/docs/claude-code/sdk#command-line for available options
+            **[Bug Type] - [Location]**
+            - Issue: what will fail
+            - Impact: exact failure mode
+            - Fix: specific code change
+
+            If none: "No critical runtime bugs detected."
+
+            Give exact line numbers and failure scenarios. Use `gh pr comment`
+            (Bash) to post the report.
           claude_args: '--allowed-tools "Bash(gh issue view:*),Bash(gh search:*),Bash(gh issue list:*),Bash(gh pr comment:*),Bash(gh pr diff:*),Bash(gh pr view:*),Bash(gh pr list:*)"'
