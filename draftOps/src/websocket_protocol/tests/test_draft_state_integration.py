@@ -68,14 +68,14 @@ class TestDraftStateIntegration:
         """Test Sprint 0 message format parsing."""
         
         # Test SELECTED message
-        selected_msg = "SELECTED 1 4362628 1 {REDACTED-MEMBER-GUID}"
+        selected_msg = "SELECTED 1 4362628 1 {00000000-0000-4000-8000-000000000A01}"
         parsed = event_processor._parse_message(selected_msg)
         
         assert parsed['type'] == 'SELECTED'
         assert parsed['team_id'] == 1
         assert parsed['player_id'] == '4362628'
         assert parsed['team_draft_position'] == 1  # This is team draft position, not overall pick!
-        assert parsed['member_id'] == '{REDACTED-MEMBER-GUID}'
+        assert parsed['member_id'] == '{00000000-0000-4000-8000-000000000A01}'
         
         # Test SELECTING message  
         selecting_msg = "SELECTING 2 30000"
@@ -110,7 +110,7 @@ class TestDraftStateIntegration:
         assert draft_state.time_remaining == 30.0
         
         # Process SELECTED message (pick made)
-        selected_msg = "SELECTED 1 4362628 1 {REDACTED-MEMBER-GUID}"
+        selected_msg = "SELECTED 1 4362628 1 {00000000-0000-4000-8000-000000000A01}"
         success = event_processor.process_websocket_message(selected_msg)
         
         assert success

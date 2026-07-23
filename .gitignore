@@ -162,6 +162,9 @@ cython_debug/
 # Secrets and browser/network captures (NEVER commit these)
 .env
 *.har
+reports/          # captured draft-session logs (contain member IDs)
+draftOps/reports/
+draftOps/src/websocket_protocol/reports/
 
 # Test logs from draft monitor
 test_logs/

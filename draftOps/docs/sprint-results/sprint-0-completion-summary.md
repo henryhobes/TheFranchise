@@ -61,7 +61,7 @@ Sprint 0 has been **completed successfully with exceptional results**. All core 
 **Major Finding**: ESPN uses a **text-based command protocol** instead of JSON, making it more stable and easier to parse.
 
 ```
-SELECTED 1 4362628 4 {REDACTED-MEMBER-GUID}
+SELECTED 1 4362628 4 {00000000-0000-4000-8000-000000000A01}
 SELECTING 2 30000
 CLOCK 6 17239 1
 AUTODRAFT 2 false

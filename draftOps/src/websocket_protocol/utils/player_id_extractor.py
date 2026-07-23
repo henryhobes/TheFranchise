@@ -207,7 +207,7 @@ class PlayerIdExtractor:
         
         Format discovered from live test:
         SELECTED [pick_number] [PLAYER_ID] [position_code] [team_guid]
-        Example: "SELECTED 2 4362628 4 {REDACTED-MEMBER-GUID}"
+        Example: "SELECTED 2 4362628 4 {00000000-0000-4000-8000-000000000A02}"
         """
         extractions = []
         payload_stripped = payload.strip()

@@ -14,17 +14,18 @@ def test_espn_text_protocol():
     print("Testing ESPN Draft Text Protocol Parsing")
     print("=" * 60)
     
-    # Real messages captured from live test
+    # Sample messages in ESPN's captured draft-protocol format. Player IDs are
+    # ESPN's public NFL athlete IDs; the trailing member GUIDs are anonymized.
     test_messages = [
-        "SELECTED 1 4430807 2 {REDACTED-MEMBER-GUID}",  # Pick 1, RB
-        "SELECTED 2 4362628 4 {REDACTED-MEMBER-GUID}",  # Pick 2, WR (Justin Jefferson!)
-        "SELECTED 3 3929630 2 {REDACTED-MEMBER-GUID}",  # Pick 3, RB  
-        "SELECTED 4 3117251 2 {REDACTED-MEMBER-GUID}",  # Pick 4, RB
-        "SELECTED 5 4241389 4 {REDACTED-MEMBER-GUID}",  # Pick 5, WR
-        "SELECTED 6 4262921 4 {REDACTED-MEMBER-GUID}",  # Pick 6, WR
-        "SELECTED 7 4890973 2 {REDACTED-MEMBER-GUID}",  # Pick 7, RB
-        "SELECTED 8 4429795 2 {REDACTED-MEMBER-GUID}",  # Pick 8, RB
-        "SELECTED 9 4595348 4 {REDACTED-MEMBER-GUID}",  # Pick 9, WR
+        "SELECTED 1 4430807 2 {00000000-0000-4000-8000-000000000001}",  # Pick 1, RB
+        "SELECTED 2 4362628 4 {00000000-0000-4000-8000-000000000002}",  # Pick 2, WR (Justin Jefferson)
+        "SELECTED 3 3929630 2 {00000000-0000-4000-8000-000000000003}",  # Pick 3, RB
+        "SELECTED 4 3117251 2 {00000000-0000-4000-8000-000000000004}",  # Pick 4, RB
+        "SELECTED 5 4241389 4 {00000000-0000-4000-8000-000000000005}",  # Pick 5, WR
+        "SELECTED 6 4262921 4 {00000000-0000-4000-8000-000000000006}",  # Pick 6, WR
+        "SELECTED 7 4890973 2 {00000000-0000-4000-8000-000000000007}",  # Pick 7, RB
+        "SELECTED 8 4429795 2 {00000000-0000-4000-8000-000000000008}",  # Pick 8, RB
+        "SELECTED 9 4595348 4 {00000000-0000-4000-8000-000000000009}",  # Pick 9, WR
         "SELECTED 10 4426515 4",  # Pick 10, WR (no team GUID)
         "AUTODRAFT 5 false",  # Non-player message
         "AUTODRAFT 7 true",   # Non-player message
@@ -95,7 +96,7 @@ async def test_integration_with_resolver():
     print("\n\n4. Testing Integration with PlayerResolver:")
     print("-" * 40)
     
-    test_message = "SELECTED 2 4362628 4 {REDACTED-MEMBER-GUID}"
+    test_message = "SELECTED 2 4362628 4 {00000000-0000-4000-8000-000000000002}"
     
     async with PlayerResolver(cache_db_path="test_espn_protocol.db") as resolver:
         # Test extraction
