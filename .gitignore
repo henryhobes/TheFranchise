@@ -162,7 +162,8 @@ cython_debug/
 # Secrets and browser/network captures (NEVER commit these)
 .env
 *.har
-reports/          # captured draft-session logs (contain member IDs)
+# Captured draft-session logs (contain ESPN member IDs)
+reports/
 draftOps/reports/
 draftOps/src/websocket_protocol/reports/
 
